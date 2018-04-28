@@ -1,12 +1,14 @@
 
 /********* Variables that can change **********/
 
-// alturas
+// Alturas
 $main-header-height: 55px;
-// gutter
+// Gutter
 $gutter: 1.7rem;
-// ancho navegacion
+// Ancho de barra de navegacion
 $width-navigation: 220px;
+// Line Height
+$line-height: 1.15;
 
 /********* End variables that can change **********/
 
@@ -22,8 +24,6 @@ $XM:    750px;
 $M:     900px;     
 $L:     1170px;
 $XL:    1500px;
-
-
 
 // z-index maps
 $z-index: (

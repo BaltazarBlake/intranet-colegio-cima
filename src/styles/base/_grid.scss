@@ -1,0 +1,150 @@
+$flexgrid-grid-columns: 12;
+$flexgrid-gutter-width: $gutter/2;
+
+$half-gutter-width: $flexgrid-gutter-width * .5;
+$gutter-compensation: $flexgrid-gutter-width * .5 * -1;
+
+.container {
+  margin: 0 auto;
+  width: 90%;
+
+  @include MQ(M){
+    width: 95%;
+  }
+}
+
+.row {
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: $gutter-compensation;
+  margin-right: $gutter-compensation;
+
+  // pendiente test
+  margin-bottom: $gutter/2;
+}
+
+.column {
+  @extend .row;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.row-reverse {
+  flex-direction: row-reverse;
+}
+
+.column-reverse {
+  flex-direction: column-reverse;
+}
+
+
+.main-start {
+  justify-content: flex-start;
+  text-align: start;
+}
+
+.main-center {
+  justify-content: center;
+  text-align: center;
+}
+
+.main-end {
+  justify-content: flex-end;
+  text-align: end;
+}
+
+
+.cross-start {
+  align-items: flex-start;
+}
+
+.cross-center {
+  align-items: center;
+}
+
+.cross-end {
+  align-items: flex-end;
+}
+
+
+.around {
+  justify-content: space-around;
+}
+
+.between {
+  justify-content: space-between;
+}
+
+.no-wrap {
+  flex-wrap: nowrap;
+}
+
+$name: xs;
+.col-#{$name} {
+  flex: 0 0 auto;
+  padding: 0 $half-gutter-width;
+  // flex-basis: 100%;
+  // max-width: 100%;
+}
+@for $i from 1 through $flexgrid-grid-columns {
+  .col-#{$name}-#{$i} {
+    flex: 0 0 auto;
+    padding: 0 $half-gutter-width;
+    flex-basis: 100% / $flexgrid-grid-columns * $i;
+    max-width: 100% / $flexgrid-grid-columns * $i;
+  }
+}
+
+$flexboxgrid-breakpoints:
+  s    480px,
+  xm   750px,
+  m    900px,     
+  l    1170px,
+  xl   1500px;
+
+  @each $breakpoint in $flexboxgrid-breakpoints {
+    $name: nth($breakpoint, 1);
+    $size: nth($breakpoint, 2);
+    @media only screen and (min-width: $size) {
+      .col-#{$name} {
+        flex: 0 0 auto;
+        padding: 0 $half-gutter-width;
+        flex-basis: 100%;
+        max-width: 100%;
+      }
+      
+      @for $i from 1 through $flexgrid-grid-columns {
+        .col-#{$name}-#{$i} {
+          flex: 0 0 auto;
+          padding: 0 $half-gutter-width;
+          flex-basis: 100% / $flexgrid-grid-columns * $i;
+          max-width: 100% / $flexgrid-grid-columns * $i;
+        }
+      }
+    }
+  }
+
+  // para impresion
+  @each $breakpoint in $flexboxgrid-breakpoints {
+    $name: nth($breakpoint, 1);
+    $size: nth($breakpoint, 2);
+    @media print {
+      .col-#{$name} {
+        flex: 0 0 auto;
+        padding: 0 $half-gutter-width;
+        flex-basis: 100%;
+        max-width: 100%;
+      }
+      
+      @for $i from 1 through $flexgrid-grid-columns {
+        .col-#{$name}-#{$i} {
+          flex: 0 0 auto;
+          padding: 0 $half-gutter-width;
+          flex-basis: 100% / $flexgrid-grid-columns * $i;
+          max-width: 100% / $flexgrid-grid-columns * $i;
+        }
+      }
+    }
+  }

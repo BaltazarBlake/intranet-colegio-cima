@@ -1,9 +1,19 @@
 <template lang='pug'>
   .hellow
-    h1 {{msg}}
-      span.icon-home
-    p Un test
-      span.icon-calendar-1
+    .row.bg-c
+      .col-xs-6
+        h1 {{msg}}
+          span.icon-home
+      .col-xs-6
+        p Un test
+          span.icon-calendar-1
+    .row.bg-c
+      .col-xs-6
+        h1 {{msg}}
+          span.icon-home
+      .col-xs-6
+        p Un test
+          span.icon-calendar-1
 </template>
 
 <script>
@@ -19,6 +29,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.bg-c {
+  background-color: red;
+}
 h1, h2 {
   font-family: 'Roboto Mono';
 }
