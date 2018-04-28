@@ -1,0 +1,55 @@
+
+/********* Variables that can change **********/
+
+// alturas
+$main-header-height: 55px;
+// gutter
+$gutter: 1.7rem;
+// ancho navegacion
+$width-navigation: 220px;
+
+/********* End variables that can change **********/
+
+
+// Typography
+$font-regular: 'Lato Regular';
+$font-bold: 'Lato Bold';
+$font-monospace: 'Roboto Mono';
+
+// breakpoints   
+$S:     480px;
+$XM:    750px;
+$M:     900px;     
+$L:     1170px;
+$XL:    1500px;
+
+
+
+// z-index maps
+$z-index: (
+  modal              : 1000,
+  main-header        : 900, //usado
+  navigation         : 800, //usado
+  loading            : 700,
+  cover              : 600, //usado
+  origen             : 500, //usado
+  hack-bg-co         :-100  //usado
+);
+
+// Colors
+$blue-900: #00357B;
+$blue-600: #034995;
+$blue-300: #21548c;
+$blue-100: #2365ad;
+
+$snow: #FAFAFA;
+$gray: #263238;
+$red: #CE463A;
+
+
+// Administering  colors
+
+$principal-color: $blue-600;
+$secondary-color: $gray;
+$hover-color: $blue-300;
+$alert-color: $red;

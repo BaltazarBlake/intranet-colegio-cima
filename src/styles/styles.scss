@@ -1,0 +1,9 @@
+// variable necesario para web fonts
+$font_path: '~@/assets/fonts/';
+
+@import 'config/variables';
+@import 'config/functions';
+@import 'config/mixins';
+
+@import 'base/icon-font';
+@import 'base/web-font';

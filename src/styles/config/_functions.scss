@@ -1,0 +1,4 @@
+// organizing z-index
+@function z-index( $key ) {
+  @return map-get( $z-index, $key);
+}
