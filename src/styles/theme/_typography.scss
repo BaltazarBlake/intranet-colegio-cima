@@ -1,0 +1,48 @@
+
+/************* Sizes *************/
+
+$first-size: 9px;
+$font-size-breakpoints :
+  x-small $first-size,
+  small $first-size + 3,
+  regular ($first-size + 7),
+  large ($first-size + 11),
+  x-large ($first-size + 15),
+  xx-large ($first-size + 19);
+
+@each $breakpoint in $font-size-breakpoints {
+  $name: nth($breakpoint, 1);
+  $size: nth($breakpoint, 2);
+
+  .font-size-#{$name} {
+    font-size: $size;
+  }
+}
+
+/************* Weights *************/
+
+$weights-breakpoints :
+  light 200,
+  regular 400,
+  bold 600;
+@each $breakpoint in $weights-breakpoints {
+  $name: nth($breakpoint, 1);
+  $size: nth($breakpoint, 2);
+  .font-weight-#{$name} {
+    font-weight: $size;
+  }
+}
+
+/************* Families *************/
+
+$family-breakpoints :
+  regular $font-regular,
+  bold $font-bold,
+  mono $font-monospace;
+@each $breakpoint in $family-breakpoints {
+  $name: nth($breakpoint, 1);
+  $size: nth($breakpoint, 2);
+  .font-family-#{$name} {
+    font-family: $size;
+  }
+}

@@ -11,4 +11,14 @@ $font_path: '~@/assets/fonts/';
 @import 'base/web-font';
 @import 'base/grid';
 
+@import 'components/globals/shadows';
+@import 'components/globals/buttons';
+@import 'components/globals/card';
+@import 'components/globals/links';
+@import 'components/globals/modal';
+
+
+
+@import 'theme/typography';
+
 // https://sass-lang.com/styleguide/typography

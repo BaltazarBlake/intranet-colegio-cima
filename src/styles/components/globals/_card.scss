@@ -1,0 +1,12 @@
+.card {
+  @extend .shadow-1;
+  width: 100%;
+  padding: $gutter/1.7;
+  margin-bottom: $gutter/2;
+  background-color: #FFF;
+
+  &__title {
+    margin-top: 0;
+    margin-bottom: $gutter/3;
+  }
+}

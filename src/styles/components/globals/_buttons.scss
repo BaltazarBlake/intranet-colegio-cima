@@ -1,0 +1,85 @@
+.btn {
+  cursor: pointer;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $secondary-color;
+  background-color: transparent;
+  transition: all .3s ease-in;
+  outline: none;
+  &:hover {
+    @extend .shadow--hover;
+  }
+  &:active {
+    transform: scale(.92);
+  }
+}
+
+.btn--burger {
+  @extend .btn;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  padding: 0;
+  @include MQ(L) {
+    display: none;
+  }
+}
+
+.btn--default {
+  @extend .btn;
+  width: 10em;
+  border-radius: 2em;
+  padding: .7em .5em;
+  border: 1px solid $secondary-color;
+  &:hover,
+  &.is-active {
+    color: #FFF;
+    background-color: $secondary-color;
+    @extend .shadow--hover;
+  }
+  &>span[class^="icon-"] {
+    margin-right: $gutter/3;
+  }
+}
+
+.btn--default--small {
+  @extend .btn--default;
+  width: 6.5em;
+}
+
+.btn--primary {
+  @extend .btn--default;
+  color: #FFF;
+  background-color: $principal-color;
+  border-color: $principal-color;
+  &:hover {
+    background-color: darken($principal-color, 5%);
+  }
+}
+
+.btn--danger {
+  @extend .btn--default;
+  color: #FFF;
+  border-color: $red;
+  background-color: $red;
+  &:hover,
+  &.is-active {
+    background-color: $red;
+  }
+}
+
+.btn--warning {
+  @extend .btn--default;
+  border-color: #fab649;
+  color: #fab649;
+  &:hover,
+  &.is-active {
+    background-color: darken(#fab649, 15%);
+  }
+}
+
+button[class^="btn--"] {
+  margin-right: 0.3em;
+}

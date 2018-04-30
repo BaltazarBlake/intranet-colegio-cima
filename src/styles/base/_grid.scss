@@ -22,7 +22,7 @@ $gutter-compensation: $flexgrid-gutter-width * .5 * -1;
   margin-right: $gutter-compensation;
 
   // pendiente test
-  margin-bottom: $gutter/2;
+  // margin-bottom: $gutter/2;
 }
 
 .column {
@@ -111,8 +111,8 @@ $flexboxgrid-breakpoints:
       .col-#{$name} {
         flex: 0 0 auto;
         padding: 0 $half-gutter-width;
-        flex-basis: 100%;
-        max-width: 100%;
+        // flex-basis: 100%;
+        // max-width: 100%;
       }
       
       @for $i from 1 through $flexgrid-grid-columns {
