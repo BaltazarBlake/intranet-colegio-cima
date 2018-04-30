@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import StyleGuide from "@/components/StyleGuide";
+import Login from "@/components/Login";
 
 Vue.use(Router)
 
@@ -8,8 +8,11 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "StyleGuide",
-      component: StyleGuide
+      name: "Login",
+      component: Login,
+      // meta: {
+      //   reqAuth: true,
+      // }
     }
   ]
 });
