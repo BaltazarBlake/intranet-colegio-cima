@@ -2,11 +2,13 @@
   div
     template(v-if='isVisible')
       .modal
-        .card
-          .card__close
-            span x
-          .card__content
-            h1 es un Modal
+        .modal__header
+          .modal__title
+            h1.title.font-size-xx-large Exámenes Control Web
+          .modal__close
+            span(@click='hidenModal()').icon-close
+        .modal__content
+          p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
       .overlay__modal(@click='hidenModal()')
 </template>
 
@@ -26,17 +28,23 @@ export default {
     EventBus.$on('showModal', () => this.isVisible = true);
   },
 
+  mounted() {
+    this.eventKey();
+  },
+
   methods: {
     hidenModal() {
       this.isVisible = false;
     },
 
     eventKey() {
-      document.body.addEventListener('keup', e => {
-        if (e.keyCode === 27) this.isVisible = false;
+      document.body.addEventListener("keyup", e => {
+        if (e.keyCode === 27) {
+          this.hidenModal();
+        }
       });
     }
-  }
+  },
 }
 </script>
 

@@ -39,7 +39,6 @@
     //-         h1 Esto es un modal
     //-       .overlay__modal
     Modal
-
         
 </template>
 
