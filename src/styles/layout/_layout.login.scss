@@ -7,6 +7,10 @@
 }
 
 .logo {
-  height: 120px;
+  height: 82px;
   margin-bottom: $gutter/2;
+
+  @include MQ(M) {
+    height: 120px;
+  }
 }

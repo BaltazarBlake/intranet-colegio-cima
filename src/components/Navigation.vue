@@ -1,9 +1,9 @@
 <template lang="pug">
   section#navList.navigation
-    .navigation__user
-      .img--perfil
-        //- img(:src="imgPerson", alt="").navigation__img.shadow-1
-      strong.navigation__title Estudiante CIMA
+    .navigation__user-profile
+      .navigation__wrapper-image
+        .navigation__user-image.shadow-1
+      strong.navigation__user-name ESTUDIANTE CIMA
       button(@click='logout()').btn--danger.is-active.navigation__btn Cerrar Sesión
     ul.row
       li.navigation__item.col-xs-12

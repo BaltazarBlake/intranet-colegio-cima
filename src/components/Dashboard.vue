@@ -12,8 +12,8 @@
     main.main-content
       navigation
       .wrapper
-        .container
-          h1 section render components
+        //- section render components
+        router-view
     
     
 </template>
