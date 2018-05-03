@@ -24,6 +24,7 @@
 <script>
 import jwt from 'jwt-decode';
 import {login} from '../functions/fetchFunctions';
+import {token} from '../cfg/core';
 export default {
   name: "Login",
 
@@ -39,10 +40,10 @@ export default {
       if(this.user && this.password){
         const res = await login(this.user,this.password);
         if(res.success){
-          const token = res.token;
-          let type = jwt(token).type;
+          const myToken = res.token;
+          let type = jwt(myToken).type;
 
-          localStorage.setItem('186792bf11c51e92ed5eba02424312ac',token);
+          localStorage.setItem(token,myToken);
 
           if (type === 'student') {
             this.$router.replace('/Dashboard');

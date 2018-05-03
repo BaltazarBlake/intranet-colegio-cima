@@ -38,6 +38,7 @@
 
 <script>
 import { EventBus } from "../event-bus.js";
+import { token } from "../cfg/core";
 export default {
   name: "Navigation",
 
@@ -70,7 +71,8 @@ export default {
     },
 
     logout() {
-      
+      localStorage.removeItem(token);
+      this.$router.replace('/');
     }
   }
 };

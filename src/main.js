@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import {token} from './cfg/core'
 
 //Decode payload JWT
 import jwt_decode from 'jwt-decode'
@@ -12,7 +13,7 @@ Vue.config.productionTip = false
 //Navigations Guards
 router.beforeEach((to,from,next)=>{
   let currentUser = false;
-  let token = localStorage.getItem('4a511cf5cb8ad5c5fcee27646cbf0043');  //replace token name
+  let token = localStorage.getItem(token);  //replace token name
   let reqAuth,isFamilyGuy,isStudent,type;
 
   if(token!=null){
