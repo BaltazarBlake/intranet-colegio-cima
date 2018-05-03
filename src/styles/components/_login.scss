@@ -1,0 +1,13 @@
+.login {
+  @extend .card;
+  width: 340px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &__title {
+    @extend .title;
+    padding-bottom: $gutter/2;
+
+  }
+}

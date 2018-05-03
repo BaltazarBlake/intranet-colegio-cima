@@ -32,7 +32,10 @@ ul {
 b {
   display: none;
 }
-
-input:focus {
-  outline: none;
+input {
+  border: 0;
+  
+  &:focus {
+    outline: none;
+  }
 }

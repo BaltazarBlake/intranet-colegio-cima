@@ -1,0 +1,43 @@
+<template lang="pug">
+  section#navList.navigation
+    .navigation__user
+      .img--perfil
+        img(:src="imgPerson", alt="").navigation__img.shadow-1
+      strong.navigation__title Ricardo
+      a(href="?view=logout" @click="deleteData").btn--danger.is-active.navigation__btn Cerrar Sesión
+    ul.row
+      li.navigation__item.col-xs-12
+        a(@click="student").link
+          span.icon-home
+          span Inicio
+      li.navigation__item.col-xs-12
+        a(@click="score").link
+          span.icon-file
+          span Exámenes
+      li.navigation__item.col-xs-12
+        a(@click="assistance").link
+          span.icon-calendar-1
+          span Asistencia
+      li.navigation__item.col-xs-12
+        a(@click="horary").link
+          span.icon-horary
+          span Horario
+      li.navigation__item.col-xs-12
+        a(@click="event").link
+          span.icon-notes
+          span Observaciones
+      li.navigation__item.col-xs-12
+        a(@click="teacher").link
+          span.icon-team
+          span Profesores
+      li.navigation__item.col-xs-12
+        a(@click="regulation").link
+          span.icon-book
+          span Reglamento Int.
+</template>
+
+<script>
+export default {
+  
+}
+</script>

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from "@/components/Login";
+import Navigation from "@/components/Navigation";
 
 Vue.use(Router)
 
@@ -8,8 +8,8 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "Login",
-      component: Login,
+      name: "Navigation",
+      component: Navigation,
       // meta: {
       //   reqAuth: true,
       // }

@@ -1,0 +1,18 @@
+.input-field {
+  margin-bottom: $gutter/2;
+
+  &__label {
+    display: block;
+    text-align: left;
+    margin-bottom: $gutter/8;
+  }
+
+  &__input {
+    display: block;
+    width: 100%;
+    padding: .6em .5em;
+    border-radius: 2em;
+    border: 2px solid #ccc;
+  }
+  
+}

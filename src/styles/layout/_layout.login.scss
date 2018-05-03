@@ -1,0 +1,12 @@
+.main-content--login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+.logo {
+  height: 120px;
+  margin-bottom: $gutter/2;
+}

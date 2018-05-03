@@ -1,14 +1,14 @@
 
 /************* Sizes *************/
 
-$first-size: 9px;
+$first-size: 10px;
 $font-size-breakpoints :
   x-small $first-size,
   small $first-size + 3,
-  regular ($first-size + 7),
-  large ($first-size + 11),
+  regular ($first-size + 6),
+  large ($first-size + 10),
   x-large ($first-size + 15),
-  xx-large ($first-size + 19);
+  xx-large ($first-size + 20);
 
 @each $breakpoint in $font-size-breakpoints {
   $name: nth($breakpoint, 1);
@@ -51,4 +51,16 @@ $family-breakpoints :
 .title {
   margin-top: 0;
   margin-bottom: 0;
+}
+
+/************* Position font *************/
+
+.text--center {
+  text-align: center;
+}
+.text--left {
+  text-align: left;
+}
+.text--right {
+  text-align: right;
 }
