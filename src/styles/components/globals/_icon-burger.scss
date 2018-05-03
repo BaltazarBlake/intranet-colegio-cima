@@ -1,0 +1,23 @@
+.icon-burger {
+  position: relative;
+  width: 25px;
+  height: 2px;
+  border-radius: .5px;
+  background-color: #000;
+  
+  &:before,
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -6px;
+    width: 25px;
+    height: 2px;
+    background-color: #000;
+    border-radius: .5px;
+  }
+
+  &:after {
+    top: 6px;
+  }
+}

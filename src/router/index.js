@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Navigation from "@/components/Navigation";
+import Login from "@/components/Login";
+import Dashboard from "@/components/Dashboard";
 
 Vue.use(Router)
 
@@ -8,11 +9,13 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "Navigation",
-      component: Navigation,
-      // meta: {
-      //   reqAuth: true,
-      // }
+      name: "Login",
+      component: Login,
+    },
+    {
+      path: "/Dashboard",
+      name: "Dashboard",
+      component: Dashboard,
     }
   ]
 });

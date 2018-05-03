@@ -45,7 +45,7 @@ export default {
           localStorage.setItem('186792bf11c51e92ed5eba02424312ac',token);
 
           if (type === 'student') {
-            this.$router.replace('/Student');
+            this.$router.replace('/Dashboard');
           } else {
             this.$router.replace('/FamilyGuy');
           }

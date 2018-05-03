@@ -1,0 +1,7 @@
+.wrapper {
+  padding-top: $main-header-height;
+  
+  @include MQ(L) {
+    margin-left: $width-navigation;
+  }
+}

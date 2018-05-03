@@ -11,6 +11,7 @@ $font_path: '~@/assets/fonts/';
 @import 'base/web-font';
 @import 'base/grid';
 
+@import 'components/globals/icon-burger';
 @import 'components/globals/shadows';
 @import 'components/globals/buttons';
 @import 'components/globals/card';
@@ -18,10 +19,12 @@ $font_path: '~@/assets/fonts/';
 @import 'components/globals/modal';
 @import 'components/globals/input-field';
 
+@import 'components/header';
 @import 'components/login';
 @import 'components/navigation';
 
 @import 'layout/layout.login';
+@import 'layout/layout.dashboard';
 
 @import 'theme/typography';
 

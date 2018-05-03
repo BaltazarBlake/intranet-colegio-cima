@@ -1,0 +1,34 @@
+// Cabezera
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  @include z-index(main-header);
+  width: 100%;
+  height: $main-header-height;
+  box-shadow: 0 0 20px 0 rgba(0,0,0,.09);
+  // @extend .elevation-2;
+  background-color: #FFF;
+
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    height: 100%;
+
+    @include MQ(L) {
+      justify-content: center;
+    }
+  }
+  &__logo {
+    height: $main-header-height - 5px;
+    align-self: center;
+  }
+
+  @include MQ(L) {
+    justify-content: flex-end;
+    margin-left: $width-navigation;
+    width: calc(100% - #{$width-navigation});
+  }
+}

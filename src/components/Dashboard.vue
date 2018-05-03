@@ -1,10 +1,37 @@
 <template lang="pug">
-  main.main-content
+  div
+    //- Main header
+    header.main-header
+      .main-header__content.container
+        //- Boton Hamburguesa
+        button(@click='viewNavigation()').btn--burger
+          .icon-burger
+        //- Logo CIMA
+        img(src="../assets/logo_colegio.svg", alt="Colegio CIMA").main-header__logo
+    //- Main content
+    main.main-content
+      navigation
+      .wrapper
+        .container
+          h1 section render components
+    
     
 </template>
 
 <script>
+import { EventBus } from '../event-bus.js';
+import Navigation from './Navigation';
 export default {
-  
+  name: 'Dashboard',
+
+  components: {
+    Navigation
+  },
+
+  methods: {
+    viewNavigation() {
+      EventBus.$emit('showNavigation');
+    }
+  },
 }
 </script>
