@@ -13,8 +13,8 @@
   background-color: #002854;
 
   transition: all .4s ease-in-out;
-  transform: translateX(-110%);
-
+  transform: translate(-110%);
+  
   &.is-show {
     transform: translateX(0);
   }
