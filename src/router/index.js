@@ -4,6 +4,7 @@ import Login from '@/components/Login';
 import Dashboard from '@/components/Dashboard';
 import StyleGuide from '@/components/StyleGuide';
 import Profile from '@/components/Profile';
+import Assistance from '@/components/Assistance';
 
 Vue.use(Router)
 
@@ -18,20 +19,26 @@ export default new Router({
       path: '/Dashboard',
       name: 'Dashboard',
       component: Dashboard,
-      meta: { isStudent: true },
+      meta: { reqAuth: true },
 
       children: [
         {
           path: '',
           name: 'Profile',
           component: Profile,
-          meta: { isStudent: true },
+          meta: { reqAuth: true },
         },
         {
           path: 'StyleGuide',
           name: 'StyleGuide',
           component: StyleGuide,
-          meta: { isStudent: true },
+          meta: { reqAuth: true },
+        },
+        {
+          path: 'Assistance',
+          name: 'Assistance',
+          component: Assistance,
+          meta: { reqAuth: true },
         }
       ]
     }

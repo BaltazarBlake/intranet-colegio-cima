@@ -13,12 +13,12 @@ Vue.config.productionTip = false
 //Navigations Guards
 router.beforeEach((to,from,next)=>{
   let currentUser = false;
-  let token = localStorage.getItem(token);  //replace token name
+  let myToken = localStorage.getItem(token);  //replace token name
   let reqAuth,isFamilyGuy,isStudent,type;
 
-  if(token!=null){
+  if (myToken!=null){
     currentUser = true;  
-    type = jwt_decode(token).type; //get type user 
+    type = jwt_decode(myToken).type; //get type user 
   }    
   
   reqAuth     = to.meta.reqAuth; 

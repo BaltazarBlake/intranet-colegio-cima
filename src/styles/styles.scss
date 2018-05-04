@@ -9,6 +9,7 @@ $font_path: '~@/assets/fonts/';
 @import 'base/normalize';
 @import 'base/icon-font';
 @import 'base/web-font';
+@import 'base/gutters';
 @import 'base/grid';
 
 @import 'components/globals/scroll';
@@ -19,7 +20,9 @@ $font_path: '~@/assets/fonts/';
 @import 'components/globals/buttons';
 @import 'components/globals/card';
 @import 'components/globals/links';
+@import 'components/globals/legend';
 @import 'components/globals/modal';
+@import 'components/globals/calendar';
 @import 'components/globals/input-field';
 @import 'components/globals/error-message';
 

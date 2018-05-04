@@ -1,0 +1,160 @@
+.calendar {
+  @extend .card;
+  margin-bottom: $gutter/2;
+
+  $width-calendar: 100%;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+
+    &-days {
+      display: flex;
+      width: $width-calendar;
+      background-color: teal;
+    }
+
+    &-day {
+      padding-top: $gutter/4;
+      text-align: center;
+      width: $width-calendar/7;
+      color: #FFF;
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-wrap: wrap;
+    width: $width-calendar;
+    background-color: #FEFEFE;
+  }
+  
+  &__tag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2.5em;
+    padding: 0 1em;
+    border-radius: 1.2em;
+    border: 1px solid #CCC;
+    margin-right: $gutter/3;
+    margin-bottom: $gutter/3;
+
+    @include MQ(S) {
+      margin-bottom: 0;
+    }
+
+    &-title {
+      color: #333;
+    }
+
+    .circle--absence,
+    .circle--delay,
+    .circle--arrive {
+      width: 2em;
+      height: 2em;
+      border-radius: 50%;
+      margin-right: $gutter/3;
+    }
+    
+    .circle--absence {
+      background-color: #FFEBEE;
+      border: 1px solid #F44336;
+    }
+    .circle--delay {
+      background-color: #FFE0B2;
+      border: 1px solid #FF9800;
+    }
+    .circle--arrive {
+      background-color: #E3F2FD;
+      border: 1px solid #2196F3;
+    }
+  }
+
+  &__day {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 0;
+    width: $width-calendar/7;
+    height: 4.7em;
+    margin: $gutter/4 0;
+    border-bottom: 1px solid #eee;
+
+    &-number {
+      text-align: center;
+      width: 1.9em;
+      height: 1.9em;
+      margin-bottom: .2em;
+      border-radius: 50%;
+      transition: all .3s ease-in-out;
+      
+      &.absence,
+      &.delay,
+      &.arrive {
+        cursor: pointer;
+
+        &:hover {
+          @extend .shadow-1;
+        }
+
+        // desactivando los estilos tipo boton
+        &.is-not-bottom {
+          cursor: auto;
+          &:hover {
+            box-shadow: none;
+          }
+        }
+      }
+
+
+      &.absence {
+        background-color: #FFEBEE;
+        border: 1px solid #F44336;
+      }
+
+      &.delay {
+        background-color: #FFE0B2;
+        border: 1px solid #FF9800;
+      }
+
+      &.arrive {
+        background-color: #E3F2FD;
+        border: 1px solid #2196F3;
+      }
+
+
+      @include MQ(S) {
+        width: 2.5em;
+        height: 2.5em;
+      }
+
+      @include MQ(XM) {
+        width: 3em;
+        height: 3em;
+      }
+
+      @include MQ(M) {
+        width: 3.2em;
+        height: 3.2em;
+      }
+    }
+  }
+}
+
+
+// Impresion
+
+// @media print {
+//   .calendar {
+//     // padding: $gutter/6;
+//     &__day {
+//       height: auto;
+//       &-number {
+//         font-size: 12px;
+//         // width: auto;
+//       }
+//     }
+//   }
+// }

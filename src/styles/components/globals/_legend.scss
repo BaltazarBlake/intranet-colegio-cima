@@ -1,0 +1,28 @@
+.legend {
+  @extend .card;
+
+  &__body {
+    // display: flex;
+  }
+  
+  &__label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0.3em;
+    margin-bottom: 0.3em;
+    height: 2.5em;
+    padding: 0 1em;
+    border-radius: 1.2em;
+    border: 1px solid #ccc;
+  }
+}
+
+.circle {
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  margin-right: $gutter/3;
+  background-color: teal;
+}
