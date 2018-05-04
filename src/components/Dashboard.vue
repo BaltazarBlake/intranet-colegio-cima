@@ -21,11 +21,13 @@
 <script>
 import { EventBus } from '../event-bus.js';
 import Navigation from './Navigation';
+// import Spinner from './Spinner';
 export default {
   name: 'Dashboard',
 
   components: {
-    Navigation
+    Navigation,
+    // Spinner
   },
 
   methods: {

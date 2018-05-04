@@ -1,0 +1,21 @@
+.band {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  padding-top: $gutter/2;
+  @include z-index(origen);
+  
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 155px;
+    @include z-index(hack-bg-co);
+    background-color: #2d3a4b;
+    background-color: #f7f7f7;
+  }
+}

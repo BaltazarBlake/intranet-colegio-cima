@@ -1,10 +1,13 @@
 <template lang="pug">
   section#navList.navigation
-    .navigation__user-profile
-      .navigation__wrapper-image
-        .navigation__user-image.shadow-1
-      strong.navigation__user-name ESTUDIANTE CIMA
-      button(@click='logout()').btn--danger.is-active.navigation__btn Cerrar Sesión
+    template(v-if='report')
+      .navigation__user-profile
+        .navigation__wrapper-image
+          img(:src='report.image').navigation__user-image.shadow-1
+        strong.navigation__user-name {{report.name}}
+        button(@click='logout()').btn--danger.is-active.navigation__btn Cerrar Sesión
+    template(v-else)
+      spinner
     ul.row
       li.navigation__item.col-xs-12
         a().navigation__link
@@ -39,14 +42,30 @@
 <script>
 import { EventBus } from "../event-bus.js";
 import { token } from "../cfg/core";
+import Spinner from '@/components/globals/Spinner';
 export default {
   name: "Navigation",
+
+  components: {
+    Spinner
+  },
+
+  data() {
+    return {
+      report: null,
+    }
+  },
 
   created() {
     // Listen for the showNavigation event
     EventBus.$on('showNavigation', () => {
       const navList = document.getElementById('navList');
       navList.classList.toggle('is-show');
+    });
+
+    // 
+    EventBus.$on('shareData', (data) => {
+      this.report = data;
     });
   },
 

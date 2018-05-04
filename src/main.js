@@ -26,21 +26,21 @@ router.beforeEach((to,from,next)=>{
   isStudent   = to.meta.isStudent;
 
   if(reqAuth){
-    if(!currentUser){next('/login')}       //replace view login
+    if(!currentUser){next('/')}       //replace view login
     else{
       if(isFamilyGuy){        
         if(type==='familyGuy'){next()}
-        else{next('/user')}               //replace view student
+        else{next('/Dashboard')}               //replace view student
       }else if(isStudent){
         if(type==='student'){next()}
-        else{next('/admin')}              //replace view family guy
+        else{next('/FamilyGuy')}              //replace view family guy
       }else{
         next();
       }
     }
   }else if(currentUser){
-    if(type==='familyGuy'){next('/admin')}    //replace view family guy
-    if(type==='student'){next('/user')}       //replace view student
+    if (type === 'familyGuy') { next('/FamilyGuy')}    //replace view family guy
+    if (type === 'student') { next('/Dashboard')}       //replace view student
   }else{
     next();
   }

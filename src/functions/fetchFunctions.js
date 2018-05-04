@@ -128,4 +128,4 @@ async function getObservations(idStudentSchool){
   }
 }
 
-export {login,getTeachers}
+export {login,getTeachers,getProfile}

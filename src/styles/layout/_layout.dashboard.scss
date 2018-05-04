@@ -1,7 +1,14 @@
 .wrapper {
-  padding-top: $main-header-height;
+  margin-top: $main-header-height;
+  // padding-top: $gutter/2;
   
   @include MQ(L) {
     margin-left: $width-navigation;
   }
+}
+
+.tarjet {
+  position: relative;
+  z-index: 500;
+  min-height: 30vh;
 }

@@ -1,0 +1,30 @@
+.profile {
+  @extend .card;
+  max-width: 400px;
+  margin: auto;
+
+  &__wrapper-image {
+    position: relative;
+    overflow: hidden;
+    width: 9em;
+    height: 9em;
+    margin: 0 auto;
+    margin-bottom: $gutter/2;
+    border-radius: 50%;
+    background-color: teal;
+  }
+
+  &__user-image {
+    position: absolute;
+    top: -20%;
+    width: 100%;
+  }
+
+  &__description {
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
+    margin-top: $gutter/2;
+  }
+
+}

@@ -2,12 +2,15 @@
   main.main-content--login
     .container
       .row.main-center
+
         .col-xs-12
             img(src="../assets/logo_colegio.svg", alt="Colegio CIMA").logo
-        //- .row.main-center
-          //- template(v-if="error")
-          //-   article.message-error
-          //-     h1(v-text="error").message-error__title
+
+        template(v-if="error")
+          .col-xs-12
+            .row.main-center
+              article.message-error
+                h1(v-text="error").font-size-large
         .login
           h1.login__title.text--center.font-size-xx-large Iniciar sesión
           .row.main-center
@@ -18,7 +21,7 @@
               label.input-field__label Contraseña
               input(type="password", v-model="password", placeholder="").input-field__input
             .col-xs
-              button(v-on:click="enviarData", v-on:keyup.enter="enviarData").btn--primary Ingresar
+              button(v-on:click="login", v-on:keyup.enter="login").btn--primary Ingresar
 </template>
 
 <script>
@@ -31,12 +34,13 @@ export default {
   data() {
     return {
       user: null,
+      error: null,
       password: null
     };
   },
 
   methods: {
-    async enviarData() {
+    async login() {
       if(this.user && this.password){
         const res = await login(this.user,this.password);
         if(res.success){
@@ -51,10 +55,10 @@ export default {
             this.$router.replace('/FamilyGuy');
           }
         }else{
-          console.log(res.message);
+          this.error = res.message;
         }
       }else{
-        console.log('Debe ingresar usuario y contraseña');
+        this.error = 'Debe ingresar usuario y contraseña';
       }   
       this.user     = '';
       this.password = '';   
