@@ -18,8 +18,8 @@
           span.icon-file
           span Exámenes
       li.navigation__item.col-xs-12
-        //- router-link(active-class='is-active' to='').navigation__link Asistencia
-        a().navigation__link
+        router-link(active-class='is-active' :to="{name:'assistance'}").navigation__link Asistencia
+        //- a().navigation__link
           span.icon-calendar-1
           span Asistencia
       li.navigation__item.col-xs-12
@@ -42,6 +42,7 @@
 
 <script>
 import { EventBus } from "../event-bus.js";
+import {mapState} from 'vuex';
 import { token } from "../cfg/core";
 import Spinner from '@/components/globals/Spinner';
 export default {
@@ -56,7 +57,9 @@ export default {
       report: null,
     }
   },
-
+  mounted(){
+    mapState['img,name']
+  },
   created() {
     // Listen for the showNavigation event
     EventBus.$on('showNavigation', () => {
