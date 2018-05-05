@@ -128,4 +128,16 @@ async function getObservations(idStudentSchool){
   }
 }
 
-export {login,getTeachers,getProfile}
+async function getAssistance(idStudentSchool){
+  const response = await fetch(
+                          `${host}/assistance/${idStudentSchool}`,
+                          {
+                            method:'get',
+                            headers:{'Authorization':localStorage.getItem(token)}
+                          }
+  );
+  const res = await response.json();
+  return res;
+}
+
+export {login,getTeachers,getProfile,getAssistance}

@@ -35,27 +35,32 @@
 <script>
 // import { EventBus } from "../event-bus.js";
 import jwt from 'jwt-decode';
-import {getProfile} from '../functions/fetchFunctions';
+import {getAssistance} from '../functions/fetchFunctions';
 import {token} from '../cfg/core';
 import Calendar from './globals/Calendar';
 import Spinner from '@/components/globals/Spinner';
 export default {
   name: 'Assistance',
-
+  data(){
+    return{
+      report:null,
+    }
+  },
   components: {
     Calendar
   },
 
-  mounted() {
-
+  async mounted() {
+    await this.getData();
   },
 
   methods: {
-    getData() {
+    async getData() {
       const myToken = localStorage.getItem(token);
-      // const idUser = jwt(myToken).user;
-      // const res = await getProfile(idUser);
-      // this.report = res;
+      const idUser = jwt(myToken).idUser;
+      const res = await getAssistance(idUser);
+      this.report = res;
+      console.log(this.report);
     }
   }
 }
