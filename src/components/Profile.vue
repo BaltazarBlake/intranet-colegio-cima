@@ -77,6 +77,8 @@ export default {
       this.report = res;
       this.idPerson = this.report.idpersona;
       this.image = `http://docente.cima.com.pe:8096/v4cima/vista/fotosalumno/${this.idPerson}.jpg`;
+
+      localStorage.setItem('idTurn', this.report.idturno);
     },
 
     shareData() {

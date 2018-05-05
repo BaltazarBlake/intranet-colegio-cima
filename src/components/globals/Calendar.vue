@@ -18,14 +18,95 @@
         .calendar__header-day
           h2.font-size-small DOM.
       .calendar__body        
-        - for (var x = 0; x < 30; x++)
+        template(v-for='day in data')
           .calendar__day
-            small.calendar__day-number 1
-            small.font-size-small -
+            small.calendar__day-number {{day.numero_dia}}
+            small.font-size-small {{viewHour(day)}}
 </template>
 
 <script>
 export default {
   name: 'Calendar',
+
+  props: ['data', 'idTurn'],
+
+  methods: {
+    colorState(day) {
+      let classColor;
+
+      if (day.hora_turno != 'x') {
+        if (this.idTurn == 1) {
+          // Turno mañana
+          if (this.turn) {
+            if (day.estado == '[F]' && day.hora_turno == '') {
+              classColor = 'absence';
+            } else if (day.estado == '[T]' && day.hora_turno != '') {
+              classColor = 'delay';
+            } else if (day.estado == '' && day.hora_turno != '') {
+              classColor = 'arrive';
+            }
+          // Turno tarde
+          } else {
+            if (!this.turn) {
+              if (day.hora_opcional == '[F]') {
+                classColor = '';
+              } else {
+                classColor = 'arrive';
+              }              
+            }
+          }
+        }
+      }
+
+      if (day.nro_dia == 0) {
+        classColor = '';
+      }
+
+      return classColor;
+    },
+
+    viewHour(day) {
+      let hour;
+      if (this.idTurn == 1) {
+        if (this.turn) {
+          if (day.hora_turno != '') {
+            hour = day.hora_turno;
+          } else {
+            hour = '-';
+          }
+        } else {
+          if (day.hora_opcional != '[F]') {
+            hour = day.hora_opcional;
+          } else {
+            hour = '-';
+          }
+        }
+      } else {
+        if (!this.turn) {
+          if (day.hora_turno != '[F]') {
+            hour = day.hora_turno;
+          } else {
+            hour = '';
+          }
+        } else {
+          if (day.hora_opcional != '') {
+            hour = day.hora_opcional;
+          } else {
+            hour = '';
+          }
+        }
+      }
+
+      if (day.nro_dia == undefined) {
+        hour = '';
+      }
+
+      if (day.hora_turno == 'x' && day.nro_dia != undefined) {
+        hour = '-';
+      }
+
+      return hour;
+    },
+  }
 }
 </script>
