@@ -1,7 +1,7 @@
 <template lang="pug">
   article.calendar
     header.calendar__header
-      h1.font-size-large Mes
+      h1.font-size-large {{data[0].mes}}
       .calendar__header-days
         .calendar__header-day
           h2.font-size-small LUN.
@@ -20,7 +20,7 @@
       .calendar__body        
         template(v-for='day in data')
           .calendar__day
-            small.calendar__day-number {{day.numero_dia}}
+            small(:class='colorState(day)').calendar__day-number {{day.numero_dia}}
             small.font-size-small {{viewHour(day)}}
 </template>
 
@@ -28,7 +28,7 @@
 export default {
   name: 'Calendar',
 
-  props: ['data', 'idTurn'],
+  props: ['data', 'idTurn', 'turn'],
 
   methods: {
     colorState(day) {

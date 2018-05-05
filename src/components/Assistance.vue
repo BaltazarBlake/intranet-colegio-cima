@@ -22,13 +22,13 @@
                     i.circle
                     span Asistencia
             .row.no-wrap.m-b
-              button.btn--default Mañana
-              button.btn--default Tarde
+              button(@click='checkMorning()').btn--default Mañana
+              button(@click='checkAfternoon()').btn--default Tarde
               button.btn--default Reporte
             .row.m-b
               template(v-for='month in report')
                 .col-xs-12.col-l-6
-                  calendar(:data='month' :idTurn='idTurn')
+                  calendar(:data='month' :idTurn='idTurn' :turn='turn')
           template(v-else)
             spinner
       
@@ -48,6 +48,7 @@ export default {
     return{
       report:null,
       idTurn: null,
+      turn: null,
     }
   },
   components: {
@@ -57,6 +58,7 @@ export default {
 
   async mounted() {
     await this.getData();
+    this.checkTurn();
   },
 
   methods: {

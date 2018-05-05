@@ -54,7 +54,7 @@
     transition: all .4s ease-in-out;
 
     &:hover,
-    &.is.active {
+    &.is-active {
       background-color: $hover-color;
     }
   }

@@ -18,6 +18,7 @@
           span.icon-file
           span Exámenes
       li.navigation__item.col-xs-12
+        //- router-link(active-class='is-active' to='').navigation__link Asistencia
         a().navigation__link
           span.icon-calendar-1
           span Asistencia
