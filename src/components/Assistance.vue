@@ -22,8 +22,8 @@
                     i.circle
                     span Asistencia
             .row.no-wrap.m-b
-              button(@click='checkMorning()').btn--default Mañana
-              button(@click='checkAfternoon()').btn--default Tarde
+              button(@click='checkMorning()' :class='turn? "is-active" : ""').btn--default Mañana
+              button(@click='checkAfternoon()' :class='turn? "" : "is-active"').btn--default Tarde
               button.btn--default Reporte
             .row.m-b
               template(v-for='month in report')
@@ -105,83 +105,6 @@ export default {
 
     checkAfternoon() {
       this.turn = false;
-    },
-
-    colorState(day) {
-      let classColor;
-
-      if (day.hora_turno != 'x') {
-        if (this.idTurn == 1) {
-          // Turno mañana
-          if (this.turn) {
-            if (day.estado == '[F]' && day.hora_turno == '') {
-              classColor = 'absence';
-            } else if (day.estado == '[T]' && day.hora_turno != '') {
-              classColor = 'delay';
-            } else if (day.estado == '' && day.hora_turno != '') {
-              classColor = 'arrive';
-            }
-          // Turno tarde
-          } else {
-            if (!this.turn) {
-              if (day.hora_opcional == '[F]') {
-                classColor = '';
-              } else {
-                classColor = 'arrive';
-              }              
-            }
-          }
-        }
-      }
-
-      if (day.nro_dia == 0) {
-        classColor = '';
-      }
-
-      return classColor;
-    },
-
-    viewHour(day) {
-      let hour;
-      if (this.idTurn == 1) {
-        if (this.turn) {
-          if (day.hora_turno != '') {
-            hour = day.hora_turno;
-          } else {
-            hour = '-';
-          }
-        } else {
-          if (day.hora_opcional != '[F]') {
-            hour = day.hora_opcional;
-          } else {
-            hour = '-';
-          }
-        }
-      } else {
-        if (!this.turn) {
-          if (day.hora_turno != '[F]') {
-            hour = day.hora_turno;
-          } else {
-            hour = '';
-          }
-        } else {
-          if (day.hora_opcional != '') {
-            hour = day.hora_opcional;
-          } else {
-            hour = '';
-          }
-        }
-      }
-
-      if (day.nro_dia == undefined) {
-        hour = '';
-      }
-
-      if (day.hora_turno == 'x' && day.nro_dia != undefined) {
-        hour = '-';
-      }
-
-      return hour;
     },
   }
 }

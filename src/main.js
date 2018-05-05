@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './store'
 import {token} from './cfg/core'
 
 //Decode payload JWT
@@ -51,6 +52,7 @@ router.beforeEach((to,from,next)=>{
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  store,
   router,
   components: { App },
   template: '<App/>'
