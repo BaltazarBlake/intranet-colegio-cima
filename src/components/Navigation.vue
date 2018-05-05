@@ -1,10 +1,10 @@
 <template lang="pug">
   section#navList.navigation
-    template(v-if='report')
+    template(v-if='image')
       .navigation__user-profile
         .navigation__wrapper-image
-          img(:src='report.image').navigation__user-image.shadow-1
-        strong.navigation__user-name {{report.name}}
+          img(:src='image').navigation__user-image.shadow-1
+        strong.navigation__user-name {{name}}
         button(@click='logout()').btn--danger.is-active.navigation__btn Cerrar Sesión
     template(v-else)
       spinner
@@ -18,8 +18,8 @@
           span.icon-file
           span Exámenes
       li.navigation__item.col-xs-12
-        router-link(active-class='is-active' :to="{name:'assistance'}").navigation__link Asistencia
-        //- a().navigation__link
+        //- router-link(active-class='is-active' :to="{name:'assistance'}").navigation__link Asistencia
+        a().navigation__link
           span.icon-calendar-1
           span Asistencia
       li.navigation__item.col-xs-12
@@ -41,9 +41,11 @@
 </template>
 
 <script>
-import { EventBus } from "../event-bus.js";
-import {mapState} from 'vuex';
+import jwt from 'jwt-decode';
+import {getProfile} from '../functions/fetchFunctions';
 import { token } from "../cfg/core";
+
+import { EventBus } from "../event-bus.js";
 import Spinner from '@/components/globals/Spinner';
 export default {
   name: "Navigation",
@@ -54,11 +56,9 @@ export default {
 
   data() {
     return {
-      report: null,
+      name: null,
+      image: null,
     }
-  },
-  mounted(){
-    mapState['img,name']
   },
   created() {
     // Listen for the showNavigation event
@@ -66,18 +66,25 @@ export default {
       const navList = document.getElementById('navList');
       navList.classList.toggle('is-show');
     });
-
-    // 
-    EventBus.$on('shareData', (data) => {
-      this.report = data;
-    });
   },
 
-  mounted() {
+  async mounted() {
+    await this.getData();
     this.render();
   },
 
   methods: {
+
+    async getData() {
+      const myToken = localStorage.getItem(token);
+      const idUser = jwt(myToken).user;
+      const res = await getProfile(idUser);
+      let report = res;
+      let idPerson = report.idpersona;
+      this.image = `http://docente.cima.com.pe:8096/v4cima/vista/fotosalumno/${idPerson}.jpg`;
+      this.name = `${report.nombre} ${report.apellido}`;
+    },
+
     render() {
       //  Breakpoint
       const MediumBp = matchMedia('(min-width: 1170px)');

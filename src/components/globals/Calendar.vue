@@ -20,7 +20,7 @@
       .calendar__body        
         template(v-for='day in data')
           .calendar__day
-            small(:class='colorState(day)').calendar__day-number {{day.numero_dia}}
+            small(:class='colorState(day)' @click='viewDescription(day)').calendar__day-number {{day.numero_dia}}
             small.font-size-small {{viewHour(day)}}
 </template>
 
@@ -106,6 +106,14 @@ export default {
       }
 
       return hour;
+    },
+
+    viewDescription(day) {
+      if (day.nro_dia != undefined && day.nro_dia != 0 && day.estado != undefined) {
+        if (this.turn) {
+          console.log('la justificacions');
+        }
+      }
     },
   }
 }

@@ -43,7 +43,6 @@
 </template>
 
 <script>
-import { EventBus } from "../event-bus.js";
 import jwt from 'jwt-decode';
 import {getProfile} from '../functions/fetchFunctions';
 import {token} from '../cfg/core';
@@ -66,7 +65,6 @@ export default {
 
   async mounted() {
     await this.getData();
-    this.shareData();
   },
 
   methods: {
@@ -80,16 +78,6 @@ export default {
 
       localStorage.setItem('idTurn', this.report.idturno);
     },
-
-    shareData() {
-      let image = this.image;
-      let name = `${this.report.nombre} ${this.report.apellido}`;
-      EventBus.$emit('shareData',
-        {
-          name,
-          image,
-        });
-    }
   }
 }
 </script>
