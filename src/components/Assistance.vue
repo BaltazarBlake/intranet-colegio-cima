@@ -7,41 +7,41 @@
       .row
         .col-xs-12
           template(v-if='report')
-            .legend.row
-              .col-xs-12
+            .card
+              .card__title
                 h1.font-size-regular Leyenda
-              .col-xs-12
-                .legend__body.row
-                  .legend__label.col-xs
-                    i.circle
-                    span Inasistencia
-                  .legend__label.col-xs
-                    i.circle
-                    span Tardanza
-                  .legend__label.col-xs
-                    i.circle
-                    span Asistencia
-            .row.no-wrap.m-b
+              .card__body
+                .legend__label
+                  i.circle
+                  span Inasistencia
+                .legend__label
+                  i.circle
+                  span Tardanza
+                .legend__label
+                  i.circle
+                  span Asistencia
+            .d-f.m-b
               button(@click='checkMorning()' :class='turn? "is-active" : ""').btn--default Mañana
               button(@click='checkAfternoon()' :class='turn? "" : "is-active"').btn--default Tarde
               button.btn--default Reporte
-            .row.m-b
+            .row
               template(v-for='month in report')
                 .col-xs-12.col-l-6
                   calendar(:data='month' :idTurn='idTurn' :turn='turn')
           template(v-else)
             spinner
-      
-
-
+    modal
 </template>
 
 <script>
 import jwt from 'jwt-decode';
 import {getAssistance} from '../functions/fetchFunctions';
 import {token} from '../cfg/core';
-import Calendar from './globals/Calendar';
+import { EventBus } from '../event-bus.js';
+
+import Modal from '@/components/globals/Modal';
 import Spinner from '@/components/globals/Spinner';
+import Calendar from './globals/Calendar';
 export default {
   name: 'Assistance',
   data(){
@@ -52,6 +52,7 @@ export default {
     }
   },
   components: {
+    Modal,
     Spinner,
     Calendar,
   },
@@ -106,6 +107,12 @@ export default {
     checkAfternoon() {
       this.turn = false;
     },
+
+    sendData() {
+      EventBus.$emit('sendJustification', {
+        data: 'la data'
+      });
+    }
   }
 }
 </script>

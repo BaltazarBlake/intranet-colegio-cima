@@ -25,10 +25,22 @@
 </template>
 
 <script>
+import { EventBus } from '../../event-bus.js';
+import Modal from '@/components/globals/Modal';
 export default {
   name: 'Calendar',
 
+  components: {
+    Modal,
+  },
+
   props: ['data', 'idTurn', 'turn'],
+
+  created() {
+    EventBus.$on('sendJustification',(data) => {
+      console.log(data);
+    });
+  },
 
   methods: {
     colorState(day) {
@@ -111,9 +123,13 @@ export default {
     viewDescription(day) {
       if (day.nro_dia != undefined && day.nro_dia != 0 && day.estado != undefined) {
         if (this.turn) {
-          console.log('la justificacions');
+          this.viewModal();
         }
       }
+    },
+
+    viewModal() {
+      EventBus.$emit('showModal', this.isVisible);
     },
   }
 }

@@ -11,6 +11,7 @@ $font_path: '~@/assets/fonts/';
 @import 'base/web-font';
 @import 'base/gutters';
 @import 'base/grid';
+@import 'base/layout-model';
 
 @import 'components/globals/scroll';
 @import 'components/globals/spinner';
