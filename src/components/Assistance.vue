@@ -68,7 +68,7 @@ export default {
       const idUser = jwt(myToken).idUser;
       let res = await getAssistance(idUser);
       res = res.assistance;
-      
+      console.log(res);
       this.idTurn = localStorage.getItem('idTurn');
 
       this.report = [];

@@ -1,6 +1,6 @@
 
 /************* Sizes *************/
-
+$size: 18px;  /**/
 $first-size: 10px;
 $font-size-breakpoints :
   x-small $first-size,
@@ -64,3 +64,14 @@ $family-breakpoints :
 .text--right {
   text-align: right;
 }
+
+
+//
+.title3 {
+  font-size: $size;
+}
+
+.small {
+  font-size: $size - 2;
+}
+//

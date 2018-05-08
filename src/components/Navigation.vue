@@ -10,7 +10,7 @@
       spinner
     ul.row
       li.navigation__item.col-xs-12
-        a().navigation__link
+        a(@click="$router.replace('/Dashboard')").navigation__link
           span.icon-home
           span Inicio
       li.navigation__item.col-xs-12
@@ -18,12 +18,11 @@
           span.icon-file
           span Exámenes
       li.navigation__item.col-xs-12
-        //- router-link(active-class='is-active' :to="{name:'assistance'}").navigation__link Asistencia
-        a().navigation__link
+        a(@click="$router.replace('/Dashboard/Assistance')").navigation__link
           span.icon-calendar-1
           span Asistencia
       li.navigation__item.col-xs-12
-        a().navigation__link
+        a(@click="$router.replace('/Dashboard/Schedule')").navigation__link
           span.icon-horary
           span Horario
       li.navigation__item.col-xs-12
@@ -31,7 +30,7 @@
           span.icon-notes
           span Observaciones
       li.navigation__item.col-xs-12
-        a().navigation__link
+        a(@click="$router.replace('/Dashboard/Teachers')").navigation__link
           span.icon-team
           span Profesores
       li.navigation__item.col-xs-12

@@ -64,10 +64,10 @@ async function getProfile(user){
   }
 }
 
-async function getHorary(idStudentSchool){
+async function getSchedule(idStudentSchool){
   try{
     const response = await fetch(
-                            `${host}/horary/${idStudentSchool}`,
+                            `${host}/schedule/${idStudentSchool}`,
                             {
                               method:'get',
                               headers:{'Authorization':localStorage.getItem(token)}
@@ -140,4 +140,4 @@ async function getAssistance(idStudentSchool){
   return res;
 }
 
-export {login,getTeachers,getProfile,getAssistance}
+export {login,getTeachers,getProfile,getAssistance,getSchedule}

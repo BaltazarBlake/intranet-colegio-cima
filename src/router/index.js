@@ -5,6 +5,8 @@ import Dashboard from '@/components/Dashboard';
 import StyleGuide from '@/components/StyleGuide';
 import Profile from '@/components/Profile';
 import Assistance from '@/components/Assistance';
+import Teachers from '@/components/Teachers';
+import Schedule from '@/components/Schedule';
 
 Vue.use(Router)
 
@@ -23,7 +25,7 @@ export default new Router({
 
       children: [
         {
-          path: '',
+          path: '/Dashboard',
           name: 'Profile',
           component: Profile,
           meta: { reqAuth: true },
@@ -38,6 +40,18 @@ export default new Router({
           path: 'Assistance',
           name: 'Assistance',
           component: Assistance,
+          meta: { reqAuth: true },
+        },
+        {
+          path: 'Teachers',
+          name: 'Teachers',
+          component: Teachers,
+          meta: { reqAuth: true },
+        },
+        {
+          path: 'Schedule',
+          name: 'Schedule',
+          component: Schedule,
           meta: { reqAuth: true },
         }
       ]
