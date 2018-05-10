@@ -1,9 +1,11 @@
 .profile {
   @extend .card;
   max-width: 400px;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
 
   &__wrapper-image {
+    @extend .shadow-1;
     position: relative;
     overflow: hidden;
     width: 9em;
@@ -11,12 +13,13 @@
     margin: 0 auto;
     margin-bottom: $gutter/2;
     border-radius: 50%;
-    background-color: teal;
   }
 
   &__user-image {
     position: absolute;
-    top: -20%;
+    top: -15%;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%;
   }
 

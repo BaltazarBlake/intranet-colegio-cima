@@ -7,6 +7,8 @@ import Profile from '@/components/Profile';
 import Assistance from '@/components/Assistance';
 import Teachers from '@/components/Teachers';
 import Schedule from '@/components/Schedule';
+import Observations from '@/components/Observations';
+import Classmates from '@/components/Classmates';
 
 Vue.use(Router)
 
@@ -53,6 +55,18 @@ export default new Router({
           name: 'Schedule',
           component: Schedule,
           meta: { reqAuth: true },
+        },
+        {
+          path: 'Observations',
+          name: 'Observations',
+          component: Observations,
+          meta: { reqAuth: true },
+        },
+        {
+          path:'Classmates',
+          name: 'Classmates',
+          component: Classmates,
+          meta: {reqAuth: true},
         }
       ]
     }

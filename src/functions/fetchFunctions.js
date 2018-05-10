@@ -140,4 +140,4 @@ async function getAssistance(idStudentSchool){
   return res;
 }
 
-export {login,getTeachers,getProfile,getAssistance,getSchedule}
+export { login, getTeachers, getProfile, getAssistance, getSchedule, getObservations, getClassmates}

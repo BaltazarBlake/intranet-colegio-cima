@@ -2,18 +2,20 @@
   div
     .band
       .container
-        h1 Lista de profesores
+        h1.font-size-x-large Lista de profesores
     template(v-if="report")
         .container.target
           .row
             template(v-for="teacher in report")
-              .col-xs-12.col-s-6.col-l-4.df
-                .card--person.full
-                  .img__wrapper--teacher
-                    img(:src="'http://docente.cima.com.pe:8096/v4cima/vista/fotos/prf'+teacher.idprofesor+'.jpg'", alt="").card--person__img--teacher
-                  .card--person__body
-                    h1.card--person__title {{teacher.nombre}}
-                    h2.card--person__subtitle {{teacher.asignatura}}
+              .col-xs-12.col-s-6.col-m-4.d-f
+                .profile.m-b
+                  .profile__wrapper-image
+                    img(:src="'http://docente.cima.com.pe:8096/v4cima/vista/fotos/prf'+teacher.idprofesor+'.jpg'", alt="").profile__user-image
+                  .profile__description.row.main-center
+                    .col-xs-12
+                      h1.font-size-regular {{teacher.nombre}}
+                    .col-xs-12
+                      h2.font-size-small {{teacher.asignatura}}
     template(v-else)
       spinner  
 </template>

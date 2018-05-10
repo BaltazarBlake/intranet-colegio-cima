@@ -1,9 +1,7 @@
 <template lang="pug">
   div
     .band
-      .container
-        h1 Once Section
-    .container.tarjet
+    .container.target
       .row
         .col-xs-12
           template(v-if="report")

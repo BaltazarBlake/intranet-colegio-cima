@@ -26,13 +26,17 @@
           span.icon-horary
           span Horario
       li.navigation__item.col-xs-12
-        a().navigation__link
+        a(@click="$router.replace('/Dashboard/Observations')").navigation__link
           span.icon-notes
           span Observaciones
       li.navigation__item.col-xs-12
         a(@click="$router.replace('/Dashboard/Teachers')").navigation__link
           span.icon-team
           span Profesores
+      li.navigation__item.col-xs-12
+        a(@click="$router.replace('/Dashboard/Classmates')").navigation__link
+          span.icon-team
+          span Directorio de alumnos
       li.navigation__item.col-xs-12
         a().navigation__link
           span.icon-book

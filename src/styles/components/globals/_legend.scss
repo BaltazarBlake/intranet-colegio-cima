@@ -21,3 +21,19 @@
   margin-right: $gutter/3;
   background-color: teal;
 }
+
+.circle--absence {
+  @extend .circle;
+  background-color: #FFEBEE;
+  border: 1px solid #F44336;
+}
+.circle--delay {
+  @extend .circle;
+  background-color: #FFE0B2;
+  border: 1px solid #FF9800;
+}
+.circle--arrive {
+  @extend .circle;
+  background-color: #E3F2FD;
+  border: 1px solid #2196F3;
+}

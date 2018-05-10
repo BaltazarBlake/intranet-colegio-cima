@@ -2,7 +2,7 @@
   div
     .band 
       .container
-        h1  En esta sección encontraras tu horario
+        h1.font-size-x-large En esta sección encontraras tu horario
     template(v-if="report")
         .container.target
           .row

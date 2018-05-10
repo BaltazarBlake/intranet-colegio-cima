@@ -2,8 +2,8 @@
   div
     .band
       .container
-        h1 Tu asistencia
-    .container.tarjet
+        h1.font-size-x-large Tu asistencia
+    .container.target
       .row
         .col-xs-12
           template(v-if='report')
@@ -12,13 +12,13 @@
                 h1.font-size-regular Leyenda
               .card__body
                 .legend__label
-                  i.circle
+                  i.circle--absence
                   span Inasistencia
                 .legend__label
-                  i.circle
+                  i.circle--delay
                   span Tardanza
                 .legend__label
-                  i.circle
+                  i.circle--arrive
                   span Asistencia
             .d-f.m-b
               button(@click='checkMorning()' :class='turn? "is-active" : ""').btn--default Mañana
@@ -26,7 +26,7 @@
               button.btn--default Reporte
             .row
               template(v-for='month in report')
-                .col-xs-12.col-l-6
+                .col-xs-12.col-l-6.d-f
                   calendar(:data='month' :idTurn='idTurn' :turn='turn')
           template(v-else)
             spinner
