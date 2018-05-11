@@ -15,7 +15,9 @@
                     .col-xs-12
                       h1.font-size-regular {{data.nombre}} {{data.apellido}}
                     .col-xs-12
-                      h2.font-size-small {{data.grado}}
+                      small.font-size-small Cel. {{data.telefonoper}}
+                    .col-xs-12
+                      small.font-size-small Dir. {{data.direccion}}
     template(v-else)
       spinner  
 </template>

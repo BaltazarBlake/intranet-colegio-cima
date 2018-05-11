@@ -14,6 +14,10 @@
           span.icon-home
           span Inicio
       li.navigation__item.col-xs-12
+        a(@click="$router.replace('/Dashboard/Parents')").navigation__link
+          span.icon-home
+          span Información de apoderados
+      li.navigation__item.col-xs-12
         a().navigation__link
           span.icon-file
           span Exámenes
@@ -38,9 +42,9 @@
           span.icon-team
           span Directorio de alumnos
       li.navigation__item.col-xs-12
-        a().navigation__link
+        a(@click="$router.replace('/Dashboard/Regulation')").navigation__link
           span.icon-book
-          span Reglamento Int.
+          span Documentos Int.
 </template>
 
 <script>

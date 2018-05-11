@@ -140,4 +140,16 @@ async function getAssistance(idStudentSchool){
   return res;
 }
 
-export { login, getTeachers, getProfile, getAssistance, getSchedule, getObservations, getClassmates}
+async function getParents(idStudentSchool) {
+  const response = await fetch(
+                          `${host}/parents/${idStudentSchool}`,
+                          {
+                            method: 'get',
+                            headers:{'Authorization':localStorage.getItem(token)}
+                          }
+  );
+  const res = await response.json();
+  return res;  
+}
+
+export { login, getTeachers, getProfile, getAssistance, getSchedule, getObservations, getClassmates, getParents}

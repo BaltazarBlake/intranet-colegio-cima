@@ -9,6 +9,8 @@ import Teachers from '@/components/Teachers';
 import Schedule from '@/components/Schedule';
 import Observations from '@/components/Observations';
 import Classmates from '@/components/Classmates';
+import Regulation from '@/components/Regulation';
+import Parents from '@/components/Parents';
 
 Vue.use(Router)
 
@@ -67,7 +69,19 @@ export default new Router({
           name: 'Classmates',
           component: Classmates,
           meta: {reqAuth: true},
-        }
+        },
+        {
+          path:'Regulation',
+          name: 'Regulation',
+          component: Regulation,
+          meta: {reqAuth: true},
+        },
+        {
+          path:'Parents',
+          name: 'Parents',
+          component: Parents,
+          meta: {reqAuth: true},
+        },
       ]
     }
   ]
