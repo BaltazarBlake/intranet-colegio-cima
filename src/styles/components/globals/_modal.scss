@@ -14,7 +14,7 @@
   left: 0;
   padding: $gutter;
   @include z-index(modal);
-  height: 90%;
+  height: calc(80% - 2rem);
   width: 90%;
   top: 50%;
   left: 50%;
@@ -42,6 +42,9 @@
     transition: all .3s ease-in-out;
     background-color: darken($snow , 1%);
     // background-color: teal;
+    position: absolute;
+    top: -$gutter - .7;
+    right: 0;
 
     &:hover {
       color: #FFF;

@@ -5,14 +5,14 @@
         h1.font-size-x-large En esta sección encontraras tu horario
     template(v-if="report")
         .container.target
-          .row
+          .row.main-center
             template(v-if="report == 1")
               .col-xs-12.col-xm-6.m-a
                   article.message-not-available.row.main-center.cross-center
                     h1.title2 Horario aún no disponible.
             template(v-else)
-              .horary
-                div
+              div
+                .horary
                   .horary__header
                     .horary__cell(:style="'width:'+width_dias+'%'")
                       strong.horary__cell-title Hora

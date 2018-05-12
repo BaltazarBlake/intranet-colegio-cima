@@ -2,13 +2,14 @@
   div
     template(v-if='isVisible')
       .modal
+        .modal__close
+          span(@click='hidenModal()').icon-close
         .modal__header
           .modal__title
-            h1.title.font-size-xx-large Exámenes Control Web
-          .modal__close
-            span(@click='hidenModal()').icon-close
+            h1.title.font-size-xx-large 
+              slot(name='title') Title Modal
         .modal__content
-          p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+          slot(name='body')
       .overlay__modal(@click='hidenModal()')
 </template>
 

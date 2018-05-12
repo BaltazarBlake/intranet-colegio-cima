@@ -23,7 +23,9 @@
             .d-f.m-b
               button(@click='checkMorning()' :class='turn? "is-active" : ""').btn--default Mañana
               button(@click='checkAfternoon()' :class='turn? "" : "is-active"').btn--default Tarde
-              button.btn--default Reporte
+              button.btn--warning.is-active
+                span.icon-file-text
+                span Reporte
             .row
               template(v-for='month in report')
                 .col-xs-12.col-l-6.d-f
@@ -31,6 +33,26 @@
           template(v-else)
             spinner
     modal
+      template(slot='title') Justificación
+      template(slot='body')
+        template(v-if='justify')
+          .row
+            .col-xs-12.col-xm-4
+              .card.m-b
+                template(v-if='justify.report == 1')
+                  .row
+                    .col-xs-12
+                      h1.font-size-regular NO TIENE JUSTIFICACIÓN
+                template(v-else)
+                  .row
+                    .col-xs-12.m-b-2
+                      small.font-size-regular Fecha:
+                      h1.font-size-regular {{justify.date}}
+                    .col-xs-12.m-b-2
+                      small.font-size-regular Descripción:
+                      h1.font-size-regular {{justify.report[0].descripcion}}
+        template(v-else)
+          spinner
 </template>
 
 <script>
@@ -49,12 +71,19 @@ export default {
       report:null,
       idTurn: null,
       turn: null,
+      justify: null,
     }
   },
   components: {
     Modal,
     Spinner,
     Calendar,
+  },
+
+  created() {
+    EventBus.$on('viewJustify', data =>{
+      this.justify = data;
+    });
   },
 
   async mounted() {
@@ -106,12 +135,6 @@ export default {
     checkAfternoon() {
       this.turn = false;
     },
-
-    sendData() {
-      EventBus.$emit('sendJustification', {
-        data: 'la data'
-      });
-    }
   }
 }
 </script>

@@ -152,4 +152,4 @@ async function getParents(idStudentSchool) {
   return res;  
 }
 
-export { login, getTeachers, getProfile, getAssistance, getSchedule, getObservations, getClassmates, getParents}
+export { login, getTeachers, getProfile, getAssistance, getSchedule, getObservations, getClassmates, getParents, getJustify}

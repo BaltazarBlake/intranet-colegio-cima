@@ -20,13 +20,16 @@
       .calendar__body        
         template(v-for='day in data')
           .calendar__day
-            small(:class='colorState(day)' @click='viewDescription(day)').calendar__day-number {{day.numero_dia}}
+            small(:class='colorState(day)' @click='viewJustify(day)').calendar__day-number {{day.numero_dia}}
             small.font-size-small {{viewHour(day)}}
 </template>
 
 <script>
 import { EventBus } from '../../event-bus.js';
 import Modal from '@/components/globals/Modal';
+import jwt from 'jwt-decode';
+import {getJustify} from '../../functions/fetchFunctions';
+import {token} from '../../cfg/core';
 export default {
   name: 'Calendar',
 
@@ -40,6 +43,12 @@ export default {
     EventBus.$on('sendJustification',(data) => {
       console.log(data);
     });
+  },
+
+  data() {
+    return {
+      report: null
+    }
   },
 
   methods: {
@@ -120,10 +129,21 @@ export default {
       return hour;
     },
 
-    viewDescription(day) {
+    async viewJustify(day) {
       if (day.nro_dia != undefined && day.nro_dia != 0 && day.estado != undefined) {
         if (this.turn) {
+          const myToken = localStorage.getItem(token);
+          const idUser = jwt(myToken).idUser;
+          let date = `${day.nro_anio}-${day.nro_mes}-${day.numero_dia}`;
+          let res = await getJustify(idUser, date);
+          this.report = res;
           this.viewModal();
+          // let send = this.report;
+          let send = {
+            date,
+            report: this.report
+          };
+          EventBus.$emit('viewJustify', send);
         }
       }
     },
@@ -131,6 +151,11 @@ export default {
     viewModal() {
       EventBus.$emit('showModal', this.isVisible);
     },
+
+    // getJustify(data) {
+    //   EventBus.$on('viewJustify', data);
+    // },
+
   }
 }
 </script>
