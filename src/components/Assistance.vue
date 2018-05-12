@@ -23,7 +23,7 @@
             .d-f.m-b
               button(@click='checkMorning()' :class='turn? "is-active" : ""').btn--default Mañana
               button(@click='checkAfternoon()' :class='turn? "" : "is-active"').btn--default Tarde
-              button.btn--warning.is-active
+              button.btn--warning.is-active(@click='viewReport()')
                 span.icon-file-text
                 span Reporte
             .row
@@ -53,6 +53,16 @@
                       h1.font-size-regular {{justify.report[0].descripcion}}
         template(v-else)
           spinner
+    report
+      template(slot='title') Reporte de asistencia
+      template(slot='body')
+        .d-f.m-b
+          button(@click='checkMorning()' :class='turn? "is-active" : ""').btn--default Mañana
+          button(@click='checkAfternoon()' :class='turn? "" : "is-active"').btn--default Tarde
+        .row
+          template(v-for='month in report')
+            .col-xs-12.col-l-6.d-f
+              calendar(:data='month' :idTurn='idTurn' :turn='turn')
 </template>
 
 <script>
@@ -62,6 +72,7 @@ import {token} from '../cfg/core';
 import { EventBus } from '../event-bus.js';
 
 import Modal from '@/components/globals/Modal';
+import Report from '@/components/globals/Report';
 import Spinner from '@/components/globals/Spinner';
 import Calendar from './globals/Calendar';
 export default {
@@ -76,6 +87,7 @@ export default {
   },
   components: {
     Modal,
+    Report,
     Spinner,
     Calendar,
   },
@@ -135,6 +147,10 @@ export default {
     checkAfternoon() {
       this.turn = false;
     },
+
+    viewReport() {
+      EventBus.$emit('showReport', this.isVisible);
+    }
   }
 }
 </script>

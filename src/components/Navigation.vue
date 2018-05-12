@@ -14,6 +14,7 @@
           span.icon-home
           span Inicio
       li.navigation__item.col-xs-12
+        //- router-link(to='/Dashboard/Parents') Información de apoderados
         a(@click="$router.replace('/Dashboard/Parents')").navigation__link
           span.icon-home
           span Información de apoderados

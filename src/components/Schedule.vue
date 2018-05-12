@@ -82,8 +82,8 @@ export default {
             render_curso += `
             <div style='height:${this.heigth_horas * size}%;' class='course--desktop'>
               <div class='texto-curso' style=''>
-                <span class='horary__data--desktop'>${tmp_curso}</span>
-                <span class='horary__data--desktop x-smaller'>${profe}</span>
+                <span class='horary__data--desktop font-size-small'>${tmp_curso}</span>
+                <span class='horary__data--desktop font-size-x-small'>${profe}</span>
                 <div class='horary--movile'>
                   <div class='col-xs-12'>
                     <div class='course row'>
@@ -126,8 +126,8 @@ export default {
       render_curso += `
         <div style='height:${this.heigth_horas * size}%;' class='course--desktop'>
           <div class='texto-curso' style=''>
-            <span class='horary__data--desktop'>${tmp_curso}</span>
-            <span class='horary__data--desktop x-smaller'>${profe}</span>
+            <span class='horary__data--desktop font-size-small'>${tmp_curso}</span>
+            <span class='horary__data--desktop font-size-x-small'>${profe}</span>
             <div class='horary--movile'>
               <div class='col-xs-12'>
                 <div class='course row'>

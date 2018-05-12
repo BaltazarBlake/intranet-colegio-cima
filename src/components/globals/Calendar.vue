@@ -138,7 +138,6 @@ export default {
           let res = await getJustify(idUser, date);
           this.report = res;
           this.viewModal();
-          // let send = this.report;
           let send = {
             date,
             report: this.report
@@ -151,11 +150,6 @@ export default {
     viewModal() {
       EventBus.$emit('showModal', this.isVisible);
     },
-
-    // getJustify(data) {
-    //   EventBus.$on('viewJustify', data);
-    // },
-
   }
 }
 </script>
