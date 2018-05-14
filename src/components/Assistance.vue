@@ -59,7 +59,9 @@
         .d-f.m-b
           button(@click='checkMorning()' :class='turn? "is-active" : ""').btn--default Mañana
           button(@click='checkAfternoon()' :class='turn? "" : "is-active"').btn--default Tarde
-        .row
+        .row#print  
+          .col-xs-12
+            h1 qwerty
           template(v-for='month in report')
             .col-xs-12.col-l-6.d-f
               calendar(:data='month' :idTurn='idTurn' :turn='turn')
@@ -79,6 +81,7 @@ export default {
   name: 'Assistance',
   data(){
     return{
+      dataStudent:null,
       report:null,
       idTurn: null,
       turn: null,
@@ -101,6 +104,7 @@ export default {
   async mounted() {
     await this.getData();
     this.checkTurn();
+    this.getDataStudent();
   },
 
   methods: {
@@ -150,6 +154,11 @@ export default {
 
     viewReport() {
       EventBus.$emit('showReport', this.isVisible);
+    },
+
+    getDataStudent() {
+      let data = localStorage.getItem('dataStudent');
+      this.dataStudent = data;
     }
   }
 }

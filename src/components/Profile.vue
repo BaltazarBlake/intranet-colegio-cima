@@ -75,6 +75,14 @@ export default {
       this.image = `http://docente.cima.com.pe:8096/v4cima/vista/fotosalumno/${this.idPerson}.jpg`;
 
       localStorage.setItem('idTurn', this.report.idturno);
+
+      let dataStudent = [
+        `${this.report.nombre} ${this.report.apellido}`,
+        this.report.grado,
+        this.report.seccion,
+      ];
+
+      localStorage.setItem('dataStudent', JSON.stringify(dataStudent));
     },
   }
 }

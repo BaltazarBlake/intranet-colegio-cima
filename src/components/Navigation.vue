@@ -4,7 +4,7 @@
       .navigation__user-profile
         .navigation__wrapper-image
           img(:src='image').navigation__user-image.shadow-1
-        strong.navigation__user-name {{name}}
+        strong#studentName.navigation__user-name {{name}}
         button(@click='logout()').btn--danger.is-active.navigation__btn Cerrar Sesión
     template(v-else)
       spinner

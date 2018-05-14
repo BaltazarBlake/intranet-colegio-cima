@@ -14,7 +14,7 @@
   left: 0;
   // padding: $gutter;
   @include z-index(modal);
-  height: calc(80% - 2rem);
+  // height: calc(80% - 2rem);
   width: 90%;
   top: 50%;
   left: 50%;
@@ -36,12 +36,12 @@
   }
 
   &__body {
-    height: 75%;
+    height: 40vh;
     overflow-y: auto;
     overflow-x: hidden;
     
     @include MQ(XM) {
-      height: calc(100% - 5.5rem);
+      height: 60vh;
     }
   }
 
