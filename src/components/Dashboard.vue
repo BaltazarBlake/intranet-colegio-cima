@@ -15,25 +15,16 @@
         //- section render components
         router-view
     
-    
 </template>
-
 <script>
-import { EventBus } from '../event-bus.js';
 import Navigation from './Navigation';
-// import Spinner from './Spinner';
-export default {
-  name: 'Dashboard',
-
-  components: {
-    Navigation,
-    // Spinner
-  },
-
-  methods: {
-    viewNavigation() {
+import {EventBus} from '../event-bus.js';
+export default{
+  components:{Navigation},
+  methods:{
+     viewNavigation() {
       EventBus.$emit('showNavigation');
     }
-  },
+  }
 }
 </script>

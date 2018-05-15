@@ -1,15 +1,14 @@
-<template>
-  <div id="app">
-    <router-view/>
-  </div>
+<template lang="pug">
+  div
+    router-view
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'app'
 }
 </script>
 
-<style lang='scss'>
-@import 'styles/styles.scss';
+<style lang="scss">
+@import './assets/styles/styles.scss';
 </style>

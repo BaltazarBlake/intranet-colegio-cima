@@ -38,7 +38,7 @@
 import {getParents} from '../functions/fetchFunctions';
 import jwt from 'jwt-decode';
 import {token} from '../cfg/core';
-import Spinner from '@/components/globals/Spinner';
+import Spinner from './global/Spinner';
 export default {
   components: {Spinner},
   data() {

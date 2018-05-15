@@ -1,5 +1,5 @@
 // variable necesario para web fonts
-$font_path: '~@/assets/fonts/';
+$font_path: '../fonts/';
 
 @import 'config/variables';
 @import 'config/functions';
@@ -23,7 +23,6 @@ $font_path: '~@/assets/fonts/';
 @import 'components/globals/links';
 @import 'components/globals/legend';
 @import 'components/globals/modal';
-@import 'components/globals/report';
 @import 'components/globals/calendar';
 @import 'components/globals/input-field';
 @import 'components/globals/error-message';

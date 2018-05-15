@@ -2,8 +2,8 @@
   div
     template(v-if='isVisible')
       .modal
-        .modal__close
-          span(@click='hidenModal()').icon-close
+        div(@click='hidenModal()').modal__close
+          span.icon-close
         .modal__header
           .modal__title
             h1.title.font-size-xx-large 
@@ -48,9 +48,3 @@ export default {
   },
 }
 </script>
-
-<style lang='sass'>
-
-</style>
-
-

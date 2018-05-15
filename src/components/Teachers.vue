@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import Spinner from '@/components/globals/Spinner';
+import Spinner from './global/Spinner';
 import {getTeachers} from '../functions/fetchFunctions';
 
 export default {
@@ -42,7 +42,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>

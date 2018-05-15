@@ -26,7 +26,7 @@
 
 <script>
 import { EventBus } from '../../event-bus.js';
-import Modal from '@/components/globals/Modal';
+import Modal from './Modal';
 import jwt from 'jwt-decode';
 import {getJustify} from '../../functions/fetchFunctions';
 import {token} from '../../cfg/core';
@@ -138,6 +138,7 @@ export default {
           let res = await getJustify(idUser, date);
           this.report = res;
           this.viewModal();
+          // let send = this.report;
           let send = {
             date,
             report: this.report
@@ -150,6 +151,11 @@ export default {
     viewModal() {
       EventBus.$emit('showModal', this.isVisible);
     },
+
+    // getJustify(data) {
+    //   EventBus.$on('viewJustify', data);
+    // },
+
   }
 }
 </script>

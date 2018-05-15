@@ -27,15 +27,13 @@
     template(v-else)
       spinner
 </template>
-
 <script>
-import Spinner from '@/components/globals/Spinner';
+import Spinner from './global/Spinner';
 import {getObservations} from '../functions/fetchFunctions';
 import jwt from 'jwt-decode';
 import {token} from '../cfg/core';
-export default {
+export default{
   components:{Spinner},
-
   data(){
     return{
       report:null,

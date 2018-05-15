@@ -36,55 +36,26 @@
                   p {{report.direccion}}
           template(v-else)
             spinner
-
-
 </template>
-
 <script>
-import jwt from 'jwt-decode';
-import {getProfile} from '../functions/fetchFunctions';
-import {token} from '../cfg/core';
-import Spinner from '@/components/globals/Spinner';
-export default {
-
-  name: 'Dashboard',
-
-  components: {
-    Spinner
-  },
-
-  data() {
-    return {
-      report: null,
-      idPerson: null,
-      image: null
+import Spinner from './global/Spinner';
+export default{
+  components:{Spinner},
+  data(){
+    return{
+      report:null,
+      image:null,
     }
   },
-
-  async mounted() {
-    await this.getData();
+  mounted(){
+    this.getData();
   },
-
-  methods: {
-    async getData() {
-      const myToken = localStorage.getItem(token);
-      const idUser = jwt(myToken).user;
-      const res = await getProfile(idUser);
-      this.report = res;
-      this.idPerson = this.report.idpersona;
-      this.image = `http://docente.cima.com.pe:8096/v4cima/vista/fotosalumno/${this.idPerson}.jpg`;
-
+  methods:{
+    getData(){
+      this.report = JSON.parse(localStorage.getItem('cima-usuario'));
+      this.image = `http://docente.cima.com.pe:8096/v4cima/vista/fotosalumno/${this.report.idpersona}.jpg`;
       localStorage.setItem('idTurn', this.report.idturno);
-
-      let dataStudent = [
-        `${this.report.nombre} ${this.report.apellido}`,
-        this.report.grado,
-        this.report.seccion,
-      ];
-
-      localStorage.setItem('dataStudent', JSON.stringify(dataStudent));
-    },
+    }
   }
 }
 </script>
-

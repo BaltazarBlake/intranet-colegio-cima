@@ -23,14 +23,11 @@
             .col-xs
               button(v-on:click="login", v-on:keyup.enter="login").btn--primary Ingresar
 </template>
-
 <script>
 import jwt from 'jwt-decode';
-import {login} from '../functions/fetchFunctions';
 import {token} from '../cfg/core';
-export default {
-  name: "Login",
-
+import {login,getProfile} from '../functions/fetchFunctions';
+export default{
   data() {
     return {
       user: null,
@@ -38,18 +35,20 @@ export default {
       password: null
     };
   },
-
-  methods: {
+  methods:{
     async login() {
       if(this.user && this.password){
         const res = await login(this.user,this.password);
         if(res.success){
           const myToken = res.token;
           let type = jwt(myToken).type;
+          const idUser = jwt(myToken).user;
 
           localStorage.setItem(token,myToken);
 
           if (type === 'student') {
+            let report = await getProfile(idUser);
+            localStorage.setItem('cima-usuario',JSON.stringify(report));
             this.$router.replace('/Dashboard');
           } else {
             this.$router.replace('/FamilyGuy');
@@ -64,7 +63,5 @@ export default {
       this.password = '';   
     }
   }
-};
+}
 </script>
-
-
