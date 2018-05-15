@@ -17,38 +17,47 @@ export const routes = [
   {
     path:'/Dashboard',
     component: Dashboard,
+    meta: { reqAuth: true },
     children:[
       {
         path:'',
-        component:Profile
+        component:Profile,
+        meta: { reqAuth: true },
       },
       {
         path:'Observations',
-        component:Obervations
+        component:Obervations,
+        meta: { reqAuth: true },
       },
       {
         path:'Teachers',
-        component:Teachers
+        component:Teachers,
+        meta: { reqAuth: true },
       },
       {
         path:'Classmates',
-        component:Classmates
+        component:Classmates,
+        meta: { reqAuth: true },
       },
       {
         path:'Assistance',
-        component:Assistance
+        component:Assistance,
+        meta: { reqAuth: true },
       },
       {
         path:'Parents',
-        component:Parents
+        component:Parents,
+        meta: { reqAuth: true },
       },
       {
         path:'Regulation',
-        component:Regulation
+        component:Regulation,
+        meta: { reqAuth: true },
       },
       {
         path:'Schedule',
-        component:Schedule
+        component:Schedule,
+        meta: { reqAuth: true },
       }
     ]
   }

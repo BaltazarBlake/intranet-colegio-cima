@@ -23,7 +23,7 @@
             .d-f.m-b
               button(@click='checkMorning()' :class='turn? "is-active" : ""').btn--default Mañana
               button(@click='checkAfternoon()' :class='turn? "" : "is-active"').btn--default Tarde
-              button.btn--warning.is-active
+              button.btn--warning.is-active(@click='viewReport()')
                 span.icon-file-text
                 span Reporte
             .row
@@ -53,6 +53,19 @@
                       h1.font-size-regular {{justify.report[0].descripcion}}
         template(v-else)
           spinner
+    report
+      template(slot='title') Reporte de asistencia
+      template(slot='body')
+        .d-f.m-b
+          button(@click='checkMorning()' :class='turn? "is-active" : ""').btn--default Mañana
+          button(@click='checkAfternoon()' :class='turn? "" : "is-active"').btn--default Tarde
+        .row#print  
+          .col-xs-12
+            h1 qwerty
+          template(v-for='month in report')
+            .col-xs-12.col-l-6.d-f
+              calendar(:data='month' :idTurn='idTurn' :turn='turn')
+
 </template>
 
 <script>
@@ -64,10 +77,12 @@ import { EventBus } from '../event-bus.js';
 import Modal from './global/Modal';
 import Spinner from './global/Spinner';
 import Calendar from './global/Calendar';
+import Report from './global/Report';
 export default {
   name: 'Assistance',
   data(){
     return{
+      dataStudent:null,
       report:null,
       idTurn: null,
       turn: null,
@@ -76,6 +91,7 @@ export default {
   },
   components: {
     Modal,
+    Report,
     Spinner,
     Calendar,
   },
@@ -89,6 +105,7 @@ export default {
   async mounted() {
     await this.getData();
     this.checkTurn();
+    this.getDataStudent();
   },
 
   methods: {
@@ -135,6 +152,16 @@ export default {
     checkAfternoon() {
       this.turn = false;
     },
+
+    viewReport() {
+      EventBus.$emit('showReport');
+    },
+
+    getDataStudent(){
+      this.dataStudent = JSON.parse(localStorage.getItem('cima-usuario'));
+      console.log(this.dataStudent);
+    }
+
   }
 }
 </script>
