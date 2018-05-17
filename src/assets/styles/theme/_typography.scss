@@ -1,5 +1,5 @@
 /************* Sizes *************/
-$first-size: 10px;
+$first-size: 9px;
 $font-size-breakpoints :
   x-small $first-size,
   small $first-size + 3,
@@ -17,6 +17,16 @@ $font-size-breakpoints :
   }
 }
 
+@media print {
+  @each $breakpoint in $font-size-breakpoints {
+  $name: nth($breakpoint, 1);
+  $size: nth($breakpoint, 2);
+
+  .font-size-#{$name} {
+    font-size: 10px;
+  }
+}
+}
 /************* Weights *************/
 
 $weights-breakpoints :

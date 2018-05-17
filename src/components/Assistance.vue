@@ -61,7 +61,29 @@
           button(@click='checkAfternoon()' :class='turn? "" : "is-active"').btn--default Tarde
         .row#print  
           .col-xs-12
-            h1 qwerty
+            .row.main-center
+              .col-xs-12
+                template(v-if='dataStudent')
+                  h1.font-size-large {{dataStudent.nombre}} {{dataStudent.apellido}}
+                  h2.font-size-small {{dataStudent.nivel}} - {{dataStudent.grado}} {{dataStudent.seccion}}
+                template(v-else)
+                  spinner
+          .col-xs-12
+            .row
+              .col-xs-12
+                .card
+                  .card__title
+                    h1.font-size-regular Leyenda
+                  .card__body
+                    .legend__label
+                      i.circle--absence
+                      span Inasistencia
+                    .legend__label
+                      i.circle--delay
+                      span Tardanza
+                    .legend__label
+                      i.circle--arrive
+                      span Asistencia
           template(v-for='month in report')
             .col-xs-12.col-l-6.d-f
               calendar(:data='month' :idTurn='idTurn' :turn='turn')
@@ -105,7 +127,7 @@ export default {
   async mounted() {
     await this.getData();
     this.checkTurn();
-    this.getDataStudent();
+    // this.getDataStudent();
   },
 
   methods: {
@@ -155,6 +177,7 @@ export default {
 
     viewReport() {
       EventBus.$emit('showReport');
+      this.getDataStudent();
     },
 
     getDataStudent(){

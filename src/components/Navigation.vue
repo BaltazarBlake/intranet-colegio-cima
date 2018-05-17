@@ -47,6 +47,7 @@
           span Documentos Int.
 </template>
 <script>
+import {token} from '../cfg/core';
 import Spinner from './global/Spinner';
 import { EventBus } from "../event-bus.js";
 export default{

@@ -149,15 +149,15 @@
 
 // Impresion
 
-// @media print {
-//   .calendar {
-//     // padding: $gutter/6;
-//     &__day {
-//       height: auto;
-//       &-number {
-//         font-size: 12px;
-//         // width: auto;
-//       }
-//     }
-//   }
-// }
+@media print {
+  .calendar {
+    // padding: $gutter/6;
+    &__day {
+      height: auto;
+      &-number {
+        font-size: 12px;
+        // width: auto;
+      }
+    }
+  }
+}
