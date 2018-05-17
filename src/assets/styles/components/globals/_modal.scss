@@ -12,20 +12,41 @@
   position: fixed;
   top: 0;
   left: 0;
-  padding: $gutter;
+  // padding: $gutter;
   @include z-index(modal);
-  height: calc(80% - 2rem);
+  // height: calc(80% - 2rem);
   width: 90%;
   top: 50%;
   left: 50%;
   transform: translateY(-50%) translateX(-50%);
   background-color: #FFF;
 
+  @include MQ(XM) {
+    width: 70%;
+  }
+
   &__header {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: $gutter/3;
+    flex-wrap: wrap;
+    padding: $gutter $gutter $gutter/3;
+    box-shadow: 0 0 20px 0 rgba(0,0,0,.09);
+  }
+
+  &__body {
+    height: 40vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    
+    @include MQ(XM) {
+      height: 60vh;
+    }
+  }
+
+  &__content {
+    margin: $gutter/2 $gutter 0;
   }
 
   &__close {
@@ -52,3 +73,4 @@
     }
   }
 }
+
