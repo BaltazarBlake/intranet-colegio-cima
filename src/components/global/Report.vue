@@ -70,7 +70,7 @@ export default {
         "<title>Reporte</title>" +
         "<style> button {display: none}</style>" +
         "</head>" +
-        "<body onload='window.print();window.close()'>";
+        "<body onload='window.print();window.close()' class='container'>";
 
       print += report.outerHTML + "</body>" + "</html>";
 
@@ -81,3 +81,4 @@ export default {
   },
 }
 </script>
+

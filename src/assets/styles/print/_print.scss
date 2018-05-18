@@ -1,0 +1,13 @@
+#print {
+  // max-height: 5cm !important;
+}
+
+.print {
+  &__header {
+    position: relative;
+  }
+  &__img {
+    position: absolute;
+    height: 40px;
+  }
+}

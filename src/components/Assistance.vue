@@ -59,7 +59,10 @@
         .d-f.m-b
           button(@click='checkMorning()' :class='turn? "is-active" : ""').btn--default Mañana
           button(@click='checkAfternoon()' :class='turn? "" : "is-active"').btn--default Tarde
-        .row#print  
+        .row#print
+          .col-xs-12
+            .print__header
+              img(src='../assets/logo_colegio.svg').print__img
           .col-xs-12
             .row.main-center
               .col-xs-12
@@ -84,9 +87,21 @@
                     .legend__label
                       i.circle--arrive
                       span Asistencia
-          template(v-for='month in report')
+          template(v-for='(month, index) in report')
             .col-xs-12.col-l-6.d-f
               calendar(:data='month' :idTurn='idTurn' :turn='turn')
+            template(v-if='(index+1)%4 == 0')
+              .col-xs-12
+                .print__header
+                  img(src='../assets/logo_colegio.svg').print__img
+              .col-xs-12
+                .row.main-center
+                  .col-xs-12
+                    template(v-if='dataStudent')
+                      h1.font-size-large {{dataStudent.nombre}} {{dataStudent.apellido}}
+                      h2.font-size-small {{dataStudent.nivel}} - {{dataStudent.grado}} {{dataStudent.seccion}}
+                    template(v-else)
+                      spinner
 
 </template>
 
