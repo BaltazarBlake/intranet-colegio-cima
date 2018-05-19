@@ -26,7 +26,7 @@
 <script>
 import jwt from 'jwt-decode';
 import {token} from '../cfg/core';
-import {login,getProfile} from '../functions/fetchFunctions';
+import {login,getProfile,getChildren} from '../functions/fetchFunctions';
 export default{
   data() {
     return {
@@ -51,7 +51,11 @@ export default{
             localStorage.setItem('cima-usuario',JSON.stringify(report));
             this.$router.replace('/Dashboard');
           } else {
-            this.$router.replace('/FamilyGuy');
+            const idUser = jwt(myToken).idUser;
+            let report = await getChildren(idUser);
+            localStorage.setItem('cima-children', JSON.stringify(report));
+            this.$router.replace('/Familyguy');
+            console.log(report);
           }
         }else{
           this.error = res.message;

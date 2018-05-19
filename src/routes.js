@@ -8,6 +8,7 @@ import Assistance from './components/Assistance';
 import Parents from './components/Parents';
 import Regulation from './components/Regulation';
 import Schedule from './components/Schedule';
+import Familyguy from './components/Familyguy';
 
 export const routes = [
   {
@@ -60,5 +61,10 @@ export const routes = [
         meta: { reqAuth: true },
       }
     ]
+  },
+  {
+    path: '/Familyguy',
+    component: Familyguy,
+    meta: { reqAuth: true },
   }
 ]

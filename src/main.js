@@ -33,13 +33,13 @@ router.beforeEach((to,from,next)=>{
         else{next('/Dashboard')}               //replace view student
       }else if(isStudent){
         if(type==='student'){next()}
-        else{next('/FamilyGuy')}              //replace view family guy
+        else{next('/Familyguy')}              //replace view family guy
       }else{
         next();
       }
     }
   }else if(currentUser){
-    if (type === 'familyGuy') { next('/FamilyGuy')}    //replace view family guy
+    if (type === 'familyGuy') { next('/Familyguy')}    //replace view family guy
     if (type === 'student') { next('/Dashboard')}       //replace view student
   }else{
     next();

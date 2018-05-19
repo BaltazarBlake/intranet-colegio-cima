@@ -93,6 +93,8 @@ export default{
 
     logout() {
       localStorage.removeItem(token);
+      localStorage.removeItem('cima-usuario');
+      localStorage.removeItem('idTurn');
       this.$router.replace('/');
     }
   }
