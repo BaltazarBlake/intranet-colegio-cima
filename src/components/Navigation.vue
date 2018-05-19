@@ -10,11 +10,11 @@
       spinner
     ul.row
       li.navigation__item.col-xs-12
-        router-link(to="/Dashboard").navigation__link
+        router-link(active-class="is-active" to="/Dashboard" exact).navigation__link
           span.icon-home 
           span Inicio
       li.navigation__item.col-xs-12
-        router-link(to="/Dashboard/Parents").navigation__link
+        router-link(active-class="is-active" to="/Dashboard/Parents" exact).navigation__link
           span.icon-home
           span Información de apoderados
       li.navigation__item.col-xs-12
@@ -22,27 +22,27 @@
           span.icon-file
           span Exámenes
       li.navigation__item.col-xs-12
-        router-link(to="/Dashboard/Assistance").navigation__link
+        router-link(active-class="is-active" to="/Dashboard/Assistance" exact).navigation__link
           span.icon-calendar-1
           span Asistencia
       li.navigation__item.col-xs-12
-        router-link(to="/Dashboard/Schedule").navigation__link
+        router-link(active-class="is-active" to="/Dashboard/Schedule" exact).navigation__link
           span.icon-horary
           span Horario
       li.navigation__item.col-xs-12
-        router-link(to="/Dashboard/Observations").navigation__link
+        router-link(active-class="is-active" to="/Dashboard/Observations" exact).navigation__link
           span.icon-notes
           span Observaciones
       li.navigation__item.col-xs-12
-        router-link(to="/Dashboard/Teachers").navigation__link
+        router-link(active-class="is-active" to="/Dashboard/Teachers" exact).navigation__link
           span.icon-team
           span Profesores
       li.navigation__item.col-xs-12
-        router-link(to="/Dashboard/Classmates").navigation__link
+        router-link(active-class="is-active" to="/Dashboard/Classmates" exact).navigation__link
           span.icon-team
           span Directorio de alumnos
       li.navigation__item.col-xs-12
-        router-link(to="/Dashboard/Regulation").navigation__link
+        router-link(active-class="is-active" to="/Dashboard/Regulation" exact).navigation__link
           span.icon-book
           span Documentos Int.
 </template>

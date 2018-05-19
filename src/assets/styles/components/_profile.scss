@@ -21,6 +21,13 @@
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
+
+    &.parent {
+      position: initial;
+      top: auto;
+      left: auto;
+      transform: translateX(0);
+    }
   }
 
   &__description {

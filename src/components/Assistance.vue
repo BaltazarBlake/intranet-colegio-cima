@@ -60,18 +60,39 @@
           button(@click='checkMorning()' :class='turn? "is-active" : ""').btn--default Mañana
           button(@click='checkAfternoon()' :class='turn? "" : "is-active"').btn--default Tarde
         .row#print
-          .col-xs-12
-            .print__header
-              img(src='../assets/logo_colegio.svg').print__img
-          .col-xs-12
-            .row.main-center
+          .print__header.col-xs-12
+            .row
               .col-xs-12
-                template(v-if='dataStudent')
-                  h1.font-size-large {{dataStudent.nombre}} {{dataStudent.apellido}}
-                  h2.font-size-small {{dataStudent.nivel}} - {{dataStudent.grado}} {{dataStudent.seccion}}
-                template(v-else)
-                  spinner
-          .col-xs-12
+                .p-r
+                  img(src='../assets/logo_colegio.svg').print__img
+              .col-xs-12
+                .row.main-center
+                  .col-xs-12
+                    template(v-if='dataStudent')
+                      h1.font-size-large {{dataStudent.nombre}} {{dataStudent.apellido}}
+                      h2.font-size-small {{dataStudent.nivel}} - {{dataStudent.grado}} {{dataStudent.seccion}}
+                    template(v-else)
+                      spinner
+          
+          template(v-for='(month, index) in report')
+            .col-xs-12.col-l-6.d-f.print__section
+              calendar(:data='month' :idTurn='idTurn' :turn='turn')
+            template(v-if='(index+1)%4 == 0 && report.length>(index+1)')
+              .print__header.col-xs-12(:class="(index+1)%4 == 0? 'print__m-t print__show':''")
+                .row
+                  .col-xs-12
+                    .p-r
+                      img(src='../assets/logo_colegio.svg').print__img
+                  .col-xs-12
+                    .row.main-center
+                      .col-xs-12
+                        template(v-if='dataStudent')
+                          h1.font-size-large {{dataStudent.nombre}} {{dataStudent.apellido}}
+                          h2.font-size-small {{dataStudent.nivel}} - {{dataStudent.grado}} {{dataStudent.seccion}}
+                        template(v-else)
+                          spinner
+          
+          .col-xs-12.print__show
             .row
               .col-xs-12
                 .card
@@ -87,21 +108,6 @@
                     .legend__label
                       i.circle--arrive
                       span Asistencia
-          template(v-for='(month, index) in report')
-            .col-xs-12.col-l-6.d-f
-              calendar(:data='month' :idTurn='idTurn' :turn='turn')
-            template(v-if='(index+1)%4 == 0')
-              .col-xs-12
-                .print__header
-                  img(src='../assets/logo_colegio.svg').print__img
-              .col-xs-12
-                .row.main-center
-                  .col-xs-12
-                    template(v-if='dataStudent')
-                      h1.font-size-large {{dataStudent.nombre}} {{dataStudent.apellido}}
-                      h2.font-size-small {{dataStudent.nivel}} - {{dataStudent.grado}} {{dataStudent.seccion}}
-                    template(v-else)
-                      spinner
 
 </template>
 

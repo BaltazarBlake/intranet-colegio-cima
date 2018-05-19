@@ -10,7 +10,8 @@
             .col-xs-12.col-m-6.d-f
               .profile
                 .profile__wrapper-image
-                  img(:src='data.url_imagen').profile__user-image
+                  //- img(src='../assets/logo.png' @error='detectedImages(data.url_imagen)').profile__user-image
+                  img(:src='data.url_imagen' @error='detectedImages(data)').profile__user-image.parent
                 .profile__description.row.main-center
                   .col-xs-12
                     h1.font-size-large {{data.nombre}} {{data.apellido}}
@@ -48,6 +49,7 @@ export default {
   },
   async mounted() {
     await this.getData();
+    this.detectedImages();
   },
   methods: {
     async getData() {
@@ -55,6 +57,13 @@ export default {
       const idUser = jwt(mytoken).idUser;
       let res = await getParents(idUser);
       this.report = res;
+    },
+
+    detectedImages(el) {
+      let i = this.report.indexOf(el);
+      if (this.report[i] != undefined) {
+        this.report[i].url_imagen = 'dist/user.png';        
+      }
     }
   }
 }

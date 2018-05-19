@@ -7,7 +7,7 @@
           template(v-if="report")
             .profile
               .profile__wrapper-image
-                img(:src="image").profile__user-image
+                img(:src="image" @error='detectedImages()').profile__user-image
               .profile__description.row.main-center
                 .col-xs-12
                   h1.font-size-large {{report.nombre}} {{report.apellido}}
@@ -55,6 +55,9 @@ export default{
       this.report = JSON.parse(localStorage.getItem('cima-usuario'));
       this.image = `http://docente.cima.com.pe:8096/v4cima/vista/fotosalumno/${this.report.idpersona}.jpg`;
       localStorage.setItem('idTurn', this.report.idturno);
+    },
+    detectedImages() {
+      this.image = 'dist/user.png';
     }
   }
 }

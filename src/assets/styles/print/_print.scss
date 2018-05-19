@@ -1,13 +1,37 @@
-#print {
-  // max-height: 5cm !important;
-}
-
 .print {
-  &__header {
-    position: relative;
+  &__show {
+    display: none;
   }
   &__img {
     position: absolute;
     height: 40px;
   }
+}
+
+
+@media print {
+
+  .print {
+
+    &__show {
+      display: block;
+    }
+    
+    &__header {
+      display: block;
+      top: 0;
+      min-height: 2cm;
+    }
+
+    &__section {
+      // display: block;
+      min-height: 10cm;
+    }
+
+    &__m-t {
+      margin-top: 5.5cm;
+    }
+  }
+  
+
 }

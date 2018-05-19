@@ -53,10 +53,10 @@
     cursor: pointer;
     transition: all .4s ease-in-out;
 
-    &:hover,
-    &.is-active {
-      background-color: $hover-color;
-    }
+    // &:hover,
+    // &.is-active {
+    //   background-color: $hover-color;
+    // }
   }
 
   &__link {
@@ -74,7 +74,11 @@
 
     &:hover {
       text-decoration: none;
-      // color: #000;
+    }
+
+    &:hover,
+    &.is-active {
+      background-color: $hover-color;
     }
   }
 
