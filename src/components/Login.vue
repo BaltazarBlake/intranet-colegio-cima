@@ -13,7 +13,7 @@
                 h1(v-text="error").font-size-large
         .login
           h1.login__title.text--center.font-size-xx-large Iniciar sesión
-          .row.main-center
+          form(@submit.prevent="login").row.main-center
             .input-field.col-xs-12
               label.input-field__label Usuario
               input(type="text", v-model="user", placeholder="").input-field__input
@@ -21,7 +21,7 @@
               label.input-field__label Contraseña
               input(type="password", v-model="password", placeholder="").input-field__input
             .col-xs
-              button(v-on:click="login", v-on:keyup.enter="login").btn--primary Ingresar
+              button(type="submit").btn--primary Ingresar
 </template>
 <script>
 import jwt from 'jwt-decode';
