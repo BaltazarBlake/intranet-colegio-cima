@@ -1,0 +1,18 @@
+.course {
+  &__header {
+    height: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__tag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $gutter/3;
+    margin-bottom: $gutter/2;
+    background-color: darken(#fab649, 10%);
+    color: #FFF;
+  }
+}

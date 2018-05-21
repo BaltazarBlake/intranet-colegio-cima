@@ -5,14 +5,20 @@
   margin-right: auto;
 
   &__wrapper-image {
+    $size-wrapper: 9em;
     @extend .shadow-1;
     position: relative;
     overflow: hidden;
-    width: 9em;
-    height: 9em;
+    width: $size-wrapper;
+    height: $size-wrapper;
     margin: 0 auto;
     margin-bottom: $gutter/2;
     border-radius: 50%;
+
+    &.small {
+      width: $size-wrapper/1.20;
+      height: $size-wrapper/1.20;
+    }
   }
 
   &__user-image {

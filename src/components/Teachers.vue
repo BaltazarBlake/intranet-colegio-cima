@@ -15,7 +15,8 @@
                     .col-xs-12
                       h1.font-size-regular {{teacher.nombre}}
                     .col-xs-12
-                      h2.font-size-small {{teacher.asignatura}}
+                      template(v-for='asignatura in teacher.asignaturas ')
+                        small.font-size-small {{asignatura.asignatura}}, 
     template(v-else)
       spinner  
 </template>
@@ -36,7 +37,9 @@ export default {
   },
   methods:{
     async getData(){
-      let res = await getTeachers();
+      let data = JSON.parse(localStorage.getItem('cima-usuario'));
+      let res = await getTeachers(data.idalumnocolegio);
+      console.log(res);
       this.report = res;
     }
   }

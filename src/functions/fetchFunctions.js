@@ -16,10 +16,10 @@ async function login(user,password){
   }
 }
 
-async function getTeachers(){
+async function getTeachers(id){
   try{
     const response = await fetch(
-                            `${host}/teachers`,
+                            `${host}/teachers/${id}`,
                             {
                               method:'get',
                               headers:{'Authorization':localStorage.getItem(token)}
@@ -152,6 +152,18 @@ async function getParents(idStudentSchool) {
   return res;  
 }
 
+async function getCourses(idStudentSchool) {
+  const response = await fetch(
+                        `${host}/cursos/examenes/${idStudentSchool}`,
+                          {
+                            method: 'get',
+                            headers: { 'Authorization': localStorage.getItem(token) }
+                          }
+  );
+  const res = await response.json();
+  return res; 
+}
+
 export { login,
          getTeachers,
          getChildren,
@@ -161,4 +173,5 @@ export { login,
          getClassmates,
          getObservations,
          getAssistance,
-         getParents }
+         getParents,
+         getCourses }

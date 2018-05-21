@@ -9,6 +9,7 @@ import Parents from './components/Parents';
 import Regulation from './components/Regulation';
 import Schedule from './components/Schedule';
 import Familyguy from './components/Familyguy';
+import CoursesExams from './components/CoursesExams';
 
 export const routes = [
   {
@@ -59,7 +60,12 @@ export const routes = [
         path:'Schedule',
         component:Schedule,
         meta: { reqAuth: true },
-      }
+      },
+      {
+        path:'CoursesExams',
+        component:CoursesExams,
+        meta: { reqAuth: true },
+      },
     ]
   },
   {

@@ -18,9 +18,9 @@
           span.icon-home
           span Información de apoderados
       li.navigation__item.col-xs-12
-        a().navigation__link
+        router-link(active-class="is-active" to="/Dashboard/CoursesExams" exact).navigation__link
           span.icon-file
-          span Exámenes
+          span Cursos y notas
       li.navigation__item.col-xs-12
         router-link(active-class="is-active" to="/Dashboard/Assistance" exact).navigation__link
           span.icon-calendar-1
