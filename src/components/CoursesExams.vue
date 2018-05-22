@@ -18,27 +18,57 @@
 
     template(v-else)
       spinner
+    modal
+      template(v-if='detailExam')  
+        template(slot='title') {{detailExam.course}}
+        template(slot='body')
+          .row
+            .col-xs-12
+              tabs
+                template(v-for='(data,index) in detailExam.groups')
+                  tab(:name='data.grupo' :selected='isTrue(index)')
+                    .col-xs-12.m-t
+                      .row
+                        .col-xs-12
+                          h1.font-size-large {{data.grupo}}
+                        template(v-for='exam in data.examenes')
+                          .col-xs-12.col-s-6.col-m-4.d-f
+                            .card
+                              h1.font-size-regular {{exam.evaluacion}}
+
+      template(v-else)
+        spinner
+
 </template>
 
 <script>
+import { EventBus } from '../event-bus.js';
 import {getCourses} from '../functions/fetchFunctions';
 import jwt from 'jwt-decode';
 import {token} from '../cfg/core';
 import Spinner from './global/Spinner';
 import Tabs from './global/Tabs';
 import Tab from './global/Tab';
+import Modal from './global/Modal';
 import Course from './Course';
 export default {
   components: {
     Spinner,
     Course,
+    Modal,
     Tabs,
     Tab
   },
   data() {
     return {
       report: null,
+      detailExam: null,
     }
+  },
+  created() {
+    EventBus.$on('viewDetailExam', data => {
+      this.detailExam = data;
+    });
   },
   async mounted() {
     await this.getData();

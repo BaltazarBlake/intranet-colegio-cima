@@ -14,14 +14,27 @@
       .col-xs-12
         .row.main-center
           .col-xs
-            button.btn--primary Ver más
+            button.btn--primary(@click='viewDetailExam(data)') Ver más
 </template>
 
 <script>
+import { EventBus } from '../event-bus.js';
+import Modal from './global/Modal';
 export default {
   name: 'Course',
   props: ['data'],
   methods: {
+    viewDetailExam(detail) {
+      this.viewModal();
+      let send = {
+        course: detail.curso,
+        groups: detail.grupos,
+      };
+      EventBus.$emit('viewDetailExam', send);
+    },
+    viewModal() {
+      EventBus.$emit('showModal', this.isVisible);
+    },
   }
 }
 </script>
