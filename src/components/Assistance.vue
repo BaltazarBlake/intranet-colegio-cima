@@ -28,7 +28,7 @@
                 span Reporte
             .row
               template(v-for='month in report')
-                .col-xs-12.col-l-6.d-f
+                .col-xs-12.col-xm-6.col-l-4.d-f
                   calendar(:data='month' :idTurn='idTurn' :turn='turn')
           template(v-else)
             spinner

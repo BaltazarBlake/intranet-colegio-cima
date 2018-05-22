@@ -12,7 +12,19 @@
     justify-content: center;
     padding: $gutter/3;
     margin-bottom: $gutter/2;
-    background-color: darken(#fab649, 10%);
-    color: #FFF;
+
+    &.green,
+    &.red {
+      color: #FFF;
+    }
+
+    &.green {
+      background-color: #00C853;
+    }
+
+    &.red {
+      background-color: #ff5252;
+    }
+
   }
 }

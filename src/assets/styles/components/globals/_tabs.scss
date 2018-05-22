@@ -1,0 +1,18 @@
+.tabs {
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+  overflow-x: auto;
+
+  &:not(:last-child) {
+    margin-bottom: $gutter/2;
+  }
+
+  &__list {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-grow: 1;
+    flex-shrink: 0;
+  }
+}
