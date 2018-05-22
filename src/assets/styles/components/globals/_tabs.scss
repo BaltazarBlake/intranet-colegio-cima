@@ -1,12 +1,8 @@
 .tabs {
   display: flex;
-  justify-content: space-between;
-  overflow: hidden;
+  justify-content: flex-start;
+  overflow-y: hidden;
   overflow-x: auto;
-
-  &:not(:last-child) {
-    margin-bottom: $gutter/2;
-  }
 
   &__list {
     display: flex;
@@ -14,5 +10,37 @@
     justify-content: flex-start;
     flex-grow: 1;
     flex-shrink: 0;
+  }
+}
+
+.tab {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+  align-items: center;
+  height: 44px;
+  border-radius: 2em;
+  padding: .7em .5em;
+  font-size: 15px;
+  transition: all .3s ease-in;
+  color: $secondary-color;
+  border: 1px solid $secondary-color;
+  background-color: #FFF;
+  margin-right: .3em;
+  &:hover,
+  &.is-active {
+    text-decoration: none;
+    color: #FFF;
+    background-color: $secondary-color;
+    @extend .shadow--hover;
+  }
+  &:active {
+    transform: scale(.92);
+  }
+  & a {
+    &:hover {
+      text-decoration: none;
+    }
   }
 }

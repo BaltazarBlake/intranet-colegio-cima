@@ -13,7 +13,7 @@
                   .col-xs-12.m-t
                     .row
                       template(v-for='courses in data.cursos')
-                        .col-xs-12.col-s-6.col-m-4.d-f
+                        .col-xs-12.col-s-6.col-m-4.col-l-3.d-f
                           course(:data='courses')
 
     template(v-else)
@@ -34,7 +34,19 @@
                         template(v-for='exam in data.examenes')
                           .col-xs-12.col-s-6.col-m-4.d-f
                             .card
-                              h1.font-size-regular {{exam.evaluacion}}
+                              .row
+                                .col-xs-12
+                                  small Evaluación:
+                                  h1.font-size-regular {{exam.evaluacion}}
+                                .col-xs-12
+                                  small Fecha:
+                                  h1.font-size-regular {{exam.fecha}}
+                                .col-xs-12
+                                  small Instrumento:
+                                  h1.font-size-regular {{exam.instrumento}}
+                                .col-xs-12
+                                  small Nota:
+                                  h1.font-size-regular {{exam.nota}}
 
       template(v-else)
         spinner
@@ -86,7 +98,7 @@ export default {
       }
     },
     rename(el) {
-      return `${el}° Bimestre`;
+      return `${el}° BIMESTRE`;
     }
   },
 }

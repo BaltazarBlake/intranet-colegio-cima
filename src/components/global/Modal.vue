@@ -8,7 +8,7 @@
           .modal__title
             h1.title.font-size-xx-large 
               slot(name='title') Title Modal
-        .modal__content
+        .modal__content.modal__body
           slot(name='body')
       .overlay__modal(@click='hidenModal()')
 </template>

@@ -2,8 +2,8 @@
   div
     .tabs
       ul.tabs__list
-        li(v-for='tab in tabs' )
-          button(:class="{ 'is-active': tab.isActive }" @click='selectTab(tab)').btn--default {{tab.name}}
+        li(v-for='tab in tabs').tab(:class="{ 'is-active': tab.isActive }")
+          a(@click='selectTab(tab)') {{tab.name}}
     
     .tabs__detail
       slot
