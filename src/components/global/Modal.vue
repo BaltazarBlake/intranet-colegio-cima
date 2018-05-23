@@ -6,8 +6,9 @@
           span.icon-close
         .modal__header
           .modal__title
-            h1.title.font-size-xx-large 
-              slot(name='title') Title Modal
+            //- h1.title.font-size-xx-large 
+            //-   slot(name='title') Title Modal
+            slot(name='title') Title Modal
         .modal__body
           .modal__content
             slot(name='body')

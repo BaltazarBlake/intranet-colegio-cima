@@ -4,7 +4,7 @@
       .col-xs-12.course__header
         h1.font-size-large.text--center {{data.curso}}
       .col-xs-12
-        strong(:class="data.promedio >= 11? 'green':'red'").course__tag PROMEDIO: {{data.promedio}}
+        strong(:class="data.promedio >= 11? 'green':'red'").course__tag.m-b PROMEDIO: {{data.promedio}}
       .col-xs-12
         small Docente:
         p {{data.docente}}

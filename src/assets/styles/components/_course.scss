@@ -11,12 +11,7 @@
     align-items: center;
     justify-content: center;
     padding: $gutter/3;
-    margin-bottom: $gutter/2;
-
-    &.green,
-    &.red {
-      // color: #FFF;
-    }
+    border-radius: .5em;
 
     &.green {
       background-color: lighten(#2E7D32, 40%);

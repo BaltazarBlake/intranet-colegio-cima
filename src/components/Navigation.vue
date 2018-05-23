@@ -22,7 +22,7 @@
           span.icon-file
           span Cursos y notas
       li.navigation__item.col-xs-12
-        router-link(active-class="is-active" to="/Dashboard/Exams" exact).navigation__link
+        router-link(active-class="is-active" to="/Dashboard/ModalityExams" exact).navigation__link
           span.icon-file
           span Simulacros
       li.navigation__item.col-xs-12

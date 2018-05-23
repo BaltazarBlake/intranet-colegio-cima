@@ -4,18 +4,40 @@
       .container
         h1.font-size-x-large Tus examenes
     template(v-if="report")
-      pre {{report}}
+      .container.target
+        .row
+          template(v-for='(modality,index) in report')
+            .col-xs-12.col-s-6.col-m-4.col-l-3.d-f
+              article.card
+                .row
+                  .col-xs-12
+                    h1.font-size-large {{modality.modalidad}}
+                  .col-xs-12
+                    .row.main-center
+                      .col-xs
+                        button.btn--default.is-active Ver más
     template(v-else)
       spinner
 </template>
 
 <script>
+import { EventBus } from '../event-bus.js';
 import {getExams} from '../functions/fetchFunctions';
 import jwt from 'jwt-decode';
 import {token} from '../cfg/core';
 import Spinner from './global/Spinner';
+import Tabs from './global/Tabs';
+import Tab from './global/Tab';
+import Modal from './global/Modal';
+import Exam from './Exam';
 export default {
-  components:{Spinner},
+  components:{
+    Spinner,
+    Exam,
+    Modal,
+    Tabs,
+    Tab
+  },
   data(){
     return{
       report:null
@@ -49,7 +71,12 @@ export default {
         })
       })
       this.report = res;
-    }
+    },
+    isTrue(el) {
+      if (el == 0) {
+        return 'true';
+      }
+    },
   }
 }
 </script>

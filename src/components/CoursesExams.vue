@@ -18,9 +18,16 @@
 
     template(v-else)
       spinner
+
+    //- MODAL
     modal
       template(v-if='detailExam')  
-        template(slot='title') {{detailExam.course}} {{detailExam.mean}}
+        template(slot='title')
+          .row.cross-center
+            .col-xs
+              strong.font-size-x-large {{detailExam.course}}
+            .col-xs
+              strong(:class="detailExam.mean >= 11? 'green':'red'").course__tag.m-b-0 PROMEDIO: {{detailExam.mean}}
         template(slot='body')
           .row
             .col-xs-12
@@ -30,13 +37,16 @@
                     .col-xs-12.m-t
                       .row
                         .col-xs-12.m-b
-                          .row.cross-center
-                            .col-xs-12.col-s
-                              strong.font-size-large {{data.grupo}}
-                            .col-xs.col-s
-                              strong.tag.font-size-regular PROM: {{data.promedio}}
-                            .col-xs.col-s
-                              strong.tag.font-size-regular PESO: {{data.peso}}
+                          .card--ligth
+                            .row.cross-center
+                              .col-xs-12.col-s
+                                strong.font-size-large {{data.grupo}}
+                              .col-xs.col-s
+                                strong.tag.font-size-regular PESO: {{data.peso}}%
+                              .col-xs-12.col-s.m-t.m-b
+                                strong(:class="data.promedio >= 11? 'green':'red'").course__tag.font-size-regular PROMEDIO: {{data.promedio}}
+                        .col-xs-12
+                          h1.font-size-regular EVALUACIONES
                         template(v-for='exam in data.examenes')
                           .col-xs-12.col-s-6.col-m-4.d-f
                             .card
