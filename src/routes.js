@@ -10,6 +10,7 @@ import Regulation from './components/Regulation';
 import Schedule from './components/Schedule';
 import Familyguy from './components/Familyguy';
 import CoursesExams from './components/CoursesExams';
+import Exams from './components/Exams';
 
 export const routes = [
   {
@@ -66,6 +67,11 @@ export const routes = [
         component:CoursesExams,
         meta: { reqAuth: true },
       },
+      {
+        path:'Exams',
+        component:Exams,
+        meta:{ reqAuth: true}
+      }
     ]
   },
   {

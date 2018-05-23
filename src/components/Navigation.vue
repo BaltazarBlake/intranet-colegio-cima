@@ -22,6 +22,10 @@
           span.icon-file
           span Cursos y notas
       li.navigation__item.col-xs-12
+        router-link(active-class="is-active" to="/Dashboard/Exams" exact).navigation__link
+          span.icon-file
+          span Simulacros
+      li.navigation__item.col-xs-12
         router-link(active-class="is-active" to="/Dashboard/Assistance" exact).navigation__link
           span.icon-calendar-1
           span Asistencia

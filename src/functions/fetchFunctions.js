@@ -154,7 +154,19 @@ async function getParents(idStudentSchool) {
 
 async function getCourses(idStudentSchool) {
   const response = await fetch(
-                        `${host}/cursos/examenes/${idStudentSchool}`,
+                        `${host}/courses/${idStudentSchool}`,
+                          {
+                            method: 'get',
+                            headers: { 'Authorization': localStorage.getItem(token) }
+                          }
+  );
+  const res = await response.json();
+  return res; 
+}
+
+async function getExams(idStudentSchool) {
+  const response = await fetch(
+                        `${host}/exams/${idStudentSchool}`,
                           {
                             method: 'get',
                             headers: { 'Authorization': localStorage.getItem(token) }
@@ -174,4 +186,5 @@ export { login,
          getObservations,
          getAssistance,
          getParents,
-         getCourses }
+         getCourses,
+         getExams }
