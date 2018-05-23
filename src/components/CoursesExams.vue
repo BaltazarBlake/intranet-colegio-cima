@@ -20,7 +20,7 @@
       spinner
     modal
       template(v-if='detailExam')  
-        template(slot='title') {{detailExam.course}}
+        template(slot='title') {{detailExam.course}} {{detailExam.mean}}
         template(slot='body')
           .row
             .col-xs-12
@@ -29,8 +29,14 @@
                   tab(:name='data.grupo' :selected='isTrue(index)')
                     .col-xs-12.m-t
                       .row
-                        .col-xs-12
-                          h1.font-size-large {{data.grupo}}
+                        .col-xs-12.m-b
+                          .row.cross-center
+                            .col-xs-12.col-s
+                              strong.font-size-large {{data.grupo}}
+                            .col-xs.col-s
+                              strong.tag.font-size-regular PROM: {{data.promedio}}
+                            .col-xs.col-s
+                              strong.tag.font-size-regular PESO: {{data.peso}}
                         template(v-for='exam in data.examenes')
                           .col-xs-12.col-s-6.col-m-4.d-f
                             .card
@@ -45,8 +51,7 @@
                                   small Instrumento:
                                   h1.font-size-regular {{exam.instrumento}}
                                 .col-xs-12
-                                  small Nota:
-                                  h1.font-size-regular {{exam.nota}}
+                                  strong.course__tag(:class="exam.nota >= 11? 'green':'red'") Nota: {{exam.nota}}
 
       template(v-else)
         spinner

@@ -3,11 +3,14 @@
   justify-content: flex-start;
   overflow-y: hidden;
   overflow-x: auto;
+  height: 48px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, .09);
 
   &__list {
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    height: 100%;
     flex-grow: 1;
     flex-shrink: 0;
   }
@@ -19,28 +22,23 @@
   justify-content: center;
   flex-shrink: 0;
   align-items: center;
-  height: 44px;
-  border-radius: 2em;
-  padding: .7em .5em;
+  height: 100%;
   font-size: 15px;
+  border-bottom: 2px solid transparent;
   transition: all .3s ease-in;
-  color: $secondary-color;
-  border: 1px solid $secondary-color;
-  background-color: #FFF;
-  margin-right: .3em;
-  &:hover,
+  
+  &:hover {
+    background-color: lighten($gray, 65%);
+  }
+
   &.is-active {
-    text-decoration: none;
-    color: #FFF;
-    background-color: $secondary-color;
+    color: $blue-100;
+    background-color: lighten($secondary-color, 72%);
+    border-bottom: 2px solid $blue-100;
     @extend .shadow--hover;
   }
+
   &:active {
     transform: scale(.92);
-  }
-  & a {
-    &:hover {
-      text-decoration: none;
-    }
   }
 }

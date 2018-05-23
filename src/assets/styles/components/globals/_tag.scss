@@ -1,0 +1,18 @@
+.tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  flex-shrink: 0;
+  max-width: 100px;
+  margin-top: $gutter/4;
+  padding: .5em .4em;
+  border: 1px solid $gray;
+  border-radius: 2em;
+  color: $gray;
+
+  @include MQ(S) {
+    margin-top: 0;
+    padding: .4em;
+  }
+}

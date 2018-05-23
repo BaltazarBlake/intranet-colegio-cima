@@ -15,15 +15,17 @@
 
     &.green,
     &.red {
-      color: #FFF;
+      // color: #FFF;
     }
 
     &.green {
-      background-color: #00C853;
+      background-color: lighten(#2E7D32, 40%);
+      color: darken(#2E7D32, 30%);
     }
 
     &.red {
-      background-color: #ff5252;
+      background-color: lighten(#ff5252, 10%);
+      color: darken(#ff5252, 48%);
     }
 
   }

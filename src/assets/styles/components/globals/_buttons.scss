@@ -44,6 +44,12 @@
   }
 }
 
+// .btn--light {
+//   @extend .btn--default;
+//   background-color: $blue-100;
+
+// }
+
 .btn--default--small {
   @extend .btn--default;
   width: 6.5em;

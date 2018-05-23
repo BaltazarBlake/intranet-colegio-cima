@@ -1,10 +1,10 @@
 <template lang="pug">
   div
-    .tabs
-      ul.tabs__list
-        li(v-for='tab in tabs').tab(:class="{ 'is-active': tab.isActive }")
-          a(@click='selectTab(tab)') {{tab.name}}
-    
+    .col-xs-12
+      .tabs
+        ul.tabs__list
+          button(v-for='tab in tabs' @click='selectTab(tab)' :class="{ 'is-active': tab.isActive }").tab.btn {{tab.name}}
+      
     .tabs__detail
       slot
 </template>

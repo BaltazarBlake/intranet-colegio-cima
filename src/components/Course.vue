@@ -4,7 +4,7 @@
       .col-xs-12.course__header
         h1.font-size-large.text--center {{data.curso}}
       .col-xs-12
-        strong.course__tag(:class="data.promedio > 11? 'green':'red'") Promedio: {{data.promedio}}
+        strong(:class="data.promedio >= 11? 'green':'red'").course__tag PROMEDIO: {{data.promedio}}
       .col-xs-12
         small Docente:
         p {{data.docente}}
@@ -14,7 +14,7 @@
       .col-xs-12
         .row.main-center
           .col-xs
-            button.btn--primary(@click='viewDetailExam(data)') Ver más
+            button(@click='viewDetailExam(data)').btn--default Ver más
 </template>
 
 <script>
@@ -28,6 +28,7 @@ export default {
       this.viewModal();
       let send = {
         course: detail.curso,
+        mean: detail.promedio,
         groups: detail.grupos,
       };
       EventBus.$emit('viewDetailExam', send);
