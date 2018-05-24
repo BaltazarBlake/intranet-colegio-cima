@@ -1,4 +1,5 @@
 .course {
+  position: relative;
   &__header {
     height: 3em;
     display: flex;
@@ -13,7 +14,7 @@
     width: 100%;
     padding: $gutter/3;
     border-radius: .5em;
-    background-color: #fab649;
+    background-color: lighten(#fab649, 5%);
 
     &.green {
       background-color: lighten(#2E7D32, 40%);
@@ -24,6 +25,18 @@
       background-color: lighten(#ff5252, 10%);
       color: darken(#ff5252, 48%);
     }
+  }
 
+  &__message {
+    background-color: rgba($red-100, .7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
   }
 }

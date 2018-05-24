@@ -3,11 +3,12 @@
     .row
       template(v-for='(exams,index) in data')
         .col-xs-12.col-xm-6.col-m-4.col-l-3.d-f
-          article.card
+          article.card.course
             .row.main-center.h-100
               .col-xs-12
                 h1.font-size-large {{exams.descripcion}}
               .col-xs-12.m-b
+                //- i.icon-horary
                 strong.font-size-regular {{exams.fecha}}
               .col-xs-6
                 small Mérito general:
@@ -39,6 +40,10 @@
                 .row.main-center
                   .col-xs
                     router-link(:to='link(id,index)' tag="button").btn--default.is-active Ver más
+            template(v-if='exams.nota_20 == 0')
+              .course__message
+                strong.font-size-xx-large.text--uppercase.text--center {{exams.motivo}}
+                strong.font-size-xx-large.text--uppercase.text--center {{exams.fecha}}
 </template>
 
 <script>

@@ -86,7 +86,7 @@ export default {
                 <span class='horary__data--desktop font-size-small'>${profe}</span>
                 <div class='horary--movile'>
                   <div class='col-xs-12'>
-                    <div class='course row'>
+                    <div class='course-horary row'>
                       <div class="col-xs-12">
                         <p class="title2">${ tmp_curso == " " ? '' : tmp_curso}</p>
                       </div>
@@ -130,7 +130,7 @@ export default {
             <span class='horary__data--desktop font-size-small'>${profe}</span>
             <div class='horary--movile'>
               <div class='col-xs-12'>
-                <div class='course row'>
+                <div class='course-horary row'>
                   <div class="col-xs-12">
                     <p class="title2">${ tmp_curso == " " ? '' : tmp_curso}</p>
                   </div>
