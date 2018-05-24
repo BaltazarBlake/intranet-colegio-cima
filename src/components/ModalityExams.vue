@@ -6,17 +6,12 @@
     template(v-if="report")
       .container.target
         .row
-          template(v-for='(modality,index) in report')
-            .col-xs-12.col-s-6.col-m-4.col-l-3.d-f
-              article.card
-                .row
-                  .col-xs-12
-                    h1.font-size-large {{modality.modalidad}}
-                  .col-xs-12
-                    .row.main-center
-                      .col-xs
-                        //- router-link(active-class="is-active" to="/ModalityExams/Exams" tag="button" exact).btn--primary Ver más
-                        button(@click='change()').btn--primary Ver más
+          .col-xs-12
+            tabs.row
+              template(v-for='(modality,index) in report')
+                tab(:name='modality.modalidad' :selected='isTrue(index)')
+                  .col-xs-12.m-t
+                    exams(:data='modality.examenes' :id='index' :idMod='modality.idmodalidad')
     template(v-else)
       spinner
 </template>
@@ -30,10 +25,12 @@ import Spinner from './global/Spinner';
 import Tabs from './global/Tabs';
 import Tab from './global/Tab';
 import Modal from './global/Modal';
+import Exams from './Exams';
 import Exam from './Exam';
 export default {
   components:{
     Spinner,
+    Exams,
     Exam,
     Modal,
     Tabs,
@@ -72,6 +69,12 @@ export default {
         })
       })
       this.report = res;
+      localStorage.setItem('cima-reporte-simulacros', JSON.stringify(this.report));
+    },
+    isTrue(el) {
+      if (el == 0) {
+        return 'true';
+      }
     },
     change() {
       this.$router.push('/Dashboard/Exams');

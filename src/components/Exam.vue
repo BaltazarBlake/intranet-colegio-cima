@@ -1,25 +1,41 @@
 <template lang="pug">
-  article.card
-    .row
-      .col-xs-12.course__header
-        h1.font-size-large.text--center {{data.descripcion}}
-      //- .col-xs-12
-      //-   strong(:class="data.promedio >= 11? 'green':'red'").course__tag.m-b PROMEDIO: {{data.promedio}}
-      //- .col-xs-12
-      //-   small Docente:
-      //-   p {{data.docente}}
-      //- .col-xs-12
-      //-   small Teléfono:
-      //-   p {{data.telefono}}
-      .col-xs-12
-        .row.main-center
-          .col-xs
-            button(@click='viewDetailExam(data)').btn--default Ver más
+  div
+    template(v-if="report")
+      .band
+        .container
+          h1.font-size-x-large {{report.descripcion}}
+        .container.target
+          .row
+            template(v-for='data in report.asignaturas')
+              .col-xs-12.col-xm-6.col-m-4.col-l-3.d-f
+                .card
+                  .row.main-center.h-100
+                    .col-xs-12
+                      h1.font-size-large {{data.asignatura}}
+                    .col-xs-12.m-b
+                      strong.course__tag.font-size-regular PUNTAJE {{data.nota}}
+    template(v-else)
+      spinner
 </template>
 
 <script>
+import Spinner from './global/Spinner';
 export default {
+  components: {Spinner},
   name: 'Exam',
-  props: ['data']
+  props: ['modalidad', 'examen', 'idmodalidad'],
+  data() {
+    return {
+      report: null,
+    }
+  },
+  mounted() {
+    this.getData();
+  },
+  methods: {
+    getData() {
+      this.report = JSON.parse(localStorage.getItem('cima-reporte-simulacros'))[this.modalidad].examenes[this.examen];
+    }
+  }
 }
 </script>

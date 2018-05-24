@@ -11,7 +11,7 @@ import Schedule from './components/Schedule';
 import Familyguy from './components/Familyguy';
 import CoursesExams from './components/CoursesExams';
 import ModalityExams from './components/ModalityExams';
-import Exams from './components/Exams';
+import Exam from './components/Exam';
 
 export const routes = [
   {
@@ -74,8 +74,9 @@ export const routes = [
         meta:{ reqAuth: true},
       },
       {
-        path:'Exams',
-        component:Exams,
+        path:'Exam',
+        component:Exam,
+        props: (route) => ({modalidad: route.query.mod, examen: route.query.exam, idmodalidad: route.query.idmod}),
         meta:{ reqAuth: true},
       },
     ]

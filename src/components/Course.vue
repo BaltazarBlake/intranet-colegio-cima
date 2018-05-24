@@ -1,6 +1,6 @@
 <template lang="pug">
   article.card
-    .row
+    .row.h-100
       .col-xs-12.course__header
         h1.font-size-large.text--center {{data.curso}}
       .col-xs-12
@@ -14,7 +14,7 @@
       .col-xs-12
         .row.main-center
           .col-xs
-            button(@click='viewDetailExam(data)').btn--default Ver más
+            button(@click='viewDetailExam(data)').btn--default.is-active Ver más
 </template>
 
 <script>
