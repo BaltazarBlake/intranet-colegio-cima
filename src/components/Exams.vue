@@ -5,10 +5,9 @@
         .col-xs-12.col-xm-6.col-m-4.col-l-3.d-f
           article.card.course
             .row.main-center.h-100
-              .col-xs-12
+              .col-xs-12.course__header
                 h1.font-size-large {{exams.descripcion}}
               .col-xs-12.m-b
-                //- i.icon-horary
                 strong.font-size-regular {{exams.fecha}}
               .col-xs-6
                 small Mérito general:
