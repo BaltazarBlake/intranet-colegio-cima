@@ -15,7 +15,8 @@
                   .col-xs-12
                     .row.main-center
                       .col-xs
-                        button.btn--default.is-active Ver más
+                        //- router-link(active-class="is-active" to="/ModalityExams/Exams" tag="button" exact).btn--primary Ver más
+                        button(@click='change()').btn--primary Ver más
     template(v-else)
       spinner
 </template>
@@ -72,10 +73,8 @@ export default {
       })
       this.report = res;
     },
-    isTrue(el) {
-      if (el == 0) {
-        return 'true';
-      }
+    change() {
+      this.$router.push('/Dashboard/Exams');
     },
   }
 }

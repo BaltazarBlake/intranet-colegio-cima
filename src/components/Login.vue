@@ -48,6 +48,7 @@ export default{
 
           if (type === 'student') {
             let report = await getProfile(idUser);
+            console.log('report student:', report);
             localStorage.setItem('cima-usuario',JSON.stringify(report));
             this.$router.replace('/Dashboard');
           } else {
@@ -55,7 +56,6 @@ export default{
             let report = await getChildren(idUser);
             localStorage.setItem('cima-children', JSON.stringify(report));
             this.$router.replace('/Familyguy');
-            console.log(report);
           }
         }else{
           this.error = res.message;

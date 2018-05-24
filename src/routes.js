@@ -11,6 +11,7 @@ import Schedule from './components/Schedule';
 import Familyguy from './components/Familyguy';
 import CoursesExams from './components/CoursesExams';
 import ModalityExams from './components/ModalityExams';
+import Exams from './components/Exams';
 
 export const routes = [
   {
@@ -70,8 +71,13 @@ export const routes = [
       {
         path:'ModalityExams',
         component:ModalityExams,
-        meta:{ reqAuth: true}
-      }
+        meta:{ reqAuth: true},
+      },
+      {
+        path:'Exams',
+        component:Exams,
+        meta:{ reqAuth: true},
+      },
     ]
   },
   {
