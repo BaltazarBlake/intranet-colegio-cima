@@ -47,7 +47,6 @@ export default {
   },
   async mounted() {
     await this.getData();
-    this.detectedImages();
   },
   methods: {
     async getData() {

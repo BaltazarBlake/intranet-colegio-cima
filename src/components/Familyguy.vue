@@ -2,14 +2,14 @@
   div
     .band.large
       .container
-        .row.main-center.cross-center
+        div(v-if="profile").row.main-center.cross-center
           .col-xs-6.col-s
             .profile__wrapper-image.small
               //- img(:src="image" @error='detectedImages()').profile__user-image
-              img(src='').profile__user-image
+              img(:src='profile.url_imagen' @error="detectedImages()").profile__user-image
           .col-xs-6.col-s
-            h1.font-size-large Padre de familia
-            strong.font-size-small DNI: 12345678
+            h1.font-size-large {{profile.nombre}} {{profile.apellidos}}
+            strong.font-size-small DNI: {{profile.dni}}
           .col-xs-12.col-s
             .d-f.main-center
               button(@click='logout()').btn--danger.is-active Cerrar Sesión
@@ -39,11 +39,13 @@
 
 <script>
 import Spinner from './global/Spinner';
+import {token} from '../cfg/core';
 export default {
   components: {Spinner},
   data() {
     return {
       report: null,
+      profile: null,
     }
   },
 
@@ -54,6 +56,8 @@ export default {
   methods: {
     getData() {
       this.report = JSON.parse(localStorage.getItem('cima-children'));
+      this.profile = JSON.parse(localStorage.getItem('cima-parent-profile'));
+      this.profile.url_imagen = `http://192.168.70.2/v4cima/vista/fotospadres/${this.profile.id}.jpg`
       this.report.map(el=>{
         el.url_imagen = `http://docente.cima.com.pe:8096/v4cima/vista/fotosalumno/${el.idpersona}.jpg`
       })
@@ -63,11 +67,25 @@ export default {
       localStorage.setItem('cima-estudiante',JSON.stringify(child));
       this.$router.push("/Dashboard");
     },
+    detectedImages() {
+      if(this.report){
+        this.report.url_imagen = 'dist/user.png';   
+      }     
+    },
     logout() {
-      localStorage.removeItem(token);
+       localStorage.removeItem(token);
       localStorage.removeItem('cima-estudiante');
       localStorage.removeItem('cima-children');
       localStorage.removeItem('idTurn');
+      localStorage.removeItem('cima-estudiante-asistencia');
+      localStorage.removeItem('cima-estudiante-classmates');
+      localStorage.removeItem('cima-estudiante-cursos');
+      localStorage.removeItem('cima-reporte-simulacros');
+      localStorage.removeItem('cima-estudiante-observations');
+      localStorage.removeItem('cima-estudiante-parents');
+      localStorage.removeItem('cima-estudiante-horario');
+      localStorage.removeItem('cima-estudiante-profesores');
+      localStorage.removeItem('cima-parent-profile');
       this.$router.replace('/');
     }
   }
