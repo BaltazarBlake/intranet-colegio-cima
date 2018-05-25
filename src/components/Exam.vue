@@ -91,7 +91,16 @@
                   th N° de Preg.
                   th Rpta. Exam.
                   th Rpta. Alum.
-              tbody
+              tbody.table__body
+                template(v-if='report')
+                  template(v-for='question in report.preguntas')
+                    tr
+                      td {{question.numero_pregunta}}
+                      td {{question.clave}}
+                      td(v-text='correctKey(question.respuesta)')
+                template(v-else)
+                  spinner
+
 
 </template>
 
@@ -121,6 +130,13 @@ export default {
     viewModal() {
       EventBus.$emit('showModal', this.isVisible);
     },
+    correctKey(el) {
+      if (el == null) {
+        return '-';
+      } else {
+        return `${el}`;
+      }
+    }
   }
 }
 </script>

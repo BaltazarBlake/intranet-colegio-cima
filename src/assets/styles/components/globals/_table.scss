@@ -1,22 +1,30 @@
 .table {
   display: flex;
-  .table__header {
+  flex-direction: column;
+
+  &__header,
+  &__body {
     display: flex;
-    justify-content: space-between;
     width: 100%;
-    background-color: $blue-100;
-    color: #FFF;
+    
     & tr {
       display: flex;
-      justify-content: space-between;
       width: 100%;
+      justify-content: center;
       
-      & th {
-        padding: $gutter/3 0;
+      & th,
+      & td {
+        flex-grow: 1;
+        padding: $gutter/3;
+        border-left: 1px solid #ccc;
       }
     }
   }
-  .table__body {
-
+  &__header {
+    background-color: $blue-100;
+    color: #FFF;
+  }
+  &__body {
+    flex-direction: column;
   }
 }
