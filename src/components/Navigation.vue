@@ -17,11 +17,11 @@
         router-link(active-class="is-active" to="/Dashboard/Parents" exact).navigation__link
           span.icon-home
           span Información de apoderados
-      li.navigation__item.col-xs-12
+      li(v-if="nivel!=11").navigation__item.col-xs-12
         router-link(active-class="is-active" to="/Dashboard/CoursesExams" exact).navigation__link
           span.icon-file
           span Cursos y notas
-      li.navigation__item.col-xs-12
+      li(v-if="nivel!=8 && nivel!=11").navigation__item.col-xs-12
         router-link(active-class="is-active" to="/Dashboard/ModalityExams" exact).navigation__link
           span.icon-file
           span Simulacros
@@ -61,6 +61,7 @@ export default{
       name: null,
       image: null,
       navList: null,
+      nivel:null,
     }
   },
   created() {
@@ -80,6 +81,7 @@ export default{
       this.image = `http://docente.cima.com.pe:8096/v4cima/vista/fotosalumno/${idPerson}.jpg`;
       this.name = `${report.nombre} ${report.apellido}`;
       this.navList = document.getElementById('navList');      
+      this.nivel = report.idnivel;
     },
     render() {
       //  Breakpoint

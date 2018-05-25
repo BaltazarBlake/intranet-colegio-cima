@@ -45,7 +45,6 @@ export default {
       }else{
         res = JSON.parse(localStorage.getItem('cima-estudiante-profesores'));
       }
-      console.log(res);
       this.report = res;
     }
   }

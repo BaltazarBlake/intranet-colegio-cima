@@ -123,8 +123,6 @@ export default {
           //mismo curso
           size++;
         }
-
-        // console.log(tmp_curso);
       }
       render_curso += `
         <div style='height:${this.heigth_horas * size}%;' class='course--desktop'>
