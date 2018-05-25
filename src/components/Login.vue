@@ -53,6 +53,7 @@ export default{
           } else {
             const idUser = jwt(myToken).idUser;
             let report = await getChildren(idUser);
+            console.log(report);
             localStorage.setItem('cima-children', JSON.stringify(report));
             this.$router.replace('/Familyguy');
           }
