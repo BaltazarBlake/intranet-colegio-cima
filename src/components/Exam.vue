@@ -7,13 +7,19 @@
           .col-xs-12
             article.card
               .row.main-center.cross-center
-                .col-xs-12.col-xm-4
+                .col-xs-12.col-xm-12
                   .row
                     .col-xs-12
                       h1.font-size-x-large {{report.descripcion}}
                     .col-xs-12
-                      h2.font-size-large {{report.fecha}}
-                .col-xs-12.col-xm-4
+                      strong.font-size-large {{report.fecha}}
+                .col-xs-12.col-xm-3
+                  .row.main-center.cross-center
+                    .col-xs-12.col-xm-6.d-f
+                      strong.course__tag.green.font-size-regular.m-b PUNTAJE {{report.merito_general}}
+                    .col-xs-12.col-xm-6.d-f
+                      strong.course__tag.green.font-size-regular.m-b PUNTAJE BASE 20: {{report.nota_20}}
+                .col-xs-12.col-xm-3
                   .row.main-center
                     .col-xs-6
                       small Mérito general:
@@ -21,7 +27,7 @@
                     .col-xs-6
                       small Mérito grado:
                       h2 {{report.merito_grado}}
-                .col-xs-12.col-xm-4
+                .col-xs-12.col-xm-3
                     .row.main-center
                       .col-xs-4
                         .tag--label.red
@@ -36,8 +42,9 @@
                           small Blanco:
                           h2 {{report.no_contestadas}}
 
-
-        .row
+        article.row
+          .col-xs-12
+            h1.font-size-x-large.text--center Cursos
           template(v-for='data in report.asignaturas')
             .col-xs-12.col-xm-6.col-m-4.col-l-3.d-f
               .course.card
@@ -65,16 +72,35 @@
                   .col-xs-12
                     .row.main-center
                       .col-xs
-                        button.btn--default.is-active Ver más
+                        button(@click='viewKey()').btn--default.is-active Claves
 
     template(v-else)
       spinner
+    //- MODAL
+    modal
+      template(slot='title')
+        .row.cross-center
+          .col-xs
+            strong.font-size-x-large Claves
+      template(slot='body')
+        .row
+          .col-xs-12
+            table.table
+              thead.table__header
+                tr
+                  th N° de Preg.
+                  th Rpta. Exam.
+                  th Rpta. Alum.
+              tbody
+
 </template>
 
 <script>
+import { EventBus } from '../event-bus.js';
+import Modal from './global/Modal';
 import Spinner from './global/Spinner';
 export default {
-  components: {Spinner},
+  components: {Spinner,Modal},
   name: 'Exam',
   props: ['modalidad', 'examen', 'idmodalidad'],
   data() {
@@ -88,7 +114,13 @@ export default {
   methods: {
     getData() {
       this.report = JSON.parse(localStorage.getItem('cima-reporte-simulacros'))[this.modalidad].examenes[this.examen];
-    }
+    },
+    viewKey() {
+      this.viewModal();
+    },
+    viewModal() {
+      EventBus.$emit('showModal', this.isVisible);
+    },
   }
 }
 </script>

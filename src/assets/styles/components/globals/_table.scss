@@ -1,0 +1,22 @@
+.table {
+  display: flex;
+  .table__header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: $blue-100;
+    color: #FFF;
+    & tr {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      
+      & th {
+        padding: $gutter/3 0;
+      }
+    }
+  }
+  .table__body {
+
+  }
+}

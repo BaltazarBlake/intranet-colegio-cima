@@ -38,7 +38,7 @@
               .col-xs-12
                 .row.main-center
                   .col-xs
-                    router-link(:to='link(id,index)' tag="button").btn--default.is-active Ver más
+                    router-link(:to='link(id,index)' tag="button").btn--default.is-active Ver examen
             template(v-if='exams.nota_20 == 0')
               .course__message
                 strong.font-size-xx-large.text--uppercase.text--center {{exams.motivo}}
