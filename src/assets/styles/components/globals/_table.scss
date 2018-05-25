@@ -1,30 +1,68 @@
 .table {
+  $light-color: #ffffff;
+  $dark-color: #f2f2f2;
   display: flex;
-  flex-direction: column;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  border: 1px solid $dark-color;
+  font-size: 1rem;
+  margin: 0.5rem;
+  line-height: 1.5;
 
-  &__header,
-  &__body {
-    display: flex;
+  // .Table-header
+  &-header {
+    display: none;
+    @include MQ(XM) {
+      font-weight: 700;
+      background-color: $blue-100;
+    }
+  }
+
+  // .Table-row
+  &-row {
     width: 100%;
-    
-    & tr {
+    &:nth-of-type(even) {
+      background-color: $dark-color;
+    }
+    &:nth-of-type(odd) {
+      background-color: $light-color;
+    }
+    @include MQ(XM) {
       display: flex;
-      width: 100%;
-      justify-content: center;
-      
-      & th,
-      & td {
-        flex-grow: 1;
-        padding: $gutter/3;
-        border-left: 1px solid #ccc;
+      flex-flow: row nowrap;
+      &:nth-of-type(even) {
+        background-color: $light-color;
+      }
+      &:nth-of-type(odd) {
+        background-color: $dark-color;
+      }
+    } 
+    // .Table-row-item
+    &-item {
+      display: flex;
+      flex-flow: row nowrap;
+      flex-grow: 1;
+      flex-basis: 0;
+      padding: 0.5em;
+      word-break: break-word;
+      &:before {
+        content: attr(data-header);
+        width: 50%;
+        font-weight: 700;
+      }
+      @include MQ(XM) {
+        border: 1px solid $light-color;
+        padding: 0.5em;
+        &:before {
+          content: none;
+        }
       }
     }
   }
-  &__header {
-    background-color: $blue-100;
-    color: #FFF;
-  }
-  &__body {
-    flex-direction: column;
+}
+
+@for $i from 1 through 10 {
+  .u-Flex-grow#{$i} {
+    flex-grow: i;
   }
 }

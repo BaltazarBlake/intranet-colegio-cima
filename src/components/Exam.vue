@@ -85,21 +85,19 @@
       template(slot='body')
         .row
           .col-xs-12
-            table.table
-              thead.table__header
-                tr
-                  th N° de Preg.
-                  th Rpta. Exam.
-                  th Rpta. Alum.
-              tbody.table__body
-                template(v-if='report')
-                  template(v-for='question in report.preguntas')
-                    tr
-                      td {{question.numero_pregunta}}
-                      td {{question.clave}}
-                      td(v-text='correctKey(question.respuesta)')
-                template(v-else)
-                  spinner
+            .table
+              .table-row.table-header
+                .table-row-item N° de Preg.
+                .table-row-item Rpta. Exam.
+                .table-row-item Rpta. Alum.
+              template(v-if='report')
+                template(v-for='question in report.preguntas')
+                  .table-row
+                    .table-row-item(data-header='N° de Preg.') {{question.numero_pregunta}}
+                    .table-row-item(data-header='Rpta. Exam.') {{question.clave}}
+                    .table-row-item(v-text='correctKey(question.respuesta)' data-header='Rpta. Alum.')
+              template(v-else)
+                spinner
 
 
 </template>

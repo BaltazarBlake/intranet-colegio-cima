@@ -4,7 +4,7 @@
       .navigation__user-profile
         .navigation__wrapper-image
           img(:src='image').navigation__user-image.shadow-1
-        strong.navigation__user-name {{name}}
+        strong.navigation__user-name.text--center {{name}}
         button(@click='logout()').btn--danger.is-active.navigation__btn Cerrar Sesión
     template(v-else)
       spinner
@@ -60,12 +60,13 @@ export default{
     return{
       name: null,
       image: null,
+      navList: null,
     }
   },
   created() {
     // Listen for the showNavigation event
     EventBus.$on('showNavigation', () => {
-      navList.classList.toggle('is-show');
+      this.navList.classList.toggle('is-show');
     });
   },
   mounted(){
@@ -78,16 +79,16 @@ export default{
       let idPerson = report.idpersona;
       this.image = `http://docente.cima.com.pe:8096/v4cima/vista/fotosalumno/${idPerson}.jpg`;
       this.name = `${report.nombre} ${report.apellido}`;
+      this.navList = document.getElementById('navList');      
     },
     render() {
-      const navList = document.getElementById('navList');      
       //  Breakpoint
       const MediumBp = matchMedia('(min-width: 1170px)');
       const changeSize = (mql) => {
         if (mql.matches) {
-          navList.classList.add('is-show');
+          this.navList.classList.add('is-show');
         } else {
-          navList.classList.remove('is-show');
+          this.navList.classList.remove('is-show');
         }
       };
 
