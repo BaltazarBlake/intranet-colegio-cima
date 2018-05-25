@@ -52,7 +52,7 @@ export default{
   },
   methods:{
     getData(){
-      this.report = JSON.parse(localStorage.getItem('cima-usuario'));
+      this.report = JSON.parse(localStorage.getItem('cima-estudiante'));
       this.image = `http://docente.cima.com.pe:8096/v4cima/vista/fotosalumno/${this.report.idpersona}.jpg`;
       localStorage.setItem('idTurn', this.report.idturno);
     },

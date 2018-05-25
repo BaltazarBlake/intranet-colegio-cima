@@ -24,8 +24,6 @@
 
 <script>
 import {getClassmates} from '../functions/fetchFunctions';
-import jwt from 'jwt-decode';
-import {token} from '../cfg/core';
 import Spinner from './global/Spinner';
 export default {
   components: {Spinner},
@@ -39,9 +37,8 @@ export default {
   },
   methods: {
     async getData() {
-      const mytoken = localStorage.getItem(token);
-      const idUser = jwt(mytoken).idUser;
-      let res = await getClassmates(idUser);
+      let data = JSON.parse(localStorage.getItem('cima-estudiante'));
+      let res = await getClassmates(data.idalumnocolegio);
       this.report = res;
     }
   }

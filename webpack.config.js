@@ -14,7 +14,8 @@ module.exports = {
         test: /\.css$/,
         use: [
           'vue-style-loader',
-          'css-loader'
+          'css-loader',
+          'postcss-loader?sourceMap'
         ],
       },
       {
@@ -22,6 +23,7 @@ module.exports = {
         use: [
           'vue-style-loader',
           'css-loader',
+          'postcss-loader?sourceMap',          
           'resolve-url-loader',  // agregado resolve-url-loader
           'sass-loader?sourceMap'  //sourceMap
         ],
@@ -45,6 +47,7 @@ module.exports = {
             'scss': [
               'vue-style-loader',
               'css-loader',
+              'postcss-loader?sourceMap',              
               'resolve-url-loader',  //agregado resolve-url-loader
               'sass-loader?sourceMap' //sourceMap
             ],

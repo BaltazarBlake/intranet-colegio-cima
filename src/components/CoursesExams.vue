@@ -71,8 +71,6 @@
 <script>
 import { EventBus } from '../event-bus.js';
 import {getCourses} from '../functions/fetchFunctions';
-import jwt from 'jwt-decode';
-import {token} from '../cfg/core';
 import Spinner from './global/Spinner';
 import Tabs from './global/Tabs';
 import Tab from './global/Tab';
@@ -102,9 +100,8 @@ export default {
   },
   methods: {
     async getData() {
-      const mytoken = localStorage.getItem(token);
-      const idUser = jwt(mytoken).idUser;
-      let res = await getCourses(idUser);
+      let data = JSON.parse(localStorage.getItem('cima-estudiante'));      
+      let res = await getCourses(data.idalumnocolegio);
       this.report = res;
     },
     isTrue(el) {

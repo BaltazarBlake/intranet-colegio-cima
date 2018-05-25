@@ -48,8 +48,7 @@ export default{
 
           if (type === 'student') {
             let report = await getProfile(idUser);
-            console.log('report student:', report);
-            localStorage.setItem('cima-usuario',JSON.stringify(report));
+            localStorage.setItem('cima-estudiante',JSON.stringify(report));
             this.$router.replace('/Dashboard');
           } else {
             const idUser = jwt(myToken).idUser;

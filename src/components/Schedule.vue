@@ -32,9 +32,7 @@
 </template>
 
 <script>
-import jwt from 'jwt-decode';
 import Spinner from './global/Spinner';
-import {token} from '../cfg/core';
 import {getSchedule} from '../functions/fetchFunctions';
 
 export default {
@@ -53,9 +51,8 @@ export default {
   },
   methods:{
     async getData(){
-      const myToken = localStorage.getItem(token);
-      const idUser = jwt(myToken).idUser;
-      let res = await getSchedule(idUser);
+      let data = JSON.parse(localStorage.getItem('cima-estudiante'));
+      let res = await getSchedule(data.idalumnocolegio);
       this.report = res.horary;
       this.heigth_horas = 100 / this.report.horas.length;
       this.width_dias = 100 / this.report.array_dias.length;

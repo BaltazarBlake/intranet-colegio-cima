@@ -112,9 +112,7 @@
 </template>
 
 <script>
-import jwt from 'jwt-decode';
 import {getAssistance} from '../functions/fetchFunctions';
-import {token} from '../cfg/core';
 import { EventBus } from '../event-bus.js';
 
 import Modal from './global/Modal';
@@ -153,9 +151,8 @@ export default {
 
   methods: {
     async getData() {
-      const myToken = localStorage.getItem(token);
-      const idUser = jwt(myToken).idUser;
-      let res = await getAssistance(idUser);
+      let data = JSON.parse(localStorage.getItem('cima-estudiante'));
+      let res = await getAssistance(data.idalumnocolegio);
       res = res.assistance;
       this.idTurn = localStorage.getItem('idTurn');
 
@@ -202,7 +199,7 @@ export default {
     },
 
     getDataStudent(){
-      this.dataStudent = JSON.parse(localStorage.getItem('cima-usuario'));
+      this.dataStudent = JSON.parse(localStorage.getItem('cima-estudiante'));
       console.log(this.dataStudent);
     }
 

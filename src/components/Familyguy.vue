@@ -19,7 +19,7 @@
           .row
             .col-xs-12
               h1.font-size-x-large.text--center.m-t Lista de alumnos
-            template(v-for="data in report")
+            template(v-for="(data,index) in report")
               .col-xs-12.col-s-6.col-m-4.d-f
                 .profile.m-b
                   .profile__wrapper-image
@@ -31,7 +31,7 @@
                       h2.font-size-small {{data.grado}} {{data.seccion}}
                     .col-xs-12
                       .row.main-center
-                        button.btn--default Ver más
+                        button(@click="setChild(index)").btn--default Ver más
     template(v-else)
       spinner  
 
@@ -54,6 +54,14 @@ export default {
   methods: {
     getData() {
       this.report = JSON.parse(localStorage.getItem('cima-children'));
+      this.report.map(el=>{
+        el.url_imagen = `http://docente.cima.com.pe:8096/v4cima/vista/fotosalumno/${el.idpersona}.jpg`
+      })
+    },
+    setChild(index){
+      let child = this.report[index];
+      localStorage.setItem('cima-estudiante',JSON.stringify(child));
+      this.$router.push("/Dashboard");
     }
   }
 }

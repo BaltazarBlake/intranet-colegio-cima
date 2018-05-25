@@ -3,7 +3,12 @@
     .band
       .container
         h1.font-size-x-large Tus examenes
-    template(v-if="report")
+    template(v-if="report==1")
+      .container.target
+        .row
+          .card
+            p Este alumno no tiene simulacros
+    template(v-else-if="report")
       .container.target
         .row
           .col-xs-12
@@ -19,8 +24,6 @@
 <script>
 import { EventBus } from '../event-bus.js';
 import {getExams} from '../functions/fetchFunctions';
-import jwt from 'jwt-decode';
-import {token} from '../cfg/core';
 import Spinner from './global/Spinner';
 import Tabs from './global/Tabs';
 import Tab from './global/Tab';
@@ -46,10 +49,22 @@ export default {
   },
   methods:{
     async getData(){
-      const mytoken = localStorage.getItem(token);
-      const idUser = jwt(mytoken).idUser;
-      let res = await getExams(idUser);
-      res.map(item=>{
+      let data = JSON.parse(localStorage.getItem('cima-estudiante'));
+      let res = await getExams(data.idalumnocolegio);
+      if(res!=null) res = this.formatData(res);
+      this.report = res!=null? res:1;
+      localStorage.setItem('cima-reporte-simulacros', JSON.stringify(this.report));
+    },
+    isTrue(el) {
+      if (el == 0) {
+        return 'true';
+      }
+    },
+    change() {
+      this.$router.push('/Dashboard/Exams');
+    },
+    formatData(res){
+       res.map(item=>{
         item.examenes.map(exam=>{
           let mispreguntas = [];          
           let asignaturas = exam.asignaturas;
@@ -68,17 +83,8 @@ export default {
           exam.preguntas = mispreguntas;
         })
       })
-      this.report = res;
-      localStorage.setItem('cima-reporte-simulacros', JSON.stringify(this.report));
-    },
-    isTrue(el) {
-      if (el == 0) {
-        return 'true';
-      }
-    },
-    change() {
-      this.$router.push('/Dashboard/Exams');
-    },
+      return res;
+    }
   }
 }
 </script>

@@ -8,6 +8,7 @@
           .icon-burger
         //- Logo CIMA
         img(src="../assets/logo_colegio.svg", alt="Colegio CIMA").main-header__logo
+        router-link(to="/Familyguy" tag="button" v-if="children") Regresar?
     //- Main content
     main.main-content
       navigation
@@ -21,8 +22,18 @@ import Navigation from './Navigation';
 import {EventBus} from '../event-bus.js';
 export default{
   components:{Navigation},
+  data(){
+    return{
+      children:false
+    }
+  },
+  mounted(){
+    this.children = localStorage.getItem('cima-children')!=null;
+    console.log(this.children);
+  },
   methods:{
      viewNavigation() {
+       console.log('click');
       EventBus.$emit('showNavigation');
     }
   }

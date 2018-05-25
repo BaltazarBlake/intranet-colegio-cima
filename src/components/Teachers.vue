@@ -37,7 +37,7 @@ export default {
   },
   methods:{
     async getData(){
-      let data = JSON.parse(localStorage.getItem('cima-usuario'));
+      let data = JSON.parse(localStorage.getItem('cima-estudiante'));
       let res = await getTeachers(data.idalumnocolegio);
       console.log(res);
       this.report = res;
