@@ -100,6 +100,14 @@ export default{
       localStorage.removeItem('cima-estudiante');
       localStorage.removeItem('cima-children');
       localStorage.removeItem('idTurn');
+      localStorage.removeItem('cima-estudiante-asistencia');
+      localStorage.removeItem('cima-estudiante-classmates');
+      localStorage.removeItem('cima-estudiante-cursos');
+      localStorage.removeItem('cima-reporte-simulacros');
+      localStorage.removeItem('cima-estudiante-observations');
+      localStorage.removeItem('cima-estudiante-parents');
+      localStorage.removeItem('cima-estudiante-horario');
+      localStorage.removeItem('cima-estudiante-profesores');
       this.$router.replace('/');
     }
   }

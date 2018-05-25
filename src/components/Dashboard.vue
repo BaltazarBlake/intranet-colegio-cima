@@ -8,7 +8,7 @@
           .icon-burger
         //- Logo CIMA
         img(src="../assets/logo_colegio.svg", alt="Colegio CIMA").main-header__logo
-        router-link(to="/Familyguy" tag="button" v-if="children") Regresar?
+        button(@click="showChildren" v-if="children") Regresar?
     //- Main content
     main.main-content
       navigation
@@ -35,6 +35,17 @@ export default{
      viewNavigation() {
        console.log('click');
       EventBus.$emit('showNavigation');
+    },
+    showChildren(){
+      localStorage.removeItem('cima-estudiante-asistencia');
+      localStorage.removeItem('cima-estudiante-classmates');
+      localStorage.removeItem('cima-estudiante-cursos');
+      localStorage.removeItem('cima-reporte-simulacros');
+      localStorage.removeItem('cima-estudiante-observations');
+      localStorage.removeItem('cima-estudiante-parents');
+      localStorage.removeItem('cima-estudiante-horario');
+      localStorage.removeItem('cima-estudiante-profesores');
+      this.$router.push("/Familyguy");
     }
   }
 }
