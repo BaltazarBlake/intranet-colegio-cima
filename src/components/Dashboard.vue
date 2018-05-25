@@ -29,11 +29,9 @@ export default{
   },
   mounted(){
     this.children = localStorage.getItem('cima-children')!=null;
-    console.log(this.children);
   },
   methods:{
      viewNavigation() {
-       console.log('click');
       EventBus.$emit('showNavigation');
     },
     showChildren(){

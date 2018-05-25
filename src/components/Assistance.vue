@@ -207,7 +207,6 @@ export default {
 
     getDataStudent(){
       this.dataStudent = JSON.parse(localStorage.getItem('cima-estudiante'));
-      console.log(this.dataStudent);
     }
 
   }
