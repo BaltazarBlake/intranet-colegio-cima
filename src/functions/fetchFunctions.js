@@ -176,10 +176,23 @@ async function getExams(idStudentSchool) {
   return res; 
 }
 
+async function getParentProfile(idParent) {
+  const response = await fetch(
+                        `${host}/family/profile/${idParent}`,
+                          {
+                            method: 'get',
+                            headers: { 'Authorization': localStorage.getItem(token) }
+                          }
+  );
+  const res = await response.json();
+  return res; 
+}
+
 export { login,
          getTeachers,
          getChildren,
          getProfile,
+         getParentProfile,
          getSchedule,
          getJustify,
          getClassmates,

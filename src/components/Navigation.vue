@@ -111,6 +111,7 @@ export default{
       localStorage.removeItem('cima-estudiante-parents');
       localStorage.removeItem('cima-estudiante-horario');
       localStorage.removeItem('cima-estudiante-profesores');
+      localStorage.removeItem('cima-parent-profile');
       this.$router.replace('/');
     }
   }

@@ -26,7 +26,7 @@
 <script>
 import jwt from 'jwt-decode';
 import {token} from '../cfg/core';
-import {login,getProfile,getChildren} from '../functions/fetchFunctions';
+import {login,getProfile,getChildren,getParentProfile} from '../functions/fetchFunctions';
 export default{
   data() {
     return {
@@ -53,7 +53,9 @@ export default{
           } else {
             const idUser = jwt(myToken).idUser;
             let report = await getChildren(idUser);
+            let profile = await getParentProfile(idUser);
             localStorage.setItem('cima-children', JSON.stringify(report));
+            localStorage.setItem('cima-parent-profile',JSON.stringify(profile));
             this.$router.replace('/Familyguy');
           }
         }else{
