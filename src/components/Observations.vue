@@ -42,8 +42,14 @@ export default{
   },
   methods:{
     async getData(){
-      let data = JSON.parse(localStorage.getItem('cima-estudiante'));      
-      let res = await getObservations(data.idalumnocolegio);
+      let res;
+      if(!localStorage.getItem('cima-estudiante-observations')){
+        let data = JSON.parse(localStorage.getItem('cima-estudiante'));      
+        res = await getObservations(data.idalumnocolegio);
+        localStorage.setItem('cima-estudiante-observations',JSON.stringify(res));
+      }else{
+        res = JSON.parse(localStorage.getItem('cima-estudiante-observations'));
+      }
       this.report = res;
       this.report.map((el)=> {
         el.reportadopor = el.reportadopor.replace('<b>', '');

@@ -51,8 +51,14 @@ export default {
   },
   methods:{
     async getData(){
-      let data = JSON.parse(localStorage.getItem('cima-estudiante'));
-      let res = await getSchedule(data.idalumnocolegio);
+      let res;
+      if(!localStorage.getItem('cima-estudiante-horario')){
+        let data = JSON.parse(localStorage.getItem('cima-estudiante'));
+        res = await getSchedule(data.idalumnocolegio);
+        localStorage.setItem('cima-estudiante-horario',JSON.stringify(res));
+      }else{
+        res = JSON.parse(localStorage.getItem('cima-estudiante-horario'));
+      }
       this.report = res.horary;
       this.heigth_horas = 100 / this.report.horas.length;
       this.width_dias = 100 / this.report.array_dias.length;

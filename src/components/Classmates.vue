@@ -37,8 +37,15 @@ export default {
   },
   methods: {
     async getData() {
-      let data = JSON.parse(localStorage.getItem('cima-estudiante'));
-      let res = await getClassmates(data.idalumnocolegio);
+      let res;
+      if(!localStorage.getItem('cima-estudiante-classmates')){
+        let data = JSON.parse(localStorage.getItem('cima-estudiante'));
+        res = await getClassmates(data.idalumnocolegio);
+        localStorage.setItem('cima-estudiante-classmates',JSON.stringify(res));
+      }else{
+        res = JSON.parse(localStorage.getItem('cima-estudiante-classmates'));
+      }
+      
       this.report = res;
     }
   }
