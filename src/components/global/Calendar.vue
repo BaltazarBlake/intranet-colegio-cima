@@ -41,7 +41,6 @@ export default {
 
   created() {
     EventBus.$on('sendJustification',(data) => {
-      console.log(data);
     });
   },
 

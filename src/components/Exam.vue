@@ -95,7 +95,7 @@
                   .table-row
                     .table-row-item(data-header='N° de Preg.') {{question.numero_pregunta}}
                     .table-row-item(data-header='Rpta. Exam.') {{question.clave}}
-                    .table-row-item(v-text='correctKey(question.respuesta)' data-header='Rpta. Alum.')
+                    .table-row-item.font-weight-bold(v-text='correctKey(question.respuesta)' :class='colorKey(question.clave,question.respuesta)' data-header='Rpta. Alum.')
               template(v-else)
                 spinner
 
@@ -133,6 +133,13 @@ export default {
         return '-';
       } else {
         return `${el}`;
+      }
+    },
+    colorKey(rpt,rpta) {
+      if (rpt == rpta) {
+        return 'green';
+      } else {
+        return 'red';
       }
     }
   }
