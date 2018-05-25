@@ -32,3 +32,11 @@
     width: calc(100% - #{$width-navigation});
   }
 }
+
+@include MQ(L) {
+  .btn--change {
+    left: 50%;
+    transform: translateX(-100%);
+    position: relative;
+  }
+}

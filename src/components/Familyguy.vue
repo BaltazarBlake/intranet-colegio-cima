@@ -28,7 +28,7 @@
                     .col-xs-12
                       h1.font-size-regular {{data.nombre}} {{data.apellido}}
                     .col-xs-12
-                      h2.font-size-small {{data.grado}} {{data.seccion}}
+                      h2.font-size-small {{data.grado}} {{data.seccion}} {{data.nivel}}
                     .col-xs-12
                       .row.main-center
                         button(@click="setChild(index)").btn--default Ver más

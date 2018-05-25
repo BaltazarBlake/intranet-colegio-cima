@@ -8,7 +8,7 @@
           .icon-burger
         //- Logo CIMA
         img(src="../assets/logo_colegio.svg", alt="Colegio CIMA").main-header__logo
-        button(@click="showChildren" v-if="children") Regresar?
+        button(@click="showChildren" v-if="children").btn--warning.btn--change.is-active Cambiar
     //- Main content
     main.main-content
       navigation
