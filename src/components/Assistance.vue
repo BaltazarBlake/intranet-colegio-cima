@@ -151,9 +151,16 @@ export default {
 
   methods: {
     async getData() {
-      let data = JSON.parse(localStorage.getItem('cima-estudiante'));
-      let res = await getAssistance(data.idalumnocolegio);
-      res = res.assistance;
+      let res;
+      if(!localStorage.getItem('cima-estudiante-asistencia')){
+        let data = JSON.parse(localStorage.getItem('cima-estudiante'));
+        res = await getAssistance(data.idalumnocolegio);
+        res = res.assistance;        
+        localStorage.setItem('cima-estudiante-asistencia',JSON.stringify(res));        
+      }else{
+        res = JSON.parse(localStorage.getItem('cima-estudiante-asistencia'));
+      }
+     
       this.idTurn = localStorage.getItem('idTurn');
 
       this.report = [];
