@@ -30,8 +30,6 @@
 <script>
 import Spinner from './global/Spinner';
 import {getObservations} from '../functions/fetchFunctions';
-import jwt from 'jwt-decode';
-import {token} from '../cfg/core';
 export default{
   components:{Spinner},
   data(){
@@ -44,9 +42,8 @@ export default{
   },
   methods:{
     async getData(){
-      const myToken = localStorage.getItem(token);
-      const idUser = jwt(myToken).idUser;
-      let res = await getObservations(idUser);
+      let data = JSON.parse(localStorage.getItem('cima-estudiante'));      
+      let res = await getObservations(data.idalumnocolegio);
       this.report = res;
       this.report.map((el)=> {
         el.reportadopor = el.reportadopor.replace('<b>', '');

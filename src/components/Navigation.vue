@@ -65,7 +65,6 @@ export default{
   created() {
     // Listen for the showNavigation event
     EventBus.$on('showNavigation', () => {
-      const navList = document.getElementById('navList');
       navList.classList.toggle('is-show');
     });
   },
@@ -75,12 +74,13 @@ export default{
   },
   methods:{
     getData(){
-      let report = JSON.parse(localStorage.getItem('cima-usuario'));
+      let report = JSON.parse(localStorage.getItem('cima-estudiante'));
       let idPerson = report.idpersona;
       this.image = `http://docente.cima.com.pe:8096/v4cima/vista/fotosalumno/${idPerson}.jpg`;
       this.name = `${report.nombre} ${report.apellido}`;
     },
     render() {
+      const navList = document.getElementById('navList');      
       //  Breakpoint
       const MediumBp = matchMedia('(min-width: 1170px)');
       const changeSize = (mql) => {
@@ -97,7 +97,8 @@ export default{
 
     logout() {
       localStorage.removeItem(token);
-      localStorage.removeItem('cima-usuario');
+      localStorage.removeItem('cima-estudiante');
+      localStorage.removeItem('cima-children');
       localStorage.removeItem('idTurn');
       this.$router.replace('/');
     }
