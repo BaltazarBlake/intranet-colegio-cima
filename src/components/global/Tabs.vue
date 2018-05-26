@@ -5,7 +5,7 @@
         ul.tabs__list
           button(v-for='tab in tabs' @click='selectTab(tab)' :class="{ 'is-active': tab.isActive }").tab.btn {{tab.name}}
       
-    .tabs__detail
+    .tab__detail
       slot
 </template>
 
