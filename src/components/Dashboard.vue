@@ -14,7 +14,8 @@
       navigation
       .wrapper
         //- section render components
-        router-view
+        transition(name='fade' mode='out-in')
+          router-view
     
 </template>
 <script>

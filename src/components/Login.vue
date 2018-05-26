@@ -1,30 +1,31 @@
 <template lang="pug">
   main.main-content--login
     .container
-      .row.main-center
-
-        .col-xs-12
-            img(src="../assets/logo_colegio.svg", alt="Colegio CIMA").logo
-
-        template(v-if="error")
+      transition(name='slide-fade' appear)
+        .row.main-center
           .col-xs-12
-            .row.main-center
-              article.message-error
-                h1(v-text="error").font-size-large.m-t.m-b
-        .login
-          h1.login__title.text--center.font-size-xx-large Iniciar sesión
-          form(@submit.prevent="login").row.main-center
-            .input-field.col-xs-12
-              label.input-field__label Usuario
-              input(type="text", v-model="user", placeholder="").input-field__input
-            .input-field.col-xs-12
-              label.input-field__label Contraseña
-              input(type="password", v-model="password", placeholder="").input-field__input
-            .col-xs
-              button(type="submit").btn--primary
-                template(v-if='!viewSpinner') Ingresar
-                template(v-else)
-                  spinner
+              img(src="../assets/logo_colegio.svg", alt="Colegio CIMA").logo
+
+          transition(name='slide-fade-top' mode='in-out')
+            template(v-if='error')
+              .col-xs-12
+                .row.main-center
+                  article.message-error
+                    h1.font-size-large.m-t.m-b {{error}}
+          .login
+            h1.login__title.text--center.font-size-xx-large Iniciar sesión
+            form(@submit.prevent="login").row.main-center
+              .input-field.col-xs-12
+                label.input-field__label Usuario
+                input(type="text", v-model="user", placeholder="").input-field__input
+              .input-field.col-xs-12
+                label.input-field__label Contraseña
+                input(type="password", v-model="password", placeholder="").input-field__input
+              .col-xs
+                button(type="submit").btn--primary
+                  template(v-if='!viewSpinner') Ingresar
+                  template(v-else)
+                    spinner
     .login__bg
       <svg class="line-curve" viewBox="0 0 1400 600">
         <defs>
@@ -52,7 +53,7 @@ export default{
   data() {
     return {
       user: null,
-      error: null,
+      error: false,
       password: null,
       viewSpinner: false,
     };
@@ -71,23 +72,27 @@ export default{
           if (type === 'student') {
             let report = await getProfile(idUser);
             localStorage.setItem('cima-estudiante',JSON.stringify(report));
-            this.$router.replace('/Dashboard');
+            this.$router.replace('/Dashboard',() => {
+              this.user     = '';
+              this.password = '';
+            });
           } else {
             const idUser = jwt(myToken).idUser;
             let report = await getChildren(idUser);
             let profile = await getParentProfile(idUser);
             localStorage.setItem('cima-children', JSON.stringify(report));
             localStorage.setItem('cima-parent-profile',JSON.stringify(profile));
-            this.$router.replace('/Familyguy');
+            this.$router.replace('/Familyguy', () => {
+              this.user     = '';
+              this.password = '';
+            });
           }
         }else{
           this.error = res.message;
         }
       }else{
         this.error = 'Debe ingresar usuario y contraseña';
-      }   
-      this.user     = '';
-      this.password = '';   
+      }
     },
     showSpinner() {
       this.viewSpinner = true;
