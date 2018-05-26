@@ -29,7 +29,7 @@
         router-link(active-class="is-active" to="/Dashboard/Assistance" exact).navigation__link
           span.icon-calendar-1
           span Asistencia
-      li.navigation__item.col-xs-12
+      li(v-if="nivel!=11").navigation__item.col-xs-12
         router-link(active-class="is-active" to="/Dashboard/Schedule" exact).navigation__link
           span.icon-horary
           span Horario
