@@ -5,7 +5,6 @@
         div(v-if="profile").row.main-center.cross-center
           .col-xs-6.col-s
             .profile__wrapper-image.small
-              //- img(:src="image" @error='detectedImages()').profile__user-image
               img(:src='profile.url_imagen' @error="detectedImages()").profile__user-image
           .col-xs-6.col-s
             h1.font-size-large {{profile.nombre}} {{profile.apellidos}}
@@ -68,9 +67,9 @@ export default {
       this.$router.push("/Dashboard");
     },
     detectedImages() {
-      if(this.report){
-        this.report.url_imagen = 'dist/user.png';   
-      }     
+      if(this.profile != undefined) {
+        this.profile.url_imagen = 'dist/user.png';
+      }
     },
     logout() {
        localStorage.removeItem(token);

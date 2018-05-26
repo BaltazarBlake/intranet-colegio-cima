@@ -14,19 +14,22 @@
                 .col-xs-12
                   h2.font-size-regular DNI: {{report.dni}}
               .profile__description.row.main-center
-                .col-xs-4
+                .col-xs-6
                   small Turno
                   p {{report.turno}}
-                .col-xs-4
+                .col-xs-6
                   small Aula
                   p {{report.aula}}
-                .col-xs-4
+              .row.main-center
+                .col-xs-6
                   small Grado
                   p {{report.grado}}
-              .row.main-center
                 .col-xs-6
                   small Sección
                   p {{report.seccion}}
+                .col-xs-6
+                  small Nivel
+                  p {{report.nivel}}
                 .col-xs-6
                   small Pabellón
                   p {{report.pabellon}}
