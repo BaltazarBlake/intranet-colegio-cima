@@ -25,7 +25,8 @@
                         small.font-size-regular Reportado por:
                         h1.font-size-regular {{data.reportadopor}}
     template(v-else)
-      spinner
+      .m-t-s
+        spinner
 </template>
 <script>
 import Spinner from './global/Spinner';

@@ -18,7 +18,8 @@
                   .col-xs-12.m-t
                     exams(:data='modality.examenes' :id='index' :idMod='modality.idmodalidad')
     template(v-else)
-      spinner
+      .m-t-s
+        spinner
 </template>
 
 <script>

@@ -38,7 +38,8 @@
                   small Dirección
                   p {{report.direccion}}
           template(v-else)
-            spinner
+            .m-t-s
+              spinner
 </template>
 <script>
 import Spinner from './global/Spinner';

@@ -19,7 +19,8 @@
                     .col-xs-12
                       small.font-size-small Dir. {{data.direccion}}
     template(v-else)
-      spinner  
+      .m-t-s
+        spinner  
 </template>
 
 <script>

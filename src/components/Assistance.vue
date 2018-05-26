@@ -31,7 +31,8 @@
                 .col-xs-12.col-xm-6.col-l-4.d-f
                   calendar(:data='month' :idTurn='idTurn' :turn='turn')
           template(v-else)
-            spinner
+            .m-t-s
+              spinner
     modal
       template(slot='title') Justificación
       template(slot='body')

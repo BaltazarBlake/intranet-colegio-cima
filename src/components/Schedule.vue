@@ -28,7 +28,8 @@
                           h1.title2 {{dia.nombre_dia}}
                         div.horary__column--desktop(v-html='drawCurse(dia.array_horas)')
     template(v-else)
-      spinner
+      .m-t-s
+        spinner
 </template>
 
 <script>

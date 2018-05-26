@@ -32,7 +32,8 @@
 
 
     template(v-else)
-      spinner
+      .m-t-s
+        spinner
 </template>
 
 <script>

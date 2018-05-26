@@ -64,7 +64,8 @@
                                   strong.course__tag(:class="exam.nota >= 11? 'green':'red'") Nota: {{exam.nota}}
 
       template(v-else)
-        spinner
+        .m-t-s
+          spinner
 
 </template>
 

@@ -18,7 +18,8 @@
                       template(v-for='asignatura in teacher.asignaturas ')
                         small.font-size-small {{asignatura.asignatura}}, 
     template(v-else)
-      spinner  
+      .m-t-s
+        spinner  
 </template>
 
 <script>

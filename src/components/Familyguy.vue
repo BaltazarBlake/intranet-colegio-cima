@@ -32,7 +32,8 @@
                       .row.main-center
                         button(@click="setChild(index)").btn--default Ver más
     template(v-else)
-      spinner  
+      .m-t-s
+        spinner  
 
 </template>
 

@@ -97,7 +97,8 @@
                     .table-row-item(data-header='Rpta. Exam.') {{question.clave}}
                     .table-row-item.font-weight-bold(v-text='correctKey(question.respuesta)' :class='colorKey(question.clave,question.respuesta)' data-header='Rpta. Alum.')
               template(v-else)
-                spinner
+                .m-t-s
+                  spinner
 
 
 </template>
