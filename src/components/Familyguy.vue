@@ -5,7 +5,7 @@
         div(v-if="profile").row.main-center.cross-center
           .col-xs-6.col-s
             .profile__wrapper-image.small
-              img(:src='profile.url_imagen' @error="detectedImages()").profile__user-image
+              img(:src='image' @error="detectedImages()").profile__user-image.parent
           .col-xs-6.col-s
             h1.font-size-large {{profile.nombre}} {{profile.apellidos}}
             strong.font-size-small DNI: {{profile.dni}}
@@ -45,6 +45,7 @@ export default {
     return {
       report: null,
       profile: null,
+      image: null,
     }
   },
 
@@ -56,7 +57,7 @@ export default {
     getData() {
       this.report = JSON.parse(localStorage.getItem('cima-children'));
       this.profile = JSON.parse(localStorage.getItem('cima-parent-profile'));
-      this.profile.url_imagen = `http://192.168.70.2/v4cima/vista/fotospadres/${this.profile.id}.jpg`
+      this.image = `http://192.168.70.2/v4cima/vista/fotospadres/${this.profile.id}.jpg`
       this.report.map(el=>{
         el.url_imagen = `http://docente.cima.com.pe:8096/v4cima/vista/fotosalumno/${el.idpersona}.jpg`
       })
@@ -67,9 +68,7 @@ export default {
       this.$router.push("/Dashboard");
     },
     detectedImages() {
-      if(this.profile != undefined) {
-        this.profile.url_imagen = 'dist/user.png';
-      }
+      this.image = 'dist/user.png';
     },
     logout() {
        localStorage.removeItem(token);

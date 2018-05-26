@@ -62,6 +62,7 @@ export default {
     },
 
     detectedImages(el) {
+      console.log('error image');
       let i = this.report.indexOf(el);
       if (this.report[i] != undefined) {
         this.report[i].url_imagen = 'dist/user.png';        
