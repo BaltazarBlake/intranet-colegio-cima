@@ -56,7 +56,7 @@
                                   h1.font-size-regular {{exam.evaluacion}}
                                 .col-xs-12
                                   small Fecha:
-                                  h1.font-size-regular {{exam.fecha}}
+                                  h1.font-size-regular(v-text="format(exam.fecha)")
                                 .col-xs-12
                                   small Instrumento:
                                   h1.font-size-regular {{exam.instrumento}}
@@ -70,14 +70,14 @@
 </template>
 
 <script>
-import { EventBus } from '../event-bus.js';
-import {getCourses} from '../functions/fetchFunctions';
-import {formatDate} from '../functions/formatDate';
-import Spinner from './global/Spinner';
-import Tabs from './global/Tabs';
-import Tab from './global/Tab';
-import Modal from './global/Modal';
-import Course from './Course';
+import { EventBus } from "../event-bus.js";
+import { getCourses } from "../functions/fetchFunctions";
+import { formatDate } from "../functions/formatDate";
+import Spinner from "./global/Spinner";
+import Tabs from "./global/Tabs";
+import Tab from "./global/Tab";
+import Modal from "./global/Modal";
+import Course from "./Course";
 export default {
   components: {
     Spinner,
@@ -89,43 +89,42 @@ export default {
   data() {
     return {
       report: null,
-      detailExam: null,
-    }
+      detailExam: null
+    };
   },
   created() {
-    EventBus.$on('viewDetailExam', data => {
+    EventBus.$on("viewDetailExam", data => {
       this.detailExam = data;
-      this.detailExam.groups.map(group=>{
-        group.examenes.map(exam=>{
-          let dates = exam.fecha.split('-');
-          exam.fecha = formatDate(dates[0],dates[1],dates[2]);
-        })
-      })
     });
   },
   async mounted() {
-    await this.getData();    
+    await this.getData();
   },
   methods: {
     async getData() {
       let res;
-      if(!localStorage.getItem('cima-estudiante-cursos')){
-        let data = JSON.parse(localStorage.getItem('cima-estudiante'));      
+      if (!localStorage.getItem("cima-estudiante-cursos")) {
+        let data = JSON.parse(localStorage.getItem("cima-estudiante"));
         res = await getCourses(data.idalumnocolegio);
-        localStorage.setItem('cima-estudiante-cursos',JSON.stringify(res));
-      }else{
-        res = JSON.parse(localStorage.getItem('cima-estudiante-cursos'));
+        localStorage.setItem("cima-estudiante-cursos", JSON.stringify(res));
+      } else {
+        res = JSON.parse(localStorage.getItem("cima-estudiante-cursos"));
       }
       this.report = res;
     },
     isTrue(el) {
       if (el == 0) {
-        return 'true';
+        return "true";
       }
     },
     rename(el) {
       return `${el}° BIMESTRE`;
+    },
+    format(el) {
+      let dates = el.split("-");
+      let date = formatDate(dates[0], dates[1], dates[2]);
+      return date;
     }
-  },
-}
+  }
+};
 </script>

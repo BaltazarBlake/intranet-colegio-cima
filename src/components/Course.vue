@@ -14,7 +14,7 @@
       .col-xs-12
         .row.main-center
           .col-xs
-            button(@click='viewDetailExam(data)').btn--default.is-active Ver más
+            button(@click='viewDetailExam(data)').btn--default.is-active Ver curso
 </template>
 
 <script>

@@ -3,8 +3,15 @@
     display: none;
   }
   &__img {
-    position: absolute;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
     height: 40px;
+    @include MQ(XM) {
+      position: absolute;
+      left: 0;
+      transform: translateX(0);
+    }
   }
 }
 
