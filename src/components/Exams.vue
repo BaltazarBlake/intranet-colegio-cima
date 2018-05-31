@@ -46,8 +46,15 @@
 </template>
 
 <script>
+import {formatDate} from '../functions/formatDate';
 export default {
   props: ['data', 'id', 'idMod'],
+  mounted(){
+    this.data.map(el=>{
+      let dates = el.fecha.split('-');
+      el.fecha = formatDate(dates[0],dates[1],dates[2]);
+    })
+  },
   methods: {
     link(id,idExam) {
       return `/Dashboard/Exam?mod=${id}&exam=${idExam}&idmod=${this.idMod}`;

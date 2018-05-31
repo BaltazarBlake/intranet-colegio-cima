@@ -72,6 +72,7 @@
 <script>
 import { EventBus } from '../event-bus.js';
 import {getCourses} from '../functions/fetchFunctions';
+import {formatDate} from '../functions/formatDate';
 import Spinner from './global/Spinner';
 import Tabs from './global/Tabs';
 import Tab from './global/Tab';
@@ -94,10 +95,16 @@ export default {
   created() {
     EventBus.$on('viewDetailExam', data => {
       this.detailExam = data;
+      this.detailExam.groups.map(group=>{
+        group.examenes.map(exam=>{
+          let dates = exam.fecha.split('-');
+          exam.fecha = formatDate(dates[0],dates[1],dates[2]);
+        })
+      })
     });
   },
   async mounted() {
-    await this.getData();
+    await this.getData();    
   },
   methods: {
     async getData() {
