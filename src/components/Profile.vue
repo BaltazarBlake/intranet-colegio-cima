@@ -7,7 +7,7 @@
           template(v-if="report")
             .profile
               .profile__wrapper-image
-                img(:src="image" @error='detectedImages()').profile__user-image
+                img(:src="image", @error='detectedImages()', :class="image == 'dist/user.png'? 'parent':''").profile__user-image
               .profile__description.row.main-center
                 .col-xs-12
                   h1.font-size-large {{report.nombre}} {{report.apellido}}

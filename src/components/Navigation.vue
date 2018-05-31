@@ -3,7 +3,7 @@
     template(v-if='image')
       .navigation__user-profile
         .navigation__wrapper-image
-          img(:src='image').navigation__user-image.shadow-1
+          img(:src='image', @error='detectedImages()', :class="image == 'dist/user.png' ? 't-0':'qwerty'").navigation__user-image.shadow-1
         strong.navigation__user-name.text--center {{name}}
         button(@click='logout()').btn--danger.is-active.navigation__btn Cerrar Sesión
     template(v-else)
@@ -96,6 +96,10 @@ export default{
 
       MediumBp.addListener(changeSize);
       changeSize(MediumBp);
+    },
+
+    detectedImages() {
+      this.image = 'dist/user.png';
     },
 
     logout() {
