@@ -37,7 +37,7 @@ export default {
     Modal,
   },
 
-  props: ['data', 'idTurn', 'turn'],
+  props: ['data', 'idTurn', 'turn', 'showModalJustify'],
 
   created() {
     EventBus.$on('sendJustification',(data) => {

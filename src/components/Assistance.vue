@@ -29,7 +29,7 @@
             .row
               template(v-for='month in report')
                 .col-xs-12.col-xm-6.col-xl-4.d-f
-                  calendar(:data='month' :idTurn='idTurn' :turn='turn')
+                  calendar(:data='month' :idTurn='idTurn' :turn='turn' :showModalJustify='showModalJustify')
           template(v-else)
             .m-t-s
               spinner
@@ -129,6 +129,7 @@ export default {
       idTurn: null,
       turn: null,
       justify: null,
+      showModalJustify: true,
     }
   },
   components: {
@@ -202,6 +203,7 @@ export default {
     },
 
     viewReport() {
+      this.showModalJustify = false;
       EventBus.$emit('showReport');
       this.getDataStudent();
     },
