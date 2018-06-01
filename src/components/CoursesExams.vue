@@ -6,15 +6,22 @@
     template(v-if='report')
       .container.target
         .row
-          .col-xs-12
-            tabs.row
-              template(v-for='(data,index) in report')
-                tab(:name='rename(data.bimestre)' :selected='isTrue(index)')
-                  .col-xs-12.m-t
-                    .row
-                      template(v-for='courses in data.cursos')
-                        .col-xs-12.col-s-6.col-m-4.col-l-3.d-f
-                          course(:data='courses')
+          template(v-if='report[0].deudas >= 2')
+            .col-xs-12
+              .card
+                .row
+                  .col-xs-12
+                    h1.font-size-large Tiene deudas pendientes.
+          template(v-else)
+            .col-xs-12
+              tabs.row
+                template(v-for='(data,index) in report[0].examenes')
+                  tab(:name='rename(data.bimestre)' :selected='isTrue(index)')
+                    .col-xs-12.m-t
+                      .row
+                        template(v-for='courses in data.cursos')
+                          .col-xs-12.col-s-6.col-m-4.col-l-3.d-f
+                            course(:data='courses')
 
     template(v-else)
       spinner

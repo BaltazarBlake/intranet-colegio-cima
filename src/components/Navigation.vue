@@ -36,7 +36,7 @@
       li.navigation__item.col-xs-12
         router-link(active-class="is-active" to="/Dashboard/Observations" exact).navigation__link
           span.icon-notes
-          span Observaciones
+          span Anecdotario
       li.navigation__item.col-xs-12
         router-link(active-class="is-active" to="/Dashboard/Teachers" exact).navigation__link
           span.icon-team

@@ -15,28 +15,30 @@
                   h2.font-size-regular DNI: {{report.dni}}
               .profile__description.row.main-center
                 .col-xs-6
+                  strong Código Carné
+                  p.font-weight-bold {{report.idalumnocolegio}}
+                .col-xs-6
+                  strong Código Banco
+                  p.font-weight-bold {{report.codigobanco}}
+              .row.main-center
+                .col-xs-6
                   small Turno
                   p {{report.turno}}
                 .col-xs-6
-                  small Aula
-                  p {{report.aula}}
+                  small Aula - Pabellón
+                  p {{report.aula}} - {{report.pabellon}}
               .row.main-center
                 .col-xs-6
-                  small Grado
-                  p {{report.grado}}
-                .col-xs-6
-                  small Sección
-                  p {{report.seccion}}
+                  small Grado - Sección
+                  p {{report.grado}} - {{report.seccion}}
                 .col-xs-6
                   small Nivel
                   p {{report.nivel}}
-                .col-xs-6
-                  small Pabellón
-                  p {{report.pabellon}}
               .row.main-center
                 .col-xs-12
                   small Dirección
                   p {{report.direccion}}
+              
           template(v-else)
             .m-t-s
               spinner

@@ -20,6 +20,12 @@
 
   .print {
 
+    &__img {
+      position: absolute;
+      left: 0;
+      transform: translateX(0);
+    }
+
     &__show {
       display: block;
     }
