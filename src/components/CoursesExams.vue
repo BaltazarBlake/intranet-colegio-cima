@@ -11,7 +11,7 @@
               .card
                 .row
                   .col-xs-12
-                    h1.font-size-large Tiene deudas pendientes.
+                    h1.font-size-xxx-large.text--center Tiene deudas pendientes.
           template(v-else)
             .col-xs-12
               tabs.row
