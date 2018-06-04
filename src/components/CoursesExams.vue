@@ -34,7 +34,7 @@
             .col-xs
               strong.font-size-x-large {{detailExam.course}}
             .col-xs
-              strong(:class="detailExam.mean >= 11? 'green':'red'").course__tag.m-b-0 PROMEDIO: {{detailExam.mean}}
+              strong(:class="detailExam.mean >= detailExam.minimumNote? 'green':'red'").course__tag.m-b-0 PROMEDIO: {{detailExam.mean}}
         template(slot='body')
           .row
             .col-xs-12

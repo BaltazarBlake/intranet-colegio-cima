@@ -85,6 +85,7 @@ export default {
       localStorage.removeItem('cima-estudiante-horario');
       localStorage.removeItem('cima-estudiante-profesores');
       localStorage.removeItem('cima-parent-profile');
+      localStorage.removeItem('cima-estudiante-events');
       this.$router.replace('/');
     }
   }

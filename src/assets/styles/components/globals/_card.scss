@@ -14,9 +14,62 @@
     display: flex;
     flex-wrap: wrap;
   }
-}
+  // CARD LIGTH
+  &--ligth {
+    padding: $gutter/1.7;
+    background-color: #F4F6F9;
+  }
+  // CARD EVENT
+  &--event {
+    @extend .card;
+    position: relative;
+    display: flex;
+    align-items: center;
 
-.card--ligth {
-  padding: $gutter/1.7;
-  background-color: #F4F6F9;
+    // estate
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 7px;
+    }
+    
+    &.pending {
+      &::before {
+        background-color: $blue-100;
+      }
+    }
+
+    &.complete {
+      &::before {
+        background-color: $red;
+      }
+    }
+
+    &__date {
+      max-width: 30%;
+      padding-right: $gutter/2;
+    }
+
+    &__description {
+      position: relative;
+      max-width: 70%;
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        height: 100%;
+        width: 2px;
+        background-color: #ccc;
+      }
+    }
+
+    &__name,
+    &__hour {
+      padding-left: $gutter/2;
+    }
+  }
 }

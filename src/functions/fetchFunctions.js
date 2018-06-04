@@ -188,6 +188,29 @@ async function getParentProfile(idParent) {
   return res; 
 }
 
+async function getPayment(idStudentSchool) {
+  const response = await fetch(
+                        `${host}/payment/${idStudentSchool}`,
+                          {
+                            method: 'get',
+                            headers: { 'Authorization': localStorage.getItem(token) }
+                          }
+  );
+  const res = await response.json();
+  return res; 
+}
+async function getEvent(idStudentSchool) {
+  const response = await fetch(
+                        `${host}/event/${idStudentSchool}`,
+                          {
+                            method: 'get',
+                            headers: { 'Authorization': localStorage.getItem(token) }
+                          }
+  );
+  const res = await response.json();
+  return res; 
+}
+
 export { login,
          getTeachers,
          getChildren,
@@ -200,4 +223,6 @@ export { login,
          getAssistance,
          getParents,
          getCourses,
-         getExams }
+         getExams,
+         getPayment,
+         getEvent}
