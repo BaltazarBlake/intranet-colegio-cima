@@ -14,7 +14,7 @@
                   img(:src='data.url_imagen' @error='detectedImages(data)').profile__user-image.parent
                 .profile__description.row.main-center
                   .col-xs-12
-                    h1.font-size-large {{data.nombre}} {{data.apellido}}
+                    h1.font-size-large {{data.nombre}} {{data.apellidos}}
                   .col-xs-12
                     h2.font-size-small ({{data.descripcion}})
                   .col-xs-12

@@ -199,6 +199,7 @@ async function getPayment(idStudentSchool) {
   const res = await response.json();
   return res; 
 }
+
 async function getEvent(idStudentSchool) {
   const response = await fetch(
                         `${host}/event/${idStudentSchool}`,
@@ -209,6 +210,19 @@ async function getEvent(idStudentSchool) {
   );
   const res = await response.json();
   return res; 
+}
+
+async function updateFamilyProfile(idFamily,name,lastname,dni,phone,email,address){
+  const response = await fetch(
+                          `${host}/family/profile/${idFamily}`,
+                          {
+                            method: 'post',
+                            headers: { 'Authorization': localStorage.getItem(token) },
+                            body: `name=${name}&lastname=${lastname}&dni=${dni}&phone=${phone}&email=${email}&address=${address}`,
+                          }
+  );
+  const res = await response.json();
+  return res;  
 }
 
 export { login,
@@ -225,4 +239,5 @@ export { login,
          getCourses,
          getExams,
          getPayment,
-         getEvent}
+         getEvent,
+         updateFamilyProfile}
