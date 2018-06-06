@@ -51,6 +51,7 @@ export default {
         res = JSON.parse(localStorage.getItem('cima-estudiante-payment'));
       }
       this.report = res;
+      console.log("Test");
     },
   }
 }
