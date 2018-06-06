@@ -125,6 +125,7 @@ export default{
       localStorage.removeItem('cima-estudiante-profesores');
       localStorage.removeItem('cima-parent-profile');
       localStorage.removeItem('cima-estudiante-events');
+      localStorage.removeItem('cima-estudiante-payment');
       this.$router.replace('/');
     }
   }
