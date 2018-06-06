@@ -90,6 +90,11 @@ export default{
       this.name = `${report.nombre} ${report.apellido}`;
       this.navList = document.getElementById('navList');      
       this.nivel = report.idnivel;
+      console.log(this.nivel);
+      console.log(this.nivel);
+      console.log(this.nivel);
+      console.log(this.nivel);
+      console.log(this.nivel);
     },
     render() {
       //  Breakpoint
