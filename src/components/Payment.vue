@@ -7,7 +7,7 @@
       .container.target
         .row         
           .col-xs-12
-            .table
+            .table.shadow-1 
               .table-row.table-header
                 .table-row-item Descripción
                 .table-row-item Fecha Vencimiento
@@ -16,11 +16,11 @@
                 .table-row-item Estado
               template(v-for='data in report')
                 .table-row
-                  .table-row-item(data-header='Descripción') {{data.descripcion}}
-                  .table-row-item(data-header='Fecha Vencimiento') {{data.fechavencimiento}}
-                  .table-row-item(data-header='Monto') {{data.monto}}
-                  .table-row-item(data-header='Monto Pagado') {{data.montopagado}}
-                  .table-row-item(data-header='Estado') {{data.estado}}
+                  .table-row-item.font-size-small(data-header='Descripción') {{data.descripcion}}
+                  .table-row-item.font-size-small(data-header='Fecha Vencimiento') {{data.fechavencimiento}}
+                  .table-row-item.font-size-small(data-header='Monto') {{data.monto}}
+                  .table-row-item.font-size-small(data-header='Monto Pagado') {{data.montopagado}}
+                  .table-row-item.font-size-small(data-header='Estado') {{data.estado}}
     template(v-else)
       spinner
 </template>
