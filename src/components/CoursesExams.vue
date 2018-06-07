@@ -34,7 +34,7 @@
             .col-xs
               strong.font-size-x-large {{detailExam.course}}
             .col-xs
-              strong(:class="detailExam.mean >= detailExam.minimumNote? 'green':'red'").course__tag.m-b-0 PROMEDIO: {{detailExam.mean}}
+              strong(:class="detailExam.mean >= detailExam.minimumNote? 'green':'red'").sticker.m-b-0 PROMEDIO: {{detailExam.mean}}
         template(slot='body')
           .row
             .col-xs-12
@@ -51,7 +51,7 @@
                               .col-xs.col-s
                                 strong.tag.font-size-regular PESO: {{data.peso}}%
                               .col-xs-12.col-s.m-t.m-b
-                                strong(:class="data.promedio >= 11? 'green':'red'").course__tag.font-size-regular PROMEDIO: {{data.promedio}}
+                                strong(:class="data.promedio >= 11? 'green':'red'").sticker.font-size-regular PROMEDIO: {{data.promedio}}
                         .col-xs-12
                           h1.font-size-regular EVALUACIONES
                         template(v-for='exam in data.examenes')
@@ -68,7 +68,7 @@
                                   small Instrumento:
                                   h1.font-size-regular {{exam.instrumento}}
                                 .col-xs-12
-                                  strong.course__tag(:class="exam.nota >= 11? 'green':'red'") Nota: {{exam.nota}}
+                                  strong.sticker(:class="exam.nota >= 11? 'green':'red'") Nota: {{exam.nota}}
 
       template(v-else)
         .m-t-s

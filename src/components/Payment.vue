@@ -20,7 +20,7 @@
                   .table-row-item.font-size-small(data-header='Fecha Vencimiento') {{data.fechavencimiento}}
                   .table-row-item.font-size-small(data-header='Monto') {{data.monto}}
                   .table-row-item.font-size-small(data-header='Monto Pagado') {{data.montopagado}}
-                  .table-row-item.font-size-small(data-header='Estado') {{data.estado}}
+                  .table-row-item.font-size-small.sticker(data-header='Estado', :class="colorState(data.estado)") {{data.estado}}
     template(v-else)
       spinner
 </template>
@@ -53,6 +53,15 @@ export default {
       this.report = res;
       console.log("Test");
     },
+    colorState(el) {
+      let classColor;
+      if (el == 'CANCELADO') {
+        classColor = 'green';
+      } else {
+        classColor = 'red';
+      }
+      return classColor;
+    }
   }
 }
 </script>

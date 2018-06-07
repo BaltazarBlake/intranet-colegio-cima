@@ -17,10 +17,10 @@
                 h2 {{exams.merito_grado}}
               template(v-if='idMod == 10')
                 .col-xs-12.d-f.m-b
-                  strong.course__tag.font-size-regular NOTA BASE 20: {{exams.nota_20}}
+                  strong.sticker.font-size-regular NOTA BASE 20: {{exams.nota_20}}
               template(v-else)
                 .col-xs-12.d-f.m-b
-                  strong.course__tag.font-size-regular PUNTAJE {{exams.puntaje}}
+                  strong.sticker.font-size-regular PUNTAJE {{exams.puntaje}}
               .col-xs-12.m-b
                 .row
                   .col-xs-4

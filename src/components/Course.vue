@@ -4,7 +4,7 @@
       .col-xs-12.course__header
         h1.font-size-large.text--center {{data.curso}}
       .col-xs-12
-        strong(:class="data.promedio >= data.notaminima? 'green':'red'").course__tag.m-b PROMEDIO: {{data.promedio}}
+        strong(:class="data.promedio >= data.notaminima? 'green':'red'").sticker.m-b PROMEDIO: {{data.promedio}}
       .col-xs-12
         .profile__wrapper-image.small
           img(:src="'http://docente.cima.com.pe:8096/v4cima/vista/fotos/prf'+data.iddocente+'.jpg'", :alt="data.docente").profile__user-image

@@ -16,9 +16,9 @@
                 .col-xs-12.col-xm-3
                   .row.main-center.cross-center
                     .col-xs-12.col-xm-6.d-f
-                      strong.course__tag.green.font-size-regular.m-b PUNTAJE {{report.merito_general}}
+                      strong.sticker.font-size-regular.m-b PUNTAJE {{report.merito_general}}
                     .col-xs-12.col-xm-6.d-f
-                      strong.course__tag.green.font-size-regular.m-b PUNTAJE BASE 20: {{report.nota_20}}
+                      strong.sticker.font-size-regular.m-b PUNTAJE BASE 20: {{report.nota_20}}
                 .col-xs-12.col-xm-3
                   .row.main-center
                     .col-xs-6
@@ -52,9 +52,9 @@
                   .col-xs-12.course__header
                     h1.font-size-large {{data.asignatura}}
                   .col-xs-12.m-b
-                    strong.course__tag.font-size-regular PUNTAJE {{data.puntaje}}
+                    strong.sticker.font-size-regular PUNTAJE {{data.puntaje}}
                   .col-xs-12.m-b
-                    strong.course__tag.font-size-regular PUNTAJE BASE 20: {{data.nota}}
+                    strong.sticker.font-size-regular PUNTAJE BASE 20: {{data.nota}}
                   .col-xs-12.m-b
                     .row
                       .col-xs-4
@@ -85,7 +85,7 @@
       template(slot='body')
         .row
           .col-xs-12
-            .table
+            .table.shadow-1
               .table-row.table-header
                 .table-row-item N° de Preg.
                 .table-row-item Rpta. Exam.
