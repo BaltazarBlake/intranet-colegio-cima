@@ -113,6 +113,7 @@ export default {
       if (!localStorage.getItem("cima-estudiante-cursos")) {
         let data = JSON.parse(localStorage.getItem("cima-estudiante"));
         res = await getCourses(data.idalumnocolegio);
+        res = res.data;
         localStorage.setItem("cima-estudiante-cursos", JSON.stringify(res));
       } else {
         res = JSON.parse(localStorage.getItem("cima-estudiante-cursos"));

@@ -129,6 +129,7 @@ export default {
       idTurn: null,
       turn: null,
       justify: null,
+      test: null,
       showModalJustify: true,
     }
   },
@@ -157,31 +158,33 @@ export default {
       if(!localStorage.getItem('cima-estudiante-asistencia')){
         let data = JSON.parse(localStorage.getItem('cima-estudiante'));
         res = await getAssistance(data.idalumnocolegio);
-        res = res.assistance;        
-        localStorage.setItem('cima-estudiante-asistencia',JSON.stringify(res));        
+        this.report = res.data;
+        localStorage.setItem('cima-estudiante-asistencia',JSON.stringify(this.report));        
       }else{
-        res = JSON.parse(localStorage.getItem('cima-estudiante-asistencia'));
+        this.report = JSON.parse(localStorage.getItem('cima-estudiante-asistencia'));
       }
+
+      // this.report = res;
      
       this.idTurn = localStorage.getItem('idTurn');
 
-      this.report = [];
-      for (let i = 0; i < res.length; i++) {
-        this.report[i] = res[i].map(data => {
-          return {
-            id_asistencia: data.id_asistencia,
-            numero_dia: data.numero_dia,
-            mes: data.mes,
-            hora_turno: this.idTurn == 1 ? data.hora_mañana : data.hora_tarde,
-            hora_opcional: this.idTurn == 1 ? data.hora_tarde : data.hora_mañana,
-            estado: this.idTurn == 1 ? data.estado_mañana : data.estado_tarde,
-            nro_dia: data.nro_dia,
+      // this.report = [];
+      // for (let i = 0; i < res.length; i++) {
+      //   this.report[i] = res[i].map(data => {
+      //     return {
+      //       id_asistencia: data.id_asistencia,
+      //       numero_dia: data.numero_dia,
+      //       mes: data.mes,
+      //       hora_turno: this.idTurn == 1 ? data.hora_mañana : data.hora_tarde,
+      //       hora_opcional: this.idTurn == 1 ? data.hora_tarde : data.hora_mañana,
+      //       estado: this.idTurn == 1 ? data.estado_mañana : data.estado_tarde,
+      //       nro_dia: data.nro_dia,
 
-            nro_mes: data.nro_mes,
-            nro_anio: data.nro_year,
-          };
-        });
-      }
+      //       nro_mes: data.nro_mes,
+      //       nro_anio: data.nro_year,
+      //     };
+      //   });
+      // }
 
       this.report.reverse();
     },

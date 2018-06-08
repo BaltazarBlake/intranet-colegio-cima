@@ -1,13 +1,14 @@
 import {host,token} from '../cfg/core';
 
-async function login(user,password){
+async function login(username,password){
+  let user = {username,password};
   try{
     const response = await fetch(
-                            `${host}/login`,
+                            `${host}/auth`,
                             {
                             method: 'post',
-                            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                            body: `user=${user}&password=${password}`,
+                            headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify(user),
                           });
     const res = await response.json();
     return res;
@@ -19,10 +20,10 @@ async function login(user,password){
 async function getTeachers(id){
   try{
     const response = await fetch(
-                            `${host}/teachers/${id}`,
+                            `${host}/student/teachers/${id}`,
                             {
                               method:'get',
-                              headers:{'Authorization':localStorage.getItem(token)}
+                              headers:{'authorization':localStorage.getItem(token)}
                             }       
     );
     const res = await response.json();
@@ -35,10 +36,10 @@ async function getTeachers(id){
 async function getChildren(idFamilyGuy){
   try{
     const response = await fetch(
-                            `${host}/children/${idFamilyGuy}`,
+                            `${host}/family/children/${idFamilyGuy}`,
                             {
                               method:'get',
-                              headers:{'Authorization':localStorage.getItem(token)}
+                              headers:{'authorization':localStorage.getItem(token)}
                             }
     );
     const res = await response.json();
@@ -51,10 +52,10 @@ async function getChildren(idFamilyGuy){
 async function getProfile(user){
   try{
     const response = await fetch(
-                            `${host}/profile/${user}`,
+                            `${host}/student/profile/${user}`,
                             {
                               method:'get',
-                              headers:{'Authorization':localStorage.getItem(token)}
+                              headers:{'authorization':localStorage.getItem(token)}
                             }
     );
     const res = await response.json();
@@ -67,10 +68,10 @@ async function getProfile(user){
 async function getSchedule(idStudentSchool){
   try{
     const response = await fetch(
-                            `${host}/schedule/${idStudentSchool}`,
+                            `${host}/student/schedule/${idStudentSchool}`,
                             {
                               method:'get',
-                              headers:{'Authorization':localStorage.getItem(token)}
+                              headers:{'authorization':localStorage.getItem(token)}
                             }
     );
     const res = await response.json();
@@ -83,10 +84,10 @@ async function getSchedule(idStudentSchool){
 async function getJustify(idStudentSchool,date){
   try{
     const response = await fetch(
-                            `${host}/justify/${idStudentSchool}/${date}`,
+                            `${host}/student/justify/${idStudentSchool}/${date}`,
                             {
                               method:'get',
-                              headers:{'Authorization':localStorage.getItem(token)}
+                              headers:{'authorization':localStorage.getItem(token)}
                             }
     );
     const res = await response.json();
@@ -99,10 +100,10 @@ async function getJustify(idStudentSchool,date){
 async function getClassmates(idStudentSchool){
   try{
     const response = await fetch(
-                            `${host}/classmates/${idStudentSchool}`,
+                            `${host}/student/classmates/${idStudentSchool}`,
                             {
                               method:'get',
-                              headers:{'Authorization':localStorage.getItem(token)}
+                              headers:{'authorization':localStorage.getItem(token)}
                             }
     );
     const res = await response.json();
@@ -115,10 +116,10 @@ async function getClassmates(idStudentSchool){
 async function getObservations(idStudentSchool){
   try{
     const response = await fetch(
-                            `${host}/observations/${idStudentSchool}`,
+                            `${host}/student/observations/${idStudentSchool}`,
                             {
                               method:'get',
-                              headers:{'Authorization':localStorage.getItem(token)}
+                              headers:{'authorization':localStorage.getItem(token)}
                             }
     );
     const res = await response.json();
@@ -130,10 +131,10 @@ async function getObservations(idStudentSchool){
 
 async function getAssistance(idStudentSchool){
   const response = await fetch(
-                          `${host}/assistance/${idStudentSchool}`,
+                          `${host}/student/assistance/${idStudentSchool}`,
                           {
                             method:'get',
-                            headers:{'Authorization':localStorage.getItem(token)}
+                            headers:{'authorization':localStorage.getItem(token)}
                           }
   );
   const res = await response.json();
@@ -142,10 +143,10 @@ async function getAssistance(idStudentSchool){
 
 async function getParents(idStudentSchool) {
   const response = await fetch(
-                          `${host}/parents/${idStudentSchool}`,
+                          `${host}/student/parents/${idStudentSchool}`,
                           {
                             method: 'get',
-                            headers:{'Authorization':localStorage.getItem(token)}
+                            headers:{'authorization':localStorage.getItem(token)}
                           }
   );
   const res = await response.json();
@@ -154,10 +155,10 @@ async function getParents(idStudentSchool) {
 
 async function getCourses(idStudentSchool) {
   const response = await fetch(
-                        `${host}/courses/${idStudentSchool}`,
+                        `${host}/student/courses/${idStudentSchool}`,
                           {
                             method: 'get',
-                            headers: { 'Authorization': localStorage.getItem(token) }
+                            headers: { 'authorization': localStorage.getItem(token) }
                           }
   );
   const res = await response.json();
@@ -166,10 +167,10 @@ async function getCourses(idStudentSchool) {
 
 async function getExams(idStudentSchool) {
   const response = await fetch(
-                        `${host}/exams/${idStudentSchool}`,
+                        `${host}/student/exams/${idStudentSchool}`,
                           {
                             method: 'get',
-                            headers: { 'Authorization': localStorage.getItem(token) }
+                            headers: { 'authorization': localStorage.getItem(token) }
                           }
   );
   const res = await response.json();
@@ -181,7 +182,7 @@ async function getParentProfile(idParent) {
                         `${host}/family/profile/${idParent}`,
                           {
                             method: 'get',
-                            headers: { 'Authorization': localStorage.getItem(token) }
+                            headers: { 'authorization': localStorage.getItem(token) }
                           }
   );
   const res = await response.json();
@@ -190,10 +191,10 @@ async function getParentProfile(idParent) {
 
 async function getPayment(idStudentSchool) {
   const response = await fetch(
-                        `${host}/payment/${idStudentSchool}`,
+                        `${host}/student/payment/${idStudentSchool}`,
                           {
                             method: 'get',
-                            headers: { 'Authorization': localStorage.getItem(token) }
+                            headers: { 'authorization': localStorage.getItem(token) }
                           }
   );
   const res = await response.json();
@@ -202,10 +203,10 @@ async function getPayment(idStudentSchool) {
 
 async function getEvent(idStudentSchool) {
   const response = await fetch(
-                        `${host}/event/${idStudentSchool}`,
+                        `${host}/student/events/${idStudentSchool}`,
                           {
                             method: 'get',
-                            headers: { 'Authorization': localStorage.getItem(token) }
+                            headers: { 'authorization': localStorage.getItem(token) }
                           }
   );
   const res = await response.json();
@@ -216,9 +217,12 @@ async function updateFamilyProfile(idFamily,name,lastname,dni,phone,email,addres
   const response = await fetch(
                           `${host}/family/profile/${idFamily}`,
                           {
-                            method: 'post',
-                            headers: { 'Authorization': localStorage.getItem(token) },
-                            body: `name=${name}&lastname=${lastname}&dni=${dni}&phone=${phone}&email=${email}&address=${address}`,
+                            method: 'put',
+                            headers: { 
+                              'authorization': localStorage.getItem(token),
+                              'Content-Type' : 'application/json',
+                            },
+                            body: {},
                           }
   );
   const res = await response.json();

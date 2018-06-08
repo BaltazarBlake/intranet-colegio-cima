@@ -65,23 +65,23 @@ export default{
         if(res.success){
           const myToken = res.token;
           let type = jwt(myToken).type;
-          const idUser = jwt(myToken).user;
+          const idUser = jwt(myToken).login;
           this.showSpinner();
-          localStorage.setItem(token,myToken);
 
+          localStorage.setItem(token,myToken);
           if (type === 'student') {
             let report = await getProfile(idUser);
-            localStorage.setItem('cima-estudiante',JSON.stringify(report));
+            localStorage.setItem('cima-estudiante',JSON.stringify(report.data));
             this.$router.replace('/Dashboard',() => {
               this.user     = '';
               this.password = '';
             });
           } else {
-            const idUser = jwt(myToken).idUser;
+            const idUser = jwt(myToken).id;
             let report = await getChildren(idUser);
             let profile = await getParentProfile(idUser);
-            localStorage.setItem('cima-children', JSON.stringify(report));
-            localStorage.setItem('cima-parent-profile',JSON.stringify(profile));
+            localStorage.setItem('cima-children', JSON.stringify(report.data));
+            localStorage.setItem('cima-parent-profile',JSON.stringify(profile.data));
             this.$router.replace('/Familyguy', () => {
               this.user     = '';
               this.password = '';

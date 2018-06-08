@@ -42,6 +42,7 @@ export default {
       if(!localStorage.getItem('cima-estudiante-profesores')){
         let data = JSON.parse(localStorage.getItem('cima-estudiante'));
         res = await getTeachers(data.idalumnocolegio);
+        res = res.data;
         localStorage.setItem('cima-estudiante-profesores',JSON.stringify(res));
       }else{
         res = JSON.parse(localStorage.getItem('cima-estudiante-profesores'));

@@ -1,7 +1,7 @@
 <template lang="pug">
   article.calendar
     header.calendar__header
-      h1.font-size-large {{data[0].mes}}
+      h1.font-size-large {{data.mes}}
       .calendar__header-days
         .calendar__header-day
           h2.font-size-small LUN.
@@ -18,9 +18,9 @@
         .calendar__header-day
           h2.font-size-small DOM.
       .calendar__body        
-        template(v-for='day in data')
+        template(v-for='day in data.asistencia')
           .calendar__day
-            small(:class='colorState(day)' @click='viewJustify(day)').calendar__day-number {{day.numero_dia}}
+            small(:class='colorState(day)' @click='viewJustify(day)').calendar__day-number(v-text="getDay(day.dia)")
             small.font-size-small {{viewHour(day)}}
 </template>
 
@@ -54,25 +54,33 @@ export default {
     colorState(day) {
       let classColor;
 
-      if (day.hora_turno != 'x') {
+      if (day.dia != 'auxiliar') {
         if (this.idTurn == 1) {
           // Turno mañana
           if (this.turn) {
-            if (day.estado == '[F]' && day.hora_turno == '') {
+            if (day.estado_am == '[F]' && day.am == '') {
               classColor = 'absence';
-            } else if (day.estado == '[T]' && day.hora_turno != '') {
+            } else if (day.estado_am == '[T]' && day.am != '') {
               classColor = 'delay';
-            } else if (day.estado == '' && day.hora_turno != '') {
+            } else if (day.estado_am == '' && day.am != '') {
               classColor = 'arrive';
             }
-          // Turno tarde
+          // si viene en turno tarde
           } else {
             if (!this.turn) {
-              if (day.hora_opcional == '[F]') {
+              if (day.estado_pm == '' && day.pm == '[F]') {
                 classColor = '';
-              } else {
+              } else if (day.estado_pm == '' && day.pm != '[F]') {
                 classColor = 'arrive';
-              }              
+              }
+            }
+          }
+        } else if(this.idTurn == 2) {
+          if(!this.turn) {
+            // codigo para turno tarde
+          } else {
+            if (this.turn) {
+              
             }
           }
         }
@@ -85,51 +93,51 @@ export default {
       return classColor;
     },
 
+    getDay(day) {
+      if (day == 'auxiliar') {
+        return '';
+      } else {
+        return day;
+      }
+    },
+
     viewHour(day) {
       let hour;
       if (this.idTurn == 1) {
         if (this.turn) {
-          if (day.hora_turno != '') {
-            hour = day.hora_turno;
+          if (day.am != '') {
+            hour = day.am;
           } else {
             hour = '-';
           }
         } else {
-          if (day.hora_opcional != '[F]') {
-            hour = day.hora_opcional;
+          if (day.pm != '[F]') {
+            hour = day.pm;
           } else {
             hour = '-';
           }
         }
       } else {
         if (!this.turn) {
-          if (day.hora_turno != '[F]') {
-            hour = day.hora_turno;
+          if (day.am != '[F]') {
+            hour = day.am;
           } else {
             hour = '';
           }
         } else {
-          if (day.hora_opcional != '') {
-            hour = day.hora_opcional;
+          if (day.pm != '') {
+            hour = day.pm;
           } else {
             hour = '';
           }
         }
       }
 
-      if (day.nro_dia == undefined) {
-        hour = '';
-      }
-
-      if (day.hora_turno == 'x' && day.nro_dia != undefined) {
-        hour = '-';
-      }
-
       return hour;
     },
 
     async viewJustify(day) {
-      if (day.nro_dia != undefined && day.nro_dia != 0 && day.estado != undefined) {
+      if (day.dia != undefined && day.dia != 0 && day.estado_am != undefined) {
         if (this.turn) {
           const myToken = localStorage.getItem(token);
           const idUser = jwt(myToken).idUser;

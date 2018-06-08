@@ -46,6 +46,7 @@ export default {
       if(!localStorage.getItem('cima-estudiante-payment')){
         let data = JSON.parse(localStorage.getItem('cima-estudiante'));      
         res = await getPayment(data.idalumnocolegio);
+        res = res.data;
         localStorage.setItem('cima-estudiante-payment',JSON.stringify(res));
       }else{
         res = JSON.parse(localStorage.getItem('cima-estudiante-payment'));

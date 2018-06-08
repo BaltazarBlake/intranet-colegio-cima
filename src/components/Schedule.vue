@@ -56,11 +56,12 @@ export default {
       if(!localStorage.getItem('cima-estudiante-horario')){
         let data = JSON.parse(localStorage.getItem('cima-estudiante'));
         res = await getSchedule(data.idalumnocolegio);
+        res = res.data;
         localStorage.setItem('cima-estudiante-horario',JSON.stringify(res));
       }else{
         res = JSON.parse(localStorage.getItem('cima-estudiante-horario'));
       }
-      this.report = res.horary;
+      this.report = res;
       this.heigth_horas = 100 / this.report.horas.length;
       this.width_dias = 100 / this.report.array_dias.length;
     },
