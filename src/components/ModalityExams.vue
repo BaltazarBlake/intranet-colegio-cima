@@ -55,6 +55,7 @@ export default {
         let data = JSON.parse(localStorage.getItem('cima-estudiante'));
         res = await getExams(data.idalumnocolegio);
         if(res!=null){
+          res = res.data;
           res = this.formatData(res);
           localStorage.setItem('cima-reporte-simulacros',JSON.stringify(res));
         }else{
