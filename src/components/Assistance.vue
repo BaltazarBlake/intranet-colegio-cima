@@ -34,13 +34,16 @@
             .m-t-s
               spinner
     modal
-      template(slot='title') Justificación
+      template(slot='title')
+        .row.cross-center
+          .col-xs-12
+            strong.font-size-x-large Justificación
       template(slot='body')
         template(v-if='justify')
           .row
             .col-xs-12.col-xm-4
               .card.m-b
-                template(v-if='justify.report == 1')
+                template(v-if='justify.report == null')
                   .row
                     .col-xs-12
                       h1.font-size-regular NO TIENE JUSTIFICACIÓN
@@ -48,10 +51,10 @@
                   .row
                     .col-xs-12.m-b-2
                       small.font-size-regular Fecha:
-                      h1.font-size-regular {{justify.date}}
+                      h1.font-size-regular {{justify.day}} de {{justify.month}}
                     .col-xs-12.m-b-2
                       small.font-size-regular Descripción:
-                      h1.font-size-regular {{justify.report[0].descripcion}}
+                      h1.font-size-regular {{justify.report}}
         template(v-else)
           spinner
     report
@@ -149,7 +152,6 @@ export default {
   async mounted() {
     await this.getData();
     this.checkTurn();
-    // this.getDataStudent();
   },
 
   methods: {
@@ -163,28 +165,8 @@ export default {
       }else{
         this.report = JSON.parse(localStorage.getItem('cima-estudiante-asistencia'));
       }
-
-      // this.report = res;
      
       this.idTurn = localStorage.getItem('idTurn');
-
-      // this.report = [];
-      // for (let i = 0; i < res.length; i++) {
-      //   this.report[i] = res[i].map(data => {
-      //     return {
-      //       id_asistencia: data.id_asistencia,
-      //       numero_dia: data.numero_dia,
-      //       mes: data.mes,
-      //       hora_turno: this.idTurn == 1 ? data.hora_mañana : data.hora_tarde,
-      //       hora_opcional: this.idTurn == 1 ? data.hora_tarde : data.hora_mañana,
-      //       estado: this.idTurn == 1 ? data.estado_mañana : data.estado_tarde,
-      //       nro_dia: data.nro_dia,
-
-      //       nro_mes: data.nro_mes,
-      //       nro_anio: data.nro_year,
-      //     };
-      //   });
-      // }
 
       this.report.reverse();
     },
@@ -206,7 +188,7 @@ export default {
     },
 
     viewReport() {
-      this.showModalJustify = false;
+      // this.showModalJustify = false;
       EventBus.$emit('showReport');
       this.getDataStudent();
     },

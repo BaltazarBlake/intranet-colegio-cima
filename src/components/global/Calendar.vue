@@ -20,7 +20,7 @@
       .calendar__body        
         template(v-for='day in data.asistencia')
           .calendar__day
-            small(:class='colorState(day)' @click='viewJustify(day)').calendar__day-number(v-text="getDay(day.dia)")
+            small(:class='colorState(day)' @click='viewJustify(day, data.mes)').calendar__day-number(v-text="getDay(day.dia)")
             small.font-size-small {{viewHour(day)}}
 </template>
 
@@ -136,19 +136,14 @@ export default {
       return hour;
     },
 
-    async viewJustify(day) {
-      if (day.dia != undefined && day.dia != 0 && day.estado_am != undefined) {
+    viewJustify(day, month) {
+      if (day.dia != undefined && day.dia != 0 && day.estado_am != undefined && this.showModalJustify == true) {
         if (this.turn) {
-          const myToken = localStorage.getItem(token);
-          const idUser = jwt(myToken).idUser;
-          let date = `${day.nro_anio}-${day.nro_mes}-${day.numero_dia}`;
-          let res = await getJustify(idUser, date);
-          this.report = res;
           this.viewModal();
-          // let send = this.report;
           let send = {
-            date,
-            report: this.report
+            report: day.justificacion,
+            month,
+            day: day.dia,
           };
           EventBus.$emit('viewJustify', send);
         }
@@ -158,10 +153,6 @@ export default {
     viewModal() {
       EventBus.$emit('showModal', this.isVisible);
     },
-
-    // getJustify(data) {
-    //   EventBus.$on('viewJustify', data);
-    // },
 
   }
 }

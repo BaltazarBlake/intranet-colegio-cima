@@ -31,7 +31,7 @@
       template(v-if='detailExam')  
         template(slot='title')
           .row.cross-center
-            .col-xs
+            .col-xs-12.col-s
               strong.font-size-x-large {{detailExam.course}}
             .col-xs
               strong(:class="detailExam.mean >= detailExam.minimumNote? 'green':'red'").sticker.m-b-0 PROMEDIO: {{detailExam.mean}}
