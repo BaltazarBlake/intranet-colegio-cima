@@ -18,13 +18,18 @@
                       small A LAS 
                       strong {{data.hora}} 
                       small HORAS
+                      CountDown(:date='data.fecha', :hour='data.hora')
 
 </template>
 
 <script>
 import { formatDate } from "../functions/formatDate";
 import {getEvent} from '../functions/fetchFunctions';
+import CountDown from "./global/CountDown";
 export default {
+  components: {
+    CountDown
+  },
   data() {
     return {
       report:null,
