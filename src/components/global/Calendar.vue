@@ -65,14 +65,22 @@ export default {
             } else if (day.estado_am == '' && day.am != '') {
               classColor = 'arrive';
             }
-          // Turno tarde
+          // si viene en turno tarde
           } else {
             if (!this.turn) {
-              if (day.estado_pm == '' && day.pm != '[F]') {
+              if (day.estado_pm == '' && day.pm == '[F]') {
                 classColor = '';
-              } else if (day.estado_pm == '' && day.pm != '') {
+              } else if (day.estado_pm == '' && day.pm != '[F]') {
                 classColor = 'arrive';
               }
+            }
+          }
+        } else if(this.idTurn == 2) {
+          if(!this.turn) {
+            // codigo para turno tarde
+          } else {
+            if (this.turn) {
+              
             }
           }
         }
@@ -125,19 +133,11 @@ export default {
         }
       }
 
-      // if (day.dia == 'auxiliar') {
-      //   hour = '';
-      // }
-
-      if (day.am == 'x' && day.nro_dia != undefined) {
-        hour = '-';
-      }
-
       return hour;
     },
 
     async viewJustify(day) {
-      if (day.nro_dia != undefined && day.nro_dia != 0 && day.estado != undefined) {
+      if (day.dia != undefined && day.dia != 0 && day.estado_am != undefined) {
         if (this.turn) {
           const myToken = localStorage.getItem(token);
           const idUser = jwt(myToken).idUser;
