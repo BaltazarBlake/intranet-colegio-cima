@@ -2,8 +2,8 @@
   div
     .row
       .col-xs-12
-        template(v-if="finalMessage")
-          strong.yellow {{finalMessage}}
+        template(v-if="finalMessage && status > 0")
+          strong(:class="remainTime <= -10? 'red':'yellow'") {{finalMessage}}
         template(v-else)
           strong.yellow Quedan 
           strong(v-text="days").yellow
@@ -15,12 +15,10 @@
           strong(v-text="seconds").yellow
           strong.yellow s
 
-      //- .col-xs-12
-        //- h2 {{remainTime}}
-
 </template>
 
 <script>
+import { EventBus } from '../../event-bus.js';
 export default {
   props: ["date", "hour"],
   name: "CountDown",
@@ -30,7 +28,10 @@ export default {
       deadline: null,
       now: null,
       remainTime: null,
+      endTime: null,
       finalMessage: null,
+      status: null,
+
     };
   },
   mounted() {
@@ -39,19 +40,22 @@ export default {
   },
   methods: {
     getDeadline() {
-      this.deadline = new Date(`${this.date}T${this.hour}`);
-      // this.deadline = new Date("2018-06-09T00:43:00");
+      // this.deadline = new Date(`${this.date}T${this.hour}`);
+      this.deadline = new Date("2018-06-09T10:49:00");
     },
     ready() {
       const timerUpdate = setInterval(() => {
         this.now = new Date();
         this.remainTime = (new Date(this.deadline) - this.now + 1000) / 1000;
-
+        EventBus.$emit('listenCountdown', this.status = 0);
         if (this.remainTime <= 1) {
-          this.finalMessage = '¡El evento ya inició!'
-        } else if (this.remainTime <= -7200) {
-          clearInterval(timerUpdate);
-          this.finalMessage = 'El evento ya termino';
+          this.finalMessage = '¡El evento ya inició!';          
+          EventBus.$emit('listenCountdown', this.status = 1);
+          if (this.remainTime <= -10) {
+            clearInterval(timerUpdate);
+            EventBus.$emit('listenCountdown', this.status = 2);
+            this.finalMessage = 'El evento ya termino';
+          }
         }
       }, 1000);
     }
@@ -69,12 +73,6 @@ export default {
     days() {
       return Math.floor(this.remainTime / (3600 * 24));
     },
-
-    endTime() {
-      if (this.remainTime <= 1) {
-        
-      }
-    }
   }
 };
 </script>
