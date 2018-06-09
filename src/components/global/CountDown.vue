@@ -2,53 +2,64 @@
   div
     .row
       .col-xs-12
-        span 1d:04h:15m:00s
+        h1(v-text="days")
+        h1(v-text="hours")
+        h1(v-text="minutes")
+        h1(v-text="seconds")
 </template>
 
 <script>
 export default {
-  props: ['date', 'hour'],
-  name: 'CountDown',
+  props: ["date", "hour"],
+  name: "CountDown",
   data() {
     return {
       report: null,
       deadline: null,
-    }
+      now: null,
+      remainTime: null
+    };
   },
   mounted() {
     this.getDeadline();
+    this.ready();
   },
   methods: {
     getDeadline() {
-      this.deadline = new Date(`${this.date}T${this.hour}`);
+      // this.deadline = new Date(`${this.date}T${this.hour}`);
+      this.deadline = new Date("2018-06-08T20:49:00");
     },
-    getRemainTime(deadline) {
-      let now = new Date(),
-          remainTime = (new Date(deadline) - now + 1000) / 1000,
-          remainSeconds = ('0' + Math.floor(remainTime % 60)).slice(-2),
-          remainMinutes = ('0' + Math.floor(remainTime / 60 % 60)).slice(-2),
-          remainHours = ('0' + Math.floor(remainTime / 3600 % 24)).slice(-2),
-          remainDays = Math.floor(remainTime / (3600 * 24));
-      return {
-        remainTime,
-        remainSeconds,
-        remainMinutes,
-        remainHours,
-        remainDays,
-      }
-    },
-    countdown(deadline, elem, finalMessage) {
-      const el = document.getElementById(elem);
-      const timerUpdate = setInterval(()=> {
-        let t = this.getRemainTime(deadline);
-        this.report = {
-          days: t.remainDays,
-          hours: t.remainHours,
-          minutes: t.remainMinutes,
-          seconds: t.remainSeconds,
+    ready() {
+      const timerUpdate = setInterval(() => {
+        this.now = new Date();
+        this.remainTime = (new Date(this.deadline) - this.now + 1000) / 1000;
+
+        if (this.remainTime <= 1) {
+          clearInterval(this.ready());
+          console.log('qwerty');
         }
-      })
+      }, 1000);
     }
   },
-}
+  computed: {
+    seconds() {
+      return ('0' + Math.floor(this.remainTime % 60)).slice(-2);
+    },
+    minutes() {
+      return ('0' + Math.floor(this.remainTime / 60 % 60)).slice(-2);
+    },
+    hours() {
+      return ('0' + Math.floor(this.remainTime / 3600 % 24)).slice(-2);
+    },
+    days() {
+      return Math.floor(this.remainTime / (3600 * 24));
+    },
+
+    endTime() {
+      if (this.remainTime <= 1) {
+        
+      }
+    }
+  }
+};
 </script>

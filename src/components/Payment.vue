@@ -44,7 +44,7 @@ export default {
     async getData() {
       let res;
       if(!localStorage.getItem('cima-estudiante-payment')){
-        let data = JSON.parse(localStorage.getItem('cima-estudiante'));      
+        let data = JSON.parse(localStorage.getItem('cima-estudiante'));
         res = await getPayment(data.idalumnocolegio);
         res = res.data;
         localStorage.setItem('cima-estudiante-payment',JSON.stringify(res));
@@ -52,7 +52,6 @@ export default {
         res = JSON.parse(localStorage.getItem('cima-estudiante-payment'));
       }
       this.report = res;
-      console.log("Test");
     },
     colorState(el) {
       let classColor;

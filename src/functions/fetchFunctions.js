@@ -190,8 +190,9 @@ async function getParentProfile(idParent) {
 }
 
 async function getPayment(idStudentSchool) {
+  console.log('fetch', idStudentSchool);
   const response = await fetch(
-                        `${host}/student/payment/${idStudentSchool}`,
+                          `${host}/student/payment/${idStudentSchool}`,
                           {
                             method: 'get',
                             headers: { 'authorization': localStorage.getItem(token) }
