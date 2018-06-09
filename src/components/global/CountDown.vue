@@ -2,10 +2,22 @@
   div
     .row
       .col-xs-12
-        h1(v-text="days")
-        h1(v-text="hours")
-        h1(v-text="minutes")
-        h1(v-text="seconds")
+        template(v-if="finalMessage")
+          strong.yellow {{finalMessage}}
+        template(v-else)
+          strong.yellow Quedan 
+          strong(v-text="days").yellow
+          strong.yellow d:
+          strong(v-text="hours").yellow
+          strong.yellow h:
+          strong(v-text="minutes").yellow
+          strong.yellow m:
+          strong(v-text="seconds").yellow
+          strong.yellow s
+
+      //- .col-xs-12
+        //- h2 {{remainTime}}
+
 </template>
 
 <script>
@@ -17,7 +29,8 @@ export default {
       report: null,
       deadline: null,
       now: null,
-      remainTime: null
+      remainTime: null,
+      finalMessage: null,
     };
   },
   mounted() {
@@ -26,8 +39,8 @@ export default {
   },
   methods: {
     getDeadline() {
-      // this.deadline = new Date(`${this.date}T${this.hour}`);
-      this.deadline = new Date("2018-06-08T20:49:00");
+      this.deadline = new Date(`${this.date}T${this.hour}`);
+      // this.deadline = new Date("2018-06-09T00:43:00");
     },
     ready() {
       const timerUpdate = setInterval(() => {
@@ -35,8 +48,10 @@ export default {
         this.remainTime = (new Date(this.deadline) - this.now + 1000) / 1000;
 
         if (this.remainTime <= 1) {
-          clearInterval(this.ready());
-          console.log('qwerty');
+          this.finalMessage = '¡El evento ya inició!'
+        } else if (this.remainTime <= -7200) {
+          clearInterval(timerUpdate);
+          this.finalMessage = 'El evento ya termino';
         }
       }, 1000);
     }
