@@ -22,7 +22,8 @@
                   .table-row-item.font-size-small(data-header='Monto Pagado') {{data.montopagado}}
                   .table-row-item.font-size-small.sticker(data-header='Estado', :class="colorState(data.estado)") {{data.estado}}
     template(v-else)
-      spinner
+      .m-t-s
+        spinner
 </template>
 
 <script>

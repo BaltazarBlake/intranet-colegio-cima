@@ -24,7 +24,8 @@
                             course(:data='courses')
 
     template(v-else)
-      spinner
+      .m-t-s
+        spinner
 
     //- MODAL
     modal

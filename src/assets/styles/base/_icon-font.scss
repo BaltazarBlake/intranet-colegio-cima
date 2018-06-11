@@ -10,6 +10,8 @@
 
 }
 
+
+
 [data-icon]:before {
   font-family: "cima-preu" !important;
   content: attr(data-icon);
@@ -18,7 +20,7 @@
   font-variant: normal !important;
   text-transform: none !important;
   speak: none;
-  line-height: $line-height;
+  line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -31,7 +33,7 @@
   font-variant: normal !important;
   text-transform: none !important;
   speak: none;
-  line-height: $line-height;
+  line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -68,4 +70,16 @@
 }
 .icon-arrow:before {
   content: "\6b";
+}
+.icon-event:before {
+  content: "\6c";
+}
+.icon-payment:before {
+  content: "\6d";
+}
+.icon-edit:before {
+  content: "\6e";
+}
+.icon-refresh:before {
+  content: "\6f";
 }

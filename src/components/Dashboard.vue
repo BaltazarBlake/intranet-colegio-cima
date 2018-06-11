@@ -16,6 +16,9 @@
         //- section render components
         transition(name='fade' mode='out-in')
           router-view
+        .container
+          button.btn--floating.shadow-2(@click="reload()")
+            i.icon-refresh
     
 </template>
 <script>
@@ -47,6 +50,19 @@ export default{
       localStorage.removeItem('cima-estudiante-events');
       localStorage.removeItem('cima-estudiante-payment');
       this.$router.push("/Familyguy");
+    },
+    reload() {
+      localStorage.removeItem('cima-estudiante-asistencia');
+      localStorage.removeItem('cima-estudiante-classmates');
+      localStorage.removeItem('cima-estudiante-cursos');
+      localStorage.removeItem('cima-reporte-simulacros');
+      localStorage.removeItem('cima-estudiante-observations');
+      localStorage.removeItem('cima-estudiante-parents');
+      localStorage.removeItem('cima-estudiante-horario');
+      localStorage.removeItem('cima-estudiante-profesores');
+      localStorage.removeItem('cima-estudiante-events');
+      localStorage.removeItem('cima-estudiante-payment');
+      location.reload();
     }
   }
 }

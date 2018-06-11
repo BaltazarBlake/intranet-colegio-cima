@@ -8,6 +8,13 @@
     display: flex;
   }
 
+  &__edit {
+    align-self: flex-end;
+    background-color: #ccc;
+    width: 2em;
+    height: 2em;
+  }
+
   &__wrapper-image {
     $size-wrapper: 9em;
     @extend .shadow-1;

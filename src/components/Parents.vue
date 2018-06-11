@@ -9,8 +9,11 @@
           template(v-for='data in report')
             .col-xs-12.col-m-6.d-f
               .profile
+                .row.main-end
+                  .col-xs
+                    button(@click="edit(data)").btn--edit
+                      i.icon-edit
                 .profile__wrapper-image
-                  //- img(src='../assets/logo.png' @error='detectedImages(data.url_imagen)').profile__user-image
                   img(:src='data.url_imagen' @error='detectedImages(data)').profile__user-image.parent
                 .profile__description.row.main-center
                   .col-xs-12
@@ -29,21 +32,54 @@
                   .col-xs-12
                     small Dirección
                     p {{data.direccion}}
-
-
     template(v-else)
       .m-t-s
         spinner
+    modal
+      template(slot='title')
+        .row.cross-center
+          .col-xs-12
+            strong.font-size-x-large Editar información
+      template(slot='body')
+        template(v-if="isEditing")
+          form.row
+            .input-field.col-xs-6
+              label.input-field__label Nombres
+              input(type="text" v-model="isEditing.nombre").input-field__input
+            .input-field.col-xs-6
+              label.input-field__label Apellidos
+              input(type="text" v-model="isEditing.apellidos").input-field__input
+            .input-field.col-xs-12
+              label.input-field__label DNI
+              input(type="text" v-model="isEditing.dni").input-field__input
+            .input-field.col-xs-6
+              label.input-field__label Teléfono
+              input(type="text" v-model="isEditing.telefono").input-field__input
+            .input-field.col-xs-6
+              label.input-field__label Email
+              input(type="email" v-model="isEditing.email").input-field__input
+            .input-field.col-xs-12
+              label.input-field__label Dirección
+              input(type="text" v-model="isEditing.direccion").input-field__input
+            .col-xs
+                button(type="submit").btn--primary Guardar
+
 </template>
 
 <script>
+import { EventBus } from '../event-bus.js';
 import {getParents} from '../functions/fetchFunctions';
+import Modal from './global/Modal';
 import Spinner from './global/Spinner';
 export default {
-  components: {Spinner},
+  components: {
+    Spinner,
+    Modal
+  },
   data() {
     return {
       report: null,
+      isEditing: null,
     }
   },
   async mounted() {
@@ -68,6 +104,11 @@ export default {
       if (this.report[i] != undefined) {
         this.report[i].url_imagen = 'dist/user.png';        
       }
+    },
+
+    edit(data) {
+      EventBus.$emit('showModal', this.isVisible);
+      this.isEditing = data;
     }
   }
 }

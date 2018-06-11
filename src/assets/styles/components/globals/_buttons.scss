@@ -16,15 +16,44 @@
   }
 }
 
+[class^="btn"] {
+  margin-right: 0.3em;
+}
+
+.btn--floating,
 .btn--burger {
   @extend .btn;
   width: 48px;
   height: 48px;
   border-radius: 50%;
   padding: 0;
+}
+
+.btn--floating {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 60px;
+  height: 60px;
+  margin-bottom: $gutter/2;
+  margin-right: $gutter;
+  background-color: $blue-900;
+  color: #FFF;
+  @include z-index(navigation);
+}
+
+.btn--burger {
   @include MQ(L) {
     display: none;
-  }
+  }  
+}
+
+.btn--edit {
+  @extend .btn;
+  width: 2em;
+  height: 2em;
+  border-radius: .3em;
+  background-color: #ccc;
 }
 
 .btn--default {
@@ -43,12 +72,6 @@
     margin-right: $gutter/3;
   }
 }
-
-// .btn--light {
-//   @extend .btn--default;
-//   background-color: $blue-100;
-
-// }
 
 .btn--default--small {
   @extend .btn--default;
@@ -86,6 +109,4 @@
   }
 }
 
-button[class^="btn--"] {
-  margin-right: 0.3em;
-}
+

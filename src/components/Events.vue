@@ -7,8 +7,8 @@
         .container.target
           .row
             template(v-for='data in report')
-              .col-xs-12.col-m-4.col-xl-3
-                article.card--event(:class="getClassStatus()")
+              .col-xs-12.col-m-6.col-xl-4.d-f
+                article.card--event(:class="getClassStatus(data.estado)")
                   .card--event__date
                     strong(v-text='format(data.fecha)').font-size-large.text--uppercase
                   .card--event__description
@@ -17,8 +17,11 @@
                     .card--event__hour
                       small A LAS 
                       strong {{data.hora}} 
-                      small HORAS
+                      small HORAS.
                       CountDown(:date='data.fecha', :hour='data.hora')
+    template(v-else)
+      .m-t-s
+        spinner
 
 </template>
 
@@ -26,10 +29,12 @@
 import { EventBus } from '../event-bus.js';
 import { formatDate } from "../functions/formatDate";
 import {getEvent} from '../functions/fetchFunctions';
+import Spinner from './global/Spinner';
 import CountDown from "./global/CountDown";
 export default {
   components: {
-    CountDown
+    CountDown,
+    Spinner
   },
   data() {
     return {
@@ -62,14 +67,14 @@ export default {
       let date = formatDate(dates[0], dates[1], dates[2]);
       return date;
     },
-    getClassStatus() {
+    getClassStatus(status) {
       let classStatus;
-      if (this.status == 0) {
-        classStatus = '';
-      } else if (this.status == 1) {
+      if (status == 1 && this.status == 1 ) {
         classStatus = 'onload';
-      } else if (this.status == 2) {
+      } else if (status == 0) {
         classStatus = 'complete';
+      } else if (this.status == 0 && status != 0) {
+        classStatus = '';
       }
       return classStatus;
     },
