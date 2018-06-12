@@ -20,7 +20,7 @@
       .calendar__body        
         template(v-for='day in data.asistencia')
           .calendar__day
-            small(:class='colorState(day)' @click='viewJustify(day, data.mes)').calendar__day-number(v-text="getDay(day.dia)")
+            small.calendar__day-number(:class='colorState(day)' @click='viewJustify(day, data.mes)' v-text="getDay(day.dia)")
             small.font-size-small {{viewHour(day)}}
 </template>
 

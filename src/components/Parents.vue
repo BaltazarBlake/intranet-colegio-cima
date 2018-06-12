@@ -13,8 +13,11 @@
                   .col-xs
                     button(@click="edit(data)").btn--edit
                       i.icon-edit
-                .profile__wrapper-image
+                .profile__wrapper-image             
                   img(:src='data.url_imagen' @error='detectedImages(data)').profile__user-image.parent
+                  div.profile__user-option
+                    button(@click="edit(data)").btn--edit
+                      i.icon-edit     
                 .profile__description.row.main-center
                   .col-xs-12
                     h1.font-size-large {{data.nombre}} {{data.apellidos}}
