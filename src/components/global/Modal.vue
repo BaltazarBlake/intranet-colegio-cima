@@ -29,6 +29,8 @@ export default {
   created() {
     // Listen for the showModal event
     EventBus.$on('showModal', () => this.isVisible = true);
+    // Listen for the hidenModal event
+    EventBus.$on('hidenModal', () => this.isVisible = false);
   },
 
   mounted() {

@@ -14,11 +14,11 @@
                     button(@click="edit(data)").btn--edit
                       i.icon-edit
                 .profile__wrapper-image             
-                  img(:src='data.url_imagen' @error='detectedImages(data)').profile__user-image.parent
+                  img(:src='data.url_imagen' @error='detectedImages(data)' id="avatar").profile__user-image.parent
                   div.profile__user-option
                     label(for="upload-image").btn--edit
                       input.u-hidden(type="file" id="upload-image" accept="image/*") 
-                      i.icon-edit     
+                      i.icon-edit
                 .profile__description.row.main-center
                   .col-xs-12
                     h1.font-size-large {{data.nombre}} {{data.apellidos}}
@@ -39,6 +39,7 @@
     template(v-else)
       .m-t-s
         spinner
+    // MODAL EDIT DATA PROFILE
     modal
       template(slot='title')
         .row.cross-center
@@ -47,22 +48,25 @@
       template(slot='body')
         template(v-if="isEditing")
           form(@submit.prevent="save()").row
-            .input-field.col-xs-6
+            // .input-field.col-xs-12
+            //   .profile__wrapper-image             
+            //       img(:src='isEditing.url_imagen' @error='detectedImages(data)').profile__user-image.parent
+            .input-field.col-xs-12.col-xm-6
               label.input-field__label Nombres
               input(type="text" v-model="isEditing.nombre").input-field__input
-            .input-field.col-xs-6
+            .input-field.col-xs-12.col-xm-6
               label.input-field__label Apellidos
               input(type="text" v-model="isEditing.apellidos").input-field__input
-            .input-field.col-xs-12
+            .input-field.col-xs-12.col-xm-6.col-l-4
               label.input-field__label DNI
               input(type="text" v-model="isEditing.dni").input-field__input
-            .input-field.col-xs-6
+            .input-field.col-xs-12.col-xm-6.col-l-4
               label.input-field__label Teléfono
               input(type="text" v-model="isEditing.telefono").input-field__input
-            .input-field.col-xs-6
+            .input-field.col-xs-12.col-xm-6.col-l-4
               label.input-field__label Email
               input(type="email" v-model="isEditing.email").input-field__input
-            .input-field.col-xs-12
+            .input-field.col-xs-12.col-xm-6.col-l-12
               label.input-field__label Dirección
               input(type="text" v-model="isEditing.direccion").input-field__input
             .col-xs.m-b
@@ -89,6 +93,7 @@ export default {
   },
   async mounted() {
     await this.getData();
+    // this.editImage();
   },
   methods: {
     async getData() {
@@ -128,7 +133,14 @@ export default {
         data.email,
         data.direccion,
       );
+      EventBus.$emit("hidenModal", this.isVisible);
       console.log(res);
+    },
+
+    editImage() {
+      let avatar = document.getElementById('avatar'),
+          uploadImage = document.getElementById('upload-image');
+      EventBus.$emit("showModal", this.isVisible);
     }
   }
 };
