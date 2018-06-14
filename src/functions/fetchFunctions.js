@@ -217,7 +217,7 @@ async function getEvent(idStudentSchool) {
 async function updateFamilyProfile(idFamily,nombre,apellidos,dni,telefono,email,direccion){
   let family = {nombre,apellidos,dni,telefono,email,direccion};
   const response = await fetch(
-                          `${host}/family/profile/${idFamily}`,
+                          `${host}/student/parents/${idFamily}`,
                           {
                             method: 'put',
                             headers: { 
