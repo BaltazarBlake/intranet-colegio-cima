@@ -46,7 +46,7 @@
             strong.font-size-x-large Editar información
       template(slot='body')
         template(v-if="isEditing")
-          form.row
+          form(@submit.prevent="save()").row
             .input-field.col-xs-6
               label.input-field__label Nombres
               input(type="text" v-model="isEditing.nombre").input-field__input
@@ -65,16 +65,17 @@
             .input-field.col-xs-12
               label.input-field__label Dirección
               input(type="text" v-model="isEditing.direccion").input-field__input
-            .col-xs
+            .col-xs.m-b
                 button(type="submit").btn--primary Guardar
 
 </template>
 
 <script>
-import { EventBus } from '../event-bus.js';
-import {getParents} from '../functions/fetchFunctions';
-import Modal from './global/Modal';
-import Spinner from './global/Spinner';
+import { EventBus } from "../event-bus.js";
+import { getParents } from "../functions/fetchFunctions";
+import { updateFamilyProfile } from "../functions/fetchFunctions";
+import Modal from "./global/Modal";
+import Spinner from "./global/Spinner";
 export default {
   components: {
     Spinner,
@@ -83,8 +84,8 @@ export default {
   data() {
     return {
       report: null,
-      isEditing: null,
-    }
+      isEditing: null
+    };
   },
   async mounted() {
     await this.getData();
@@ -92,13 +93,13 @@ export default {
   methods: {
     async getData() {
       let res;
-      if(!localStorage.getItem('cima-estudiante-parents')){
-        let data = JSON.parse(localStorage.getItem('cima-estudiante'));
+      if (!localStorage.getItem("cima-estudiante-parents")) {
+        let data = JSON.parse(localStorage.getItem("cima-estudiante"));
         res = await getParents(data.idalumnocolegio);
-        res= res.data;
-        localStorage.setItem('cima-estudiante-parents',JSON.stringify(res));
-      }else{
-        res = JSON.parse(localStorage.getItem('cima-estudiante-parents'));
+        res = res.data;
+        localStorage.setItem("cima-estudiante-parents", JSON.stringify(res));
+      } else {
+        res = JSON.parse(localStorage.getItem("cima-estudiante-parents"));
       }
       this.report = res;
     },
@@ -106,14 +107,29 @@ export default {
     detectedImages(el) {
       let i = this.report.indexOf(el);
       if (this.report[i] != undefined) {
-        this.report[i].url_imagen = 'dist/user.png';        
+        this.report[i].url_imagen = "dist/user.png";
       }
     },
 
     edit(data) {
-      EventBus.$emit('showModal', this.isVisible);
+      EventBus.$emit("showModal", this.isVisible);
       this.isEditing = data;
+    },
+
+    async save() {
+      let res;
+      let data = this.isEditing;
+      res = await updateFamilyProfile(
+        data.idperson,
+        data.nombre,
+        data.apellidos,
+        data.dni,
+        data.telefono,
+        data.email,
+        data.direccion,
+      );
+      console.log(res);
     }
   }
-}
+};
 </script>
