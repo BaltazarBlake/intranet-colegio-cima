@@ -16,7 +16,8 @@
                 .profile__wrapper-image             
                   img(:src='data.url_imagen' @error='detectedImages(data)').profile__user-image.parent
                   div.profile__user-option
-                    button(@click="edit(data)").btn--edit
+                    label(for="upload-image").btn--edit
+                      input.u-hidden(type="file" id="upload-image") 
                       i.icon-edit     
                 .profile__description.row.main-center
                   .col-xs-12
