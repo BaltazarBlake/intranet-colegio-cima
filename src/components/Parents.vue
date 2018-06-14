@@ -17,7 +17,7 @@
                   img(:src='data.url_imagen' @error='detectedImages(data)').profile__user-image.parent
                   div.profile__user-option
                     label(for="upload-image").btn--edit
-                      input.u-hidden(type="file" id="upload-image") 
+                      input.u-hidden(type="file" id="upload-image" accept="image/*") 
                       i.icon-edit     
                 .profile__description.row.main-center
                   .col-xs-12

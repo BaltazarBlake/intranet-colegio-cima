@@ -214,7 +214,8 @@ async function getEvent(idStudentSchool) {
   return res; 
 }
 
-async function updateFamilyProfile(idFamily,name,lastname,dni,phone,email,address){
+async function updateFamilyProfile(idFamily,nombre,apellidos,dni,telefono,email,direccion){
+  let family = {nombre,apellidos,dni,telefono,email,direccion};
   const response = await fetch(
                           `${host}/family/profile/${idFamily}`,
                           {
@@ -223,7 +224,7 @@ async function updateFamilyProfile(idFamily,name,lastname,dni,phone,email,addres
                               'authorization': localStorage.getItem(token),
                               'Content-Type' : 'application/json',
                             },
-                            body: {},
+                            body: JSON.stringify(family),
                           }
   );
   const res = await response.json();
