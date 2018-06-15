@@ -28,7 +28,7 @@ import {getExams} from '../functions/fetchFunctions';
 import Spinner from './global/Spinner';
 import Tabs from './global/Tabs';
 import Tab from './global/Tab';
-import Modal from './global/Modal/Modal';
+import Modal from './global/Modal';
 import Exams from './Exams';
 import Exam from './Exam';
 export default {

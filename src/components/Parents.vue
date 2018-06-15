@@ -41,10 +41,7 @@
         spinner
 
     // MODAL EDIT DATA PROFILE
-    modal(:active="dataEdit")
-      template(slot='modal-close')
-        div.modal__close(@click="dataEdit = false")
-          span.icon-close
+    modal(:active.sync="dataEdit")
       template(slot='title')
         .row.cross-center
           .col-xs-12
@@ -72,20 +69,14 @@
               input(type="text" v-model="isEditing.direccion").input-field__input
             .col-xs.m-b
                 button(type="submit").btn--primary Guardar
-      template(slot='modal-overlay')
-        .overlay__modal(@click="dataEdit = false")
+
     
     // MODAL EDIT IMAGE
-    modal(:active="photoEdit")
-      template(slot='modal-close')
-        div.modal__close(@click="photoEdit = false")
-          span.icon-close
+    modal(:active.sync="photoEdit")
       template(slot='title')
         .row.cross-center
           .col-xs-12
             strong.font-size-x-large Editar Foto
-      template(slot='modal-overlay')
-        .overlay__modal(@click="photoEdit = false")
 
 
 </template>
@@ -94,7 +85,7 @@
 import { EventBus } from "../event-bus.js";
 import { getParents } from "../functions/fetchFunctions";
 import { updateFamilyProfile } from "../functions/fetchFunctions";
-import Modal from "./global/Modal/Modal";
+import Modal from "./global/Modal";
 import Spinner from "./global/Spinner";
 export default {
   components: {

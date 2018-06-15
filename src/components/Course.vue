@@ -21,13 +21,11 @@
 
 <script>
 import { EventBus } from '../event-bus.js';
-import Modal from './global/Modal/Modal';
 export default {
   name: 'Course',
   props: ['data'],
   methods: {
     viewDetailExam(detail) {
-      this.viewModal();
       let send = {
         course: detail.curso,
         mean: detail.promedio,
@@ -35,9 +33,6 @@ export default {
         groups: detail.grupos,
       };
       EventBus.$emit('viewDetailExam', send);
-    },
-    viewModal() {
-      EventBus.$emit('showModal', this.isVisible);
     },
   }
 }

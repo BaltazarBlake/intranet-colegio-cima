@@ -28,7 +28,7 @@
         spinner
 
     //- MODAL
-    modal
+    modal(:active.sync="showModal")
       template(v-if='detailExam')  
         template(slot='title')
           .row.cross-center
@@ -84,7 +84,7 @@ import { formatDate } from "../functions/formatDate";
 import Spinner from "./global/Spinner";
 import Tabs from "./global/Tabs";
 import Tab from "./global/Tab";
-import Modal from "./global/Modal/Modal";
+import Modal from "./global/Modal";
 import Course from "./Course";
 export default {
   components: {
@@ -97,12 +97,14 @@ export default {
   data() {
     return {
       report: null,
-      detailExam: null
+      detailExam: null,
+      showModal: false,
     };
   },
   created() {
     EventBus.$on("viewDetailExam", data => {
       this.detailExam = data;
+      this.showModal = true;
     });
   },
   async mounted() {
