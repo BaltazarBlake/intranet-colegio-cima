@@ -39,8 +39,12 @@
     template(v-else)
       .m-t-s
         spinner
+
     // MODAL EDIT DATA PROFILE
     modal(:active="dataEdit")
+      template(slot='modal-close')
+        div.modal__close(@click="dataEdit = false")
+          span.icon-close
       template(slot='title')
         .row.cross-center
           .col-xs-12
@@ -48,9 +52,6 @@
       template(slot='body')
         template(v-if="isEditing")
           form(@submit.prevent="save()").row
-            // .input-field.col-xs-12
-            //   .profile__wrapper-image             
-            //       img(:src='isEditing.url_imagen' @error='detectedImages(data)').profile__user-image.parent
             .input-field.col-xs-12.col-xm-6
               label.input-field__label Nombres
               input(type="text" v-model="isEditing.nombre").input-field__input
@@ -71,11 +72,20 @@
               input(type="text" v-model="isEditing.direccion").input-field__input
             .col-xs.m-b
                 button(type="submit").btn--primary Guardar
+      template(slot='modal-overlay')
+        .overlay__modal(@click="dataEdit = false")
+    
+    // MODAL EDIT IMAGE
     modal(:active="photoEdit")
+      template(slot='modal-close')
+        div.modal__close(@click="photoEdit = false")
+          span.icon-close
       template(slot='title')
         .row.cross-center
           .col-xs-12
             strong.font-size-x-large Editar Foto
+      template(slot='modal-overlay')
+        .overlay__modal(@click="photoEdit = false")
 
 
 </template>

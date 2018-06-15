@@ -1,20 +1,21 @@
 <template lang='pug'>
   div
-    template(v-if='status')
-      .modal
-        ModalClose
-        .modal__header
-          .modal__title
-            slot(name='title') Title Modal
-        .modal__body
-          .modal__content
-            slot(name='body')
-      .overlay__modal(@click='')
+    div(@keyup.27="onEsc()")
+      template(v-if='status')
+        .modal
+          slot(name='modal-close')
+          .modal__header
+            .modal__title
+              slot(name='title') Title Modal
+          .modal__body
+            .modal__content
+              slot(name='body') Body Modal
+        slot(name='modal-overlay')
 </template>
 
 <script>
 // Import the EventBus.
-import ModalClose from './ModalClose';
+// import ModalClose from './ModalClose';
 import { EventBus } from '../../../event-bus.js';
 export default {
   name: 'Modal',
@@ -22,15 +23,11 @@ export default {
   props: ["active"],
 
   components: {
-    ModalClose,
+    // ModalClose,
   },
 
 
   created() {
-    // Listen for the showModal event
-    // EventBus.$on('showModal', () => this.isVisible = true);
-    // Listen for the hidenModal event
-    EventBus.$on('hidenModal', (e) => this.active = e);
   },
 
 
@@ -41,7 +38,6 @@ export default {
   },
 
   mounted() {
-    // this.eventKey();
   },
 
   methods: {
@@ -52,15 +48,11 @@ export default {
     close() {
       console.log('click');
       return this.isVisible = false;
-    }
+    },
 
-    // eventKey() {
-    //   document.body.addEventListener("keyup", e => {
-    //     if (e.keyCode === 27) {
-    //       this.hidenModal();
-    //     }
-    //   });
-    // }
+    onEsc() {
+      console.log('qwerty');
+    }
   },
 
   computed: {
