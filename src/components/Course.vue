@@ -21,7 +21,7 @@
 
 <script>
 import { EventBus } from '../event-bus.js';
-import Modal from './global/Modal';
+import Modal from './global/Modal/Modal';
 export default {
   name: 'Course',
   props: ['data'],

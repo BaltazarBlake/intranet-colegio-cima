@@ -26,7 +26,7 @@
 
 <script>
 import { EventBus } from '../../event-bus.js';
-import Modal from './Modal';
+import Modal from './Modal/Modal';
 import jwt from 'jwt-decode';
 import {getJustify} from '../../functions/fetchFunctions';
 import {token} from '../../cfg/core';

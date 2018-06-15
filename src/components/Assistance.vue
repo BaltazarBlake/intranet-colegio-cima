@@ -119,7 +119,7 @@
 import {getAssistance} from '../functions/fetchFunctions';
 import { EventBus } from '../event-bus.js';
 
-import Modal from './global/Modal';
+import Modal from './global/Modal/Modal';
 import Spinner from './global/Spinner';
 import Calendar from './global/Calendar';
 import Report from './global/Report';

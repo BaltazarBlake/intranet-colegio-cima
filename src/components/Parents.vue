@@ -14,11 +14,11 @@
                     button(@click="edit(data)").btn--edit
                       i.icon-edit
                 .profile__wrapper-image             
-                  img(:src='data.url_imagen' @error='detectedImages(data)' id="avatar").profile__user-image.parent
-                  div.profile__user-option
-                    label(for="upload-image").btn--edit
-                      input.u-hidden(type="file" id="upload-image" accept="image/*") 
-                      i.icon-edit
+                  img(:src='data.url_imagen' @error='detectedImages(data)' id="avatar" @click="editImage()").profile__user-image.parent
+                  // div.profile__user-option
+                  //   label(for="upload-image").btn--edit
+                  //     input.u-hidden(type="file" id="upload-image" accept="image/*" @click="editImage()") 
+                  //     i.icon-edit
                 .profile__description.row.main-center
                   .col-xs-12
                     h1.font-size-large {{data.nombre}} {{data.apellidos}}
@@ -40,7 +40,7 @@
       .m-t-s
         spinner
     // MODAL EDIT DATA PROFILE
-    modal
+    modal(:active="dataEdit")
       template(slot='title')
         .row.cross-center
           .col-xs-12
@@ -71,6 +71,12 @@
               input(type="text" v-model="isEditing.direccion").input-field__input
             .col-xs.m-b
                 button(type="submit").btn--primary Guardar
+    modal(:active="photoEdit")
+      template(slot='title')
+        .row.cross-center
+          .col-xs-12
+            strong.font-size-x-large Editar Foto
+
 
 </template>
 
@@ -78,7 +84,7 @@
 import { EventBus } from "../event-bus.js";
 import { getParents } from "../functions/fetchFunctions";
 import { updateFamilyProfile } from "../functions/fetchFunctions";
-import Modal from "./global/Modal";
+import Modal from "./global/Modal/Modal";
 import Spinner from "./global/Spinner";
 export default {
   components: {
@@ -88,12 +94,13 @@ export default {
   data() {
     return {
       report: null,
-      isEditing: null
+      isEditing: null,
+      dataEdit: false,
+      photoEdit: false,
     };
   },
   async mounted() {
     await this.getData();
-    // this.editImage();
   },
   methods: {
     async getData() {
@@ -117,7 +124,8 @@ export default {
     },
 
     edit(data) {
-      EventBus.$emit("showModal", this.isVisible);
+      // EventBus.$emit("showModal", this.isVisible);
+      this.dataEdit = true;
       this.isEditing = data;
     },
 
@@ -138,9 +146,11 @@ export default {
     },
 
     editImage() {
-      let avatar = document.getElementById('avatar'),
-          uploadImage = document.getElementById('upload-image');
-      EventBus.$emit("showModal", this.isVisible);
+      // let avatar = document.getElementById('avatar'),
+      //     uploadImage = document.getElementById('upload-image'),
+      //     image = document.getElementById('image');
+      // EventBus.$emit("showModal", this.isVisible);
+      this.photoEdit = true;
     }
   }
 };

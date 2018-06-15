@@ -84,7 +84,7 @@ import { formatDate } from "../functions/formatDate";
 import Spinner from "./global/Spinner";
 import Tabs from "./global/Tabs";
 import Tab from "./global/Tab";
-import Modal from "./global/Modal";
+import Modal from "./global/Modal/Modal";
 import Course from "./Course";
 export default {
   components: {
