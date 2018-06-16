@@ -24,6 +24,7 @@
 <script>
 import Navigation from './Navigation';
 import {EventBus} from '../event-bus.js';
+import {setLogeo} from '../functions/fetchFunctions';
 export default{
   components:{Navigation},
   data(){
@@ -31,8 +32,20 @@ export default{
       children:false
     }
   },
-  mounted(){
+  async mounted(){
     this.children = localStorage.getItem('cima-children')!=null;
+    let idClient, type=0;
+    if(localStorage.getItem('cima-parent-profile')){
+      idClient = JSON.parse(localStorage.getItem('cima-parent-profile')).id;
+      type = 1; 
+    }else if(localStorage.getItem('cima-estudiante')){
+      idClient = JSON.parse(localStorage.getItem('cima-estudiante')).idalumnocolegio;
+      type = 2;
+    }
+
+    if(type!=0){
+      const res = await setLogeo(idClient,type);
+    }
   },
   methods:{
      viewNavigation() {
@@ -52,6 +65,7 @@ export default{
       this.$router.push("/Familyguy");
     },
     reload() {
+      let path = this.$router.history.current.path;
       localStorage.removeItem('cima-estudiante-asistencia');
       localStorage.removeItem('cima-estudiante-classmates');
       localStorage.removeItem('cima-estudiante-cursos');
@@ -62,7 +76,8 @@ export default{
       localStorage.removeItem('cima-estudiante-profesores');
       localStorage.removeItem('cima-estudiante-events');
       localStorage.removeItem('cima-estudiante-payment');
-      location.reload();
+      this.$router.go(path);
+      
     }
   }
 }
