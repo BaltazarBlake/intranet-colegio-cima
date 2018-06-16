@@ -17,7 +17,7 @@
                   img(:src='data.url_imagen' @error='detectedImages(data)' :id="'avatar' + data.idperson").profile__user-image.parent
                   .profile__user-option
                     label(:for="'upload-image' + data.idperson").btn--edit
-                      input.u-hidden(type="file" :id="'upload-image' + data.idperson" accept="image/*" @click="editImage(data.idperson)") 
+                      input.u-hidden(type="file" :id="'upload-image' + data.idperson" accept="image/*" @click="setImage(data.idperson)") 
                       i.icon-edit
                 .profile__description.row.main-center
                   .col-xs-12
@@ -80,24 +80,29 @@
       template(slot='body')
         .row.main-center
           .col-xs
-            img(src="dist/user.png", id="image")
+            // img(src="dist/user.png", id="image")
+            vue-cropper(ref='cropper', :src=imgSrc, alt="Source Image", :cropmove="cropImage", :aspectRatio="2.4/3.1", :autoCropArea="0.9")
         .row.main-center
           .col-xs.m-t
-            button(id="crop" type="button").btn--default Guardar
+            button(@click="saveImage", type="button").btn--default Guardar
           .col-xs.m-t
-            button(type="button").btn--default Cancelar
+            button(@click="cropReset", type="button").btn--default Restablecer
+          .col-xs.m-t
+            button(@click="cropDestroy", type="button").btn--default Cancelar
 </template>
 
 <script>
-import Cropper from "cropperjs";
+// import Cropper from "cropperjs";
 import { getParents } from "../functions/fetchFunctions";
 import { updateFamilyProfile } from "../functions/fetchFunctions";
+import VueCropper from "vue-cropperjs";
 import Modal from "./global/Modal";
 import Spinner from "./global/Spinner";
 export default {
   components: {
     Spinner,
-    Modal
+    Modal,
+    VueCropper
   },
   data() {
     return {
@@ -105,6 +110,10 @@ export default {
       isEditing: null,
       dataEdit: false,
       photoEdit: false,
+
+      imgEl: null,
+      imgSrc: "",
+      cropImg: ""
     };
   },
   async mounted() {
@@ -147,74 +156,58 @@ export default {
         data.dni,
         data.telefono,
         data.email,
-        data.direccion,
+        data.direccion
       );
-      EventBus.$emit("hidenModal", this.isVisible);
-      console.log(res);
+      this.dataEdit = false;
     },
 
-    editImage(el) {
+    setImage(el) {
+
       let avatar = document.getElementById(`avatar${el}`),
           input = document.getElementById(`upload-image${el}`);
-      let image = document.getElementById('image'),
-          cropper;
-
+      
       input.addEventListener('change', (e) => {
-        let files = e.target.files;
-        const done = (url) => {
-          this.photoEdit = true;
-          image.src = url;
+        this.photoEdit = true;
+        this.imgEl = avatar;
 
-          onloadImage();
-        };
-        let reader,
-            file,
-            url;
-        if (files && files.length > 0) {
-          file = files[0];
-          if (URL) {
-            done(URL.createObjectURL(file));
-          } else if (FileReader) {
-            reader = new FileReader();
-            reader.onload = (e) => {
-              done(reader.result);
-            };
-            reader.readAsDataURL(file);
-          }
+        const file = e.target.files[0];
+        if (!file.type.includes("image/")) {
+          // alert('Please select an image file');
+          return;
+        }
+        if (typeof FileReader === "function") {
+          const reader = new FileReader();
+          reader.onload = event => {
+            console.log(event, 'event');
+            this.imgSrc = event.target.result;
+            this.$refs.cropper.replace(event.target.result);
+          };
+          reader.readAsDataURL(file);
+        } else {
+          alert("Sorry, FileReader API not supported");
         }
       });
+    },
+    
+    cropDestroy() {
+      this.$refs.cropper.destroy();
+      this.photoEdit = false;
+    },
 
-      const onloadImage = () => {
-        console.log('qwertyuio');
-        cropper = new Cropper(image, {
-          aspectRatio: 2.4/3.1,
-          autoCropArea: 0.9,
-          cropBoxResizable: false,
-        });
-      }
+    cropReset() {
+      this.$refs.cropper.reset();
+    },
 
+    cropImage() {
+      this.cropImg = this.$refs.cropper.getCroppedCanvas().toDataURL();
+    },
 
-      document.getElementById('crop').addEventListener('click', () => {
-        let initialAvatarURL;
-        let canvas;
-
-        this.photoEdit = false;
-
-        if (cropper) {
-          canvas = cropper.getCroppedCanvas({
-            width: 150,
-            height: 200,
-            fillColor: '#fff',
-          });
-
-          initialAvatarURL = avatar.scr;
-          avatar.src = canvas.toDataURL();
-          cropper.destroy();
-          cropper = null;
-        }
-      });
-    }
-  }
+    saveImage() {
+      this.cropImg = this.$refs.cropper.getCroppedCanvas().toDataURL();
+      this.imgEl.src = this.cropImg;
+      this.photoEdit = false;
+    },
+  },
 };
 </script>
 

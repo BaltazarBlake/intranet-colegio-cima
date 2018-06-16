@@ -13,6 +13,7 @@
     "cropperjs": "^1.4.0",
     "jwt-decode": "^2.2.0",
     "vue": "^2.5.11",
+    "vue-cropperjs": "^2.2.1",
     "vue-router": "^3.0.1"
   },
   "browserslist": [
