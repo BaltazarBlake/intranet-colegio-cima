@@ -14,11 +14,11 @@
                     button(@click="edit(data)").btn--edit
                       i.icon-edit
                 .profile__wrapper-image             
-                  img(:src='data.url_imagen' @error='detectedImages(data)' id="avatar" @click="editImage()").profile__user-image.parent
-                  // div.profile__user-option
-                  //   label(for="upload-image").btn--edit
-                  //     input.u-hidden(type="file" id="upload-image" accept="image/*" @click="editImage()") 
-                  //     i.icon-edit
+                  img(:src='data.url_imagen' @error='detectedImages(data)' :id="'avatar' + data.idperson").profile__user-image.parent
+                  .profile__user-option
+                    label(:for="'upload-image' + data.idperson").btn--edit
+                      input.u-hidden(type="file" :id="'upload-image' + data.idperson" accept="image/*" @click="editImage(data.idperson)") 
+                      i.icon-edit
                 .profile__description.row.main-center
                   .col-xs-12
                     h1.font-size-large {{data.nombre}} {{data.apellidos}}
@@ -77,12 +77,19 @@
         .row.cross-center
           .col-xs-12
             strong.font-size-x-large Editar Foto
-
-
+      template(slot='body')
+        .row.main-center
+          .col-xs
+            img(src="dist/user.png", id="image")
+        .row.main-center
+          .col-xs.m-t
+            button(id="crop" type="button").btn--default Guardar
+          .col-xs.m-t
+            button(type="button").btn--default Cancelar
 </template>
 
 <script>
-import { EventBus } from "../event-bus.js";
+import Cropper from "cropperjs";
 import { getParents } from "../functions/fetchFunctions";
 import { updateFamilyProfile } from "../functions/fetchFunctions";
 import Modal from "./global/Modal";
@@ -110,6 +117,7 @@ export default {
         let data = JSON.parse(localStorage.getItem("cima-estudiante"));
         res = await getParents(data.idalumnocolegio);
         res = res.data;
+        console.log(res);
         localStorage.setItem("cima-estudiante-parents", JSON.stringify(res));
       } else {
         res = JSON.parse(localStorage.getItem("cima-estudiante-parents"));
@@ -125,7 +133,6 @@ export default {
     },
 
     edit(data) {
-      // EventBus.$emit("showModal", this.isVisible);
       this.dataEdit = true;
       this.isEditing = data;
     },
@@ -146,13 +153,68 @@ export default {
       console.log(res);
     },
 
-    editImage() {
-      // let avatar = document.getElementById('avatar'),
-      //     uploadImage = document.getElementById('upload-image'),
-      //     image = document.getElementById('image');
-      // EventBus.$emit("showModal", this.isVisible);
-      this.photoEdit = true;
+    editImage(el) {
+      let avatar = document.getElementById(`avatar${el}`),
+          input = document.getElementById(`upload-image${el}`);
+      let image = document.getElementById('image'),
+          cropper;
+
+      input.addEventListener('change', (e) => {
+        let files = e.target.files;
+        const done = (url) => {
+          this.photoEdit = true;
+          image.src = url;
+
+          onloadImage();
+        };
+        let reader,
+            file,
+            url;
+        if (files && files.length > 0) {
+          file = files[0];
+          if (URL) {
+            done(URL.createObjectURL(file));
+          } else if (FileReader) {
+            reader = new FileReader();
+            reader.onload = (e) => {
+              done(reader.result);
+            };
+            reader.readAsDataURL(file);
+          }
+        }
+      });
+
+      const onloadImage = () => {
+        console.log('qwertyuio');
+        cropper = new Cropper(image, {
+          aspectRatio: 2.4/3.1,
+          autoCropArea: 0.9,
+          cropBoxResizable: false,
+        });
+      }
+
+
+      document.getElementById('crop').addEventListener('click', () => {
+        let initialAvatarURL;
+        let canvas;
+
+        this.photoEdit = false;
+
+        if (cropper) {
+          canvas = cropper.getCroppedCanvas({
+            width: 150,
+            height: 200,
+            fillColor: '#fff',
+          });
+
+          initialAvatarURL = avatar.scr;
+          avatar.src = canvas.toDataURL();
+          cropper.destroy();
+          cropper = null;
+        }
+      });
     }
   }
 };
 </script>
+

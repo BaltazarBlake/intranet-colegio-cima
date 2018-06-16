@@ -1,6 +1,6 @@
 <template lang='pug'>
-  div
-    template(v-if='active')
+  div(v-show='active')
+    template
       .modal
         div.modal__close(@click="close()")
           span.icon-close
@@ -27,7 +27,7 @@ export default {
 
   data() {
     return {
-      isVisible: null,
+      isVisible: false,
     }
   },
 
