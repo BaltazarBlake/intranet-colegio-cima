@@ -81,7 +81,7 @@
         .row.main-center
           .col-xs
             // img(src="dist/user.png", id="image")
-            vue-cropper(ref='cropper', :src=imgSrc, alt="Source Image", :cropmove="cropImage", :aspectRatio="2.4/3.1", :autoCropArea="0.9")
+            vue-cropper(ref='cropper', :src=imgSrc, alt="Source Image", :cropmove="cropImage", :aspectRatio="2.4/3.1", :autoCropArea="0.9", :cropBoxResizable="false")
         .row.main-center
           .col-xs.m-t
             button(@click="saveImage", type="button").btn--default Guardar
@@ -94,7 +94,7 @@
 <script>
 // import Cropper from "cropperjs";
 import { getParents } from "../functions/fetchFunctions";
-import { updateFamilyProfile } from "../functions/fetchFunctions";
+import { updateFamilyProfile, updateImage } from "../functions/fetchFunctions";
 import VueCropper from "vue-cropperjs";
 import Modal from "./global/Modal";
 import Spinner from "./global/Spinner";
@@ -110,7 +110,7 @@ export default {
       isEditing: null,
       dataEdit: false,
       photoEdit: false,
-
+      imgId: null,
       imgEl: null,
       imgSrc: "",
       cropImg: ""
@@ -165,6 +165,8 @@ export default {
 
       let avatar = document.getElementById(`avatar${el}`),
           input = document.getElementById(`upload-image${el}`);
+
+      this.imgId = el;
       
       input.addEventListener('change', (e) => {
         this.photoEdit = true;
@@ -202,9 +204,20 @@ export default {
       this.cropImg = this.$refs.cropper.getCroppedCanvas().toDataURL();
     },
 
-    saveImage() {
-      this.cropImg = this.$refs.cropper.getCroppedCanvas().toDataURL();
-      this.imgEl.src = this.cropImg;
+    async saveImage() {
+      this.cropImg = this.$refs.cropper.getCroppedCanvas({
+        width: 150,
+        height: 200,
+        fillColor: '#fff',
+      });
+      this.imgEl.src = this.cropImg.toDataURL();
+      this.cropImg.toBlob( blob => {
+        let formData = new FormData();
+        formData.append('newAvatar', blob);
+        console.log(formData);
+        let res = updateImage(this.imgId, formData);
+      });
+      this.$refs.cropper.destroy();
       this.photoEdit = false;
     },
   },
