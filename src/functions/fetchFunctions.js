@@ -190,7 +190,6 @@ async function getParentProfile(idParent) {
 }
 
 async function getPayment(idStudentSchool) {
-  console.log('fetch', idStudentSchool);
   const response = await fetch(
                           `${host}/student/payment/${idStudentSchool}`,
                           {
@@ -231,6 +230,36 @@ async function updateFamilyProfile(idFamily,nombre,apellidos,dni,telefono,email,
   return res;  
 }
 
+async function updateImage(idFamily,image){
+  const response = await fetch(
+                        `${host}/family/image/${idFamily}`,
+                        {
+                          method: 'post',
+                          headers:{
+                            'authorization': localStorage.getItem(token),
+                            'Content-Type' : false,
+                          },
+                          body: image
+                        }
+  );
+  const res = await response.json();
+  return res;
+}
+
+async function setLogeo(idClient,type){
+  const response = await fetch(
+                          `${host}/intranet/${idClient}/${type}`,
+                          {
+                            method:'post',
+                            headers:{
+                              'authorization': localStorage.getItem(token),
+                            }
+                          }
+  );
+  const res = await response.json();
+  return res;
+}
+
 export { login,
          getTeachers,
          getChildren,
@@ -246,4 +275,6 @@ export { login,
          getExams,
          getPayment,
          getEvent,
-         updateFamilyProfile}
+         updateFamilyProfile,
+         updateImage,
+         setLogeo}
