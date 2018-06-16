@@ -28,7 +28,7 @@
         spinner
 
     //- MODAL
-    modal
+    modal(:active.sync="showModal")
       template(v-if='detailExam')  
         template(slot='title')
           .row.cross-center
@@ -97,12 +97,14 @@ export default {
   data() {
     return {
       report: null,
-      detailExam: null
+      detailExam: null,
+      showModal: false,
     };
   },
   created() {
     EventBus.$on("viewDetailExam", data => {
       this.detailExam = data;
+      this.showModal = true;
     });
   },
   async mounted() {

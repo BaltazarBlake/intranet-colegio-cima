@@ -139,21 +139,16 @@ export default {
     viewJustify(day, month) {
       if (day.dia != undefined && day.dia != 0 && day.estado_am != undefined && this.showModalJustify == true) {
         if (this.turn) {
-          this.viewModal();
           let send = {
             report: day.justificacion,
             month,
             day: day.dia,
+            showModal: true,
           };
           EventBus.$emit('viewJustify', send);
         }
       }
     },
-
-    viewModal() {
-      EventBus.$emit('showModal', this.isVisible);
-    },
-
   }
 }
 </script>

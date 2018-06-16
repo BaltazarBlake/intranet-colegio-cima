@@ -215,6 +215,7 @@ async function getEvent(idStudentSchool) {
 
 async function updateFamilyProfile(idFamily,nombre,apellidos,dni,telefono,email,direccion){
   let family = {nombre,apellidos,dni,telefono,email,direccion};
+  console.log('famidFamilyily', idFamily);
   const response = await fetch(
                           `${host}/student/parents/${idFamily}`,
                           {

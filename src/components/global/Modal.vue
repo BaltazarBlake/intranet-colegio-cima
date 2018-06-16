@@ -1,52 +1,54 @@
 <template lang='pug'>
-  div
-    template(v-if='isVisible')
+  div(v-show='active')
+    template
       .modal
-        div(@click='hidenModal()').modal__close
+        div.modal__close(@click="close()")
           span.icon-close
         .modal__header
           .modal__title
-            //- h1.title.font-size-xx-large 
-            //-   slot(name='title') Title Modal
             slot(name='title') Title Modal
         .modal__body
           .modal__content
-            slot(name='body')
-      .overlay__modal(@click='hidenModal()')
+            slot(name='body') Body Modal..
+      .overlay__modal(@click="close()")
 </template>
 
 <script>
-// Import the EventBus.
-import { EventBus } from '../../event-bus.js';
 export default {
   name: 'Modal',
+
+  props: {
+    active: Boolean,
+  },
+
+  created() {
+    this.onEsc();
+  },
+
   data() {
     return {
       isVisible: false,
     }
   },
 
-  created() {
-    // Listen for the showModal event
-    EventBus.$on('showModal', () => this.isVisible = true);
-  },
-
-  mounted() {
-    this.eventKey();
-  },
-
   methods: {
-    hidenModal() {
-      this.isVisible = false;
+    close() {
+      this.$emit('update:active', false);
     },
-
-    eventKey() {
+    onEsc() {
       document.body.addEventListener("keyup", e => {
         if (e.keyCode === 27) {
-          this.hidenModal();
+          this.close();
         }
       });
     }
   },
+
+  computed: {
+    status() {
+      this.isVisible = this.active;
+      return this.isVisible;
+    },
+  }
 }
 </script>

@@ -33,7 +33,7 @@
           template(v-else)
             .m-t-s
               spinner
-    modal
+    modal(:active.sync="showModal")
       template(slot='title')
         .row.cross-center
           .col-xs-12
@@ -134,6 +134,7 @@ export default {
       justify: null,
       test: null,
       showModalJustify: true,
+      showModal: false,
     }
   },
   components: {
@@ -146,6 +147,7 @@ export default {
   created() {
     EventBus.$on('viewJustify', data =>{
       this.justify = data;
+      this.showModal = data.showModal;
     });
   },
 

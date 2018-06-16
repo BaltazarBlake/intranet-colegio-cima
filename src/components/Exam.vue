@@ -77,7 +77,7 @@
     template(v-else)
       spinner
     //- MODAL
-    modal
+    modal(:active.sync="showModal")
       template(slot='title')
         .row.cross-center
           .col-xs
@@ -114,6 +114,7 @@ export default {
   data() {
     return {
       report: null,
+      showModal: false,
     }
   },
   mounted() {
@@ -124,10 +125,7 @@ export default {
       this.report = JSON.parse(localStorage.getItem('cima-reporte-simulacros'))[this.modalidad].examenes[this.examen];
     },
     viewKey() {
-      this.viewModal();
-    },
-    viewModal() {
-      EventBus.$emit('showModal', this.isVisible);
+      this.showModal = true;
     },
     correctKey(el) {
       if (el == null) {
