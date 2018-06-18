@@ -79,9 +79,8 @@
             strong.font-size-x-large Editar Foto
       template(slot='body')
         .row.main-center
-          .col-xs
-            // img(src="dist/user.png", id="image")
-            vue-cropper(ref='cropper', :src=imgSrc, alt="Source Image", :cropmove="cropImage", :aspectRatio="2.4/3.1", :autoCropArea="0.9", :cropBoxResizable="false")
+          .col-xs-12.col-m-6
+            vue-cropper(ref='cropper', :src=imgSrc, alt="Source Image", :cropmove="cropImage", :aspectRatio="2.4/3.1", :autoCropArea="0.9", :cropBoxResizable="false", :minContainerHeight="280", :minContainerWidth="250")
         .row.main-center
           .col-xs.m-t
             button(@click="saveImage", type="button").btn--default Guardar
@@ -180,7 +179,7 @@ export default {
         if (typeof FileReader === "function") {
           const reader = new FileReader();
           reader.onload = event => {
-            console.log(event, 'event');
+            // console.log(event, 'event');
             this.imgSrc = event.target.result;
             this.$refs.cropper.replace(event.target.result);
           };
@@ -213,7 +212,8 @@ export default {
       this.imgEl.src = this.cropImg.toDataURL();
       this.cropImg.toBlob( blob => {
         let formData = new FormData();
-        formData.append('photo', blob);
+        console.log('blob', blob);
+        formData.append('photo', blob, `${this.imgId}.jpg`);
         updateImage(formData);
       });
       this.$refs.cropper.destroy();
@@ -222,4 +222,12 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+  // .cropper-container.cropper-bg {
+  //   min-height: 255px;
+  //   max-height: 280px;
+  // }
+</style>
+
 
