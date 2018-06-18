@@ -204,7 +204,7 @@ export default {
       this.cropImg = this.$refs.cropper.getCroppedCanvas().toDataURL();
     },
 
-    async saveImage() {
+    saveImage() {
       this.cropImg = this.$refs.cropper.getCroppedCanvas({
         width: 150,
         height: 200,
@@ -213,9 +213,8 @@ export default {
       this.imgEl.src = this.cropImg.toDataURL();
       this.cropImg.toBlob( blob => {
         let formData = new FormData();
-        formData.append('newAvatar', blob);
-        console.log(formData);
-        let res = updateImage(this.imgId, formData);
+        formData.append('photo', blob);
+        updateImage(formData);
       });
       this.$refs.cropper.destroy();
       this.photoEdit = false;

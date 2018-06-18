@@ -231,20 +231,17 @@ async function updateFamilyProfile(idFamily,nombre,apellidos,dni,telefono,email,
   return res;  
 }
 
-async function updateImage(idFamily,image){
-  const response = await fetch(
-                        `${host}/family/image/${idFamily}`,
+function updateImage(image){
+  fetch(
+                        `${host}/family/image`,
                         {
                           method: 'post',
                           headers:{
-                            'authorization': localStorage.getItem(token),
-                            'Content-Type' : false,
+                            'authorization': localStorage.getItem(token)
                           },
                           body: image
                         }
   );
-  const res = await response.json();
-  return res;
 }
 
 async function setLogeo(idClient,type){
