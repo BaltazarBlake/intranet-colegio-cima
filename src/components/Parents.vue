@@ -35,7 +35,7 @@
                     p(v-text="data.email == '' ? '-' : data.email ")
                   .col-xs-12
                     small Dirección
-                    p {{data.direccion}}
+                    p {{data.direccion.toUpperCase()}}
     template(v-else)
       .m-t-s
         spinner
@@ -126,7 +126,6 @@ export default {
         let data = JSON.parse(localStorage.getItem("cima-estudiante"));
         res = await getParents(data.idalumnocolegio);
         res = res.data;
-        console.log(res);
         localStorage.setItem("cima-estudiante-parents", JSON.stringify(res));
       } else {
         res = JSON.parse(localStorage.getItem("cima-estudiante-parents"));
@@ -180,7 +179,6 @@ export default {
         if (typeof FileReader === "function") {
           const reader = new FileReader();
           reader.onload = event => {
-            console.log(event, 'event');
             this.imgSrc = event.target.result;
             this.$refs.cropper.replace(event.target.result);
           };

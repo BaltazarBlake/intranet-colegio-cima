@@ -15,8 +15,7 @@
                     .col-xs-12
                       h1.font-size-regular {{teacher.nombre}}
                     .col-xs-12
-                      template(v-for='asignatura in teacher.asignaturas ')
-                        small.font-size-small {{asignatura.asignatura}}, 
+                      small.font-size-small {{getText(teacher.asignaturas)}} 
     template(v-else)
       .m-t-s
         spinner  
@@ -48,6 +47,13 @@ export default {
         res = JSON.parse(localStorage.getItem('cima-estudiante-profesores'));
       }
       this.report = res;
+    },
+    getText(el){
+      let text = '';
+      el.map(t=>{
+        text += `${t.asignatura}, `;
+      })
+      return text.substring(0,text.length-2);
     }
   }
 }

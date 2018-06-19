@@ -37,7 +37,7 @@
               .row.main-center
                 .col-xs-12
                   small Dirección
-                  p {{report.direccion}}
+                  p {{report.direccion.toUpperCase()}}
               
           template(v-else)
             .m-t-s

@@ -14,6 +14,9 @@ export function formatDate(year,month,day){
     case '11' : {myMonth = 'noviembre'; break;}
     case '12' : {myMonth = 'diciembre'; break;}
   }
-  date = `${day} de ${myMonth} del ${year}`;
+  date = `${day} de ${myMonth}`;
+  if(year && year!=''){
+    date += `del ${year}`;
+  }
   return date;
 }

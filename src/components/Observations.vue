@@ -2,7 +2,11 @@
   div
     .band 
       .container
-        h1.font-size-x-large Observaciones del alumno
+        .row.cross-center.m-b
+          .col-xs-12.col-s
+            h1.font-size-x-large Observaciones del alumno
+          .col-xs
+            strong(:class="nota >= 10.5? 'green':'red'").sticker.m-b-0 PROMEDIO DE CONDUCTA: {{nota}}
     template(v-if='report')
         .container.target
           .row
@@ -28,6 +32,9 @@
                                     small.font-size-regular Concepto:
                                     h1.font-size-regular {{observations.observacion}}
                                   .col-xs-12.m-b-2
+                                    small.font-size-regular.u-bold(:class="observations.puntos<0? 'red':'green'") Puntos:
+                                    h1.font-size-regular(:class="observations.puntos<0? 'red':'green'") {{observations.puntos}}
+                                  .col-xs-12.m-b-2
                                     small.font-size-regular Reportado por:
                                     h1.font-size-regular {{observations.reportadopor}}
 
@@ -49,6 +56,7 @@ export default{
   data(){
     return{
       report:null,
+      nota:18,
     }
   },
   async mounted(){
@@ -66,10 +74,13 @@ export default{
         res = JSON.parse(localStorage.getItem('cima-estudiante-observations'));
       }
       this.report = res;
-      // this.report.map((el)=> {
-      //   el.reportadopor = el.reportadopor.replace('<b>', '');
-      //   el.reportadopor = el.reportadopor.replace('</b>', '');
-      // });
+      this.report.map((el)=> {
+        el.observaciones.map(obs=>{
+          this.nota += parseInt(obs.puntos);
+          obs.reportadopor = obs.reportadopor.replace('<b>', '');
+          obs.reportadopor = obs.reportadopor.replace('</b>', '');
+        })
+      });
 
     },
     isTrue(el) {

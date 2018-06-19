@@ -17,9 +17,10 @@
               template(v-for='data in report')
                 .table-row
                   .table-row-item.font-size-small(data-header='Descripción') {{data.descripcion}}
-                  .table-row-item.font-size-small(data-header='Fecha Vencimiento') {{data.fechavencimiento}}
-                  .table-row-item.font-size-small(data-header='Monto') {{data.monto}}
-                  .table-row-item.font-size-small(data-header='Monto Pagado') {{data.montopagado}}
+                  .table-row-item.font-size-small(data-header='Fecha Vencimiento') {{format(data.fechavencimiento)}}
+                  .table-row-item.font-size-small(data-header='Monto') S/. {{data.monto}}
+                  .table-row-item.font-size-small(data-header='Monto Pagado') 
+                    span(v-if="data.montopagado") S/. {{data.montopagado}}
                   .table-row-item.font-size-small.sticker(data-header='Estado', :class="colorState(data.estado)") {{data.estado}}
     template(v-else)
       .m-t-s
@@ -29,6 +30,7 @@
 <script>
 import Spinner from './global/Spinner';
 import {getPayment} from '../functions/fetchFunctions';
+import { formatDate } from "../functions/formatDate";
 export default {
   components: {
     Spinner,
@@ -62,6 +64,11 @@ export default {
         classColor = 'red';
       }
       return classColor;
+    },
+    format(el){
+      let dates = el.split("-");
+      let date = formatDate('', dates[1], dates[2]);
+      return date;
     }
   }
 }
