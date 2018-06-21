@@ -11,9 +11,9 @@
         .container.target
           .row
             template(v-if='report == 1')
-              .col-xs-12.col-xm-6.m-a
-                  article.message-not-available.row.main-center.cross-center
-                    h1.title2 No tiene observations.
+              .col-xs-12.m-a
+                  article.card
+                    h1.title2 No tiene observaciones
             template(v-else)
               .col-xs-12
                 tabs.row

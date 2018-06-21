@@ -13,7 +13,7 @@
                     img(:src="data.url_imagen", alt="").profile__user-image
                   .profile__description.row.main-center
                     .col-xs-12
-                      h1.font-size-regular {{data.nombre}} {{data.apellido}}
+                      h1.font-size-regular {{data.apellido}} {{data.nombre}}
                     .col-xs-12
                       small.font-size-small Cel. {{data.telefonoper}}
                     .col-xs-12

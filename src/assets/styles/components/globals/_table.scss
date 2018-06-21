@@ -18,6 +18,10 @@
     }
     & .table-row-item {
       background-color: $header-color;
+
+      &.center {
+        justify-content: center;
+      }
     }
   }
 

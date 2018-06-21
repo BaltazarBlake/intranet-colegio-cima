@@ -1,6 +1,6 @@
 <template lang='pug'>
-  div(v-show='active')
-    template
+  div
+    template(v-if='active')
       .modal
         div.modal__close(@click="close()")
           span.icon-close

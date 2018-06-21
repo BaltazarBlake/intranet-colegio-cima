@@ -13,7 +13,7 @@
                 .table-row-item Fecha Vencimiento
                 .table-row-item Monto
                 .table-row-item Monto Pagado
-                .table-row-item Estado
+                .table-row-item.center Estado
               template(v-for='data in report')
                 .table-row
                   .table-row-item.font-size-small(data-header='Descripción') {{data.descripcion}}
@@ -60,7 +60,7 @@ export default {
       let classColor;
       if (el == 'CANCELADO') {
         classColor = 'green';
-      } else {
+      } else if (el == 'DEUDA') {
         classColor = 'red';
       }
       return classColor;
