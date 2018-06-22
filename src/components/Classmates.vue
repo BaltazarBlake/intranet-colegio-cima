@@ -15,7 +15,10 @@
                     .col-xs-12
                       h1.font-size-regular {{data.apellido}} {{data.nombre}}
                     .col-xs-12
-                      small.font-size-small Cel. {{data.telefonoper}}
+                      small.font-size-small Cel.
+                        template(v-for='(tel, index) in data.telefonoper')
+                          small.font-size-regular(v-if='(index+1) % 2 == 0') -
+                          strong.font-size-regular {{tel}}
                     .col-xs-12
                       small.font-size-small Dir. {{data.direccion}}
     template(v-else)

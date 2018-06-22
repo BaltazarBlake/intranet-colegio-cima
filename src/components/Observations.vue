@@ -32,8 +32,7 @@
                                     small.font-size-regular Concepto:
                                     h1.font-size-regular {{observations.observacion}}
                                   .col-xs-12.m-b-2
-                                    small.font-size-regular.u-bold(:class="observations.puntos<0? 'red':'green'") Puntos:
-                                    h1.font-size-regular(:class="observations.puntos<0? 'red':'green'") {{observations.puntos}}
+                                    strong.sticker(:class="observations.puntos > 0? 'green':'red'") Puntos: {{observations.puntos}}
                                   .col-xs-12.m-b-2
                                     small.font-size-regular Reportado por:
                                     h1.font-size-regular {{observations.reportadopor}}
