@@ -3,18 +3,25 @@
   $light-color: #ffffff;
   $dark-color: #F9F9F9;
   display: flex;
-  flex-flow: column nowrap;
+  // flex-flow: column nowrap;
+  flex-direction: column;
   justify-content: space-between;
-  // border: 1px solid $dark-color;
   font-size: 1rem;
   margin: 0.5rem;
-  line-height: 1.5;
+  line-height: 1.5; 
+
+  @include MQ(XM) {
+  }
 
   // .Table-header
   &-header {
     display: none;
+    visibility: hidden;
     @include MQ(XM) {
       font-weight: 700;
+      display: block;
+      visibility: visible;
+      width: 100%;
     }
     & .table-row-item {
       background-color: $header-color;
@@ -22,6 +29,14 @@
       &.center {
         justify-content: center;
       }
+    }
+  }
+  // .Table-body
+  &-body {
+    max-height: 400px;
+    overflow: auto;
+    @include MQ(XM) {
+      // margin-top: 50px;
     }
   }
 
@@ -75,3 +90,12 @@
     flex-grow: i;
   }
 }
+
+
+
+// <div class="tbl-content">
+//   <table cellpadding="0" cellspacing="0" border="0">
+// $(window).on("load resize ", function() {
+//   var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+//   $('.tbl-header').css({'padding-right':scrollWidth});
+// }).resize();

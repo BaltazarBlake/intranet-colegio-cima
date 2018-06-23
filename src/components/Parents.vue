@@ -9,16 +9,18 @@
           template(v-for='data in report')
             .col-xs-12.col-m-6.d-f
               .profile
-                .row.main-end
-                  .col-xs
-                    button(@click="edit(data)").btn--edit
-                      i.icon-edit
+                template(v-if="type == 0")
+                  .row.main-end
+                    .col-xs
+                      button(@click="edit(data)").btn--edit
+                        i.icon-edit
                 .profile__wrapper-image             
                   img(:src='data.url_imagen' @error='detectedImages(data)' :id="'avatar' + data.idperson").profile__user-image.parent
-                  .profile__user-option
-                    label(:for="'upload-image' + data.idperson").btn--edit
-                      input.u-hidden(type="file" :id="'upload-image' + data.idperson" accept="image/*" @click="setImage(data.idperson)") 
-                      i.icon-edit
+                  template(v-if="type == 0")
+                    .profile__user-option
+                      label(:for="'upload-image' + data.idperson").btn--edit
+                        input.u-hidden(type="file" :id="'upload-image' + data.idperson" accept="image/*" @click="setImage(data.idperson)") 
+                        i.icon-edit
                 .profile__description.row.main-center
                   .col-xs-12
                     h1.font-size-large {{data.nombre}} {{data.apellidos}}
@@ -91,7 +93,6 @@
 </template>
 
 <script>
-// import Cropper from "cropperjs";
 import { getParents } from "../functions/fetchFunctions";
 import { updateFamilyProfile, updateImage } from "../functions/fetchFunctions";
 import VueCropper from "vue-cropperjs";
@@ -112,11 +113,15 @@ export default {
       imgId: null,
       imgEl: null,
       imgSrc: "",
-      cropImg: ""
+      cropImg: "",
+      type: null,
     };
   },
+  created() {
+    },
   async mounted() {
     await this.getData();
+    
   },
   methods: {
     async getData() {
@@ -130,6 +135,7 @@ export default {
         res = JSON.parse(localStorage.getItem("cima-estudiante-parents"));
       }
       this.report = res;
+      this.type = localStorage.getItem('cima-parent-profile')? 0 : 1;
     },
 
     detectedImages(el) {
@@ -220,12 +226,5 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-  // .cropper-container.cropper-bg {
-  //   min-height: 255px;
-  //   max-height: 280px;
-  // }
-</style>
 
 

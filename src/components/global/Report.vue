@@ -53,11 +53,16 @@ export default {
 
     print(idReport) {
       let report = document.getElementById(idReport);
-      let style = document.styleSheets[0].cssRules;
+      let style = document.styleSheets;
+
+      let rules = [];
       let styleString = '';
-      
+
       for (let i = 0; i < style.length; i++) {
-        styleString += style[i].cssText
+        rules.push(style[i].cssRules);
+        for (let j = 0; j < rules[i].length; j++) {
+          styleString += rules[i][j].cssText;
+        }
       }
 
       let print =

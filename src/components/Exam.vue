@@ -72,7 +72,7 @@
                   .col-xs-12
                     .row.main-center
                       .col-xs
-                        button(@click='viewKey()').btn--default.is-active Claves
+                        button(@click='viewKey(data.preguntas)').btn--default.is-active Claves
 
     template(v-else)
       spinner
@@ -90,15 +90,16 @@
                 .table-row-item N° de Preg.
                 .table-row-item Rpta. Exam.
                 .table-row-item Rpta. Alum.
-              template(v-if='report')
-                template(v-for='question in report.preguntas')
-                  .table-row
-                    .table-row-item(data-header='N° de Preg.') {{question.numero_pregunta}}
-                    .table-row-item(data-header='Rpta. Exam.') {{question.clave}}
-                    .table-row-item.font-weight-bold(v-text='correctKey(question.respuesta)' :class='colorKey(question.clave,question.respuesta)' data-header='Rpta. Alum.')
-              template(v-else)
-                .m-t-s
-                  spinner
+              .table-body
+                template(v-if='keyExam')
+                  template(v-for='key in keyExam')
+                    .table-row
+                      .table-row-item(data-header='N° de Preg.') {{key.numero_pregunta}}
+                      .table-row-item(data-header='Rpta. Exam.') {{key.clave}}
+                      .table-row-item.font-weight-bold(v-text='correctKey(key.respuesta)' :class='colorKey(key.clave,key.respuesta)' data-header='Rpta. Alum.')
+                template(v-else)
+                  .m-t-s
+                    spinner
 
 
 </template>
@@ -115,6 +116,7 @@ export default {
     return {
       report: null,
       showModal: false,
+      keyExam: null,
     }
   },
   mounted() {
@@ -124,7 +126,8 @@ export default {
     getData() {
       this.report = JSON.parse(localStorage.getItem('cima-reporte-simulacros'))[this.modalidad].examenes[this.examen];
     },
-    viewKey() {
+    viewKey(data) {
+      this.keyExam = data;
       this.showModal = true;
     },
     correctKey(el) {

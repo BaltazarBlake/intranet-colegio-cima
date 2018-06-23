@@ -137,7 +137,7 @@ export default {
     },
 
     viewJustify(day, month) {
-      if (day.dia != undefined && day.dia != 0 && day.estado_am != undefined && this.showModalJustify == true) {
+      if (day.dia != undefined && day.dia != 0 && day.estado_am != undefined && this.showModalJustify == true && day.nro_dia) {
         if (this.turn) {
           let send = {
             report: day.justificacion,

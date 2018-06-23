@@ -16,7 +16,7 @@ export function formatDate(year,month,day){
   }
   date = `${day} de ${myMonth}`;
   if(year && year!=''){
-    date += `del ${year}`;
+    date += ` del ${year}`;
   }
   return date;
 }

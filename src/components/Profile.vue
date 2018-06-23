@@ -42,6 +42,19 @@
           template(v-else)
             .m-t-s
               spinner
+        .col-xs-12
+          .table.shadow-1
+            .table-header
+              .table-row
+                .table-row-item N° de Preg.
+                .table-row-item Rpta. Exam.
+                .table-row-item Rpta. Alum.
+            .table-body
+              - for (var x = 0; x < 20; x++)
+                .table-row
+                  .table-row-item(data-header='N° de Preg.') 1
+                  .table-row-item(data-header='Rpta. Exam.') H
+                  .table-row-item(data-header='Rpta. Alum.') W
 </template>
 <script>
 import Spinner from './global/Spinner';
