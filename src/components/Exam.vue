@@ -85,11 +85,12 @@
       template(slot='body')
         .row
           .col-xs-12
-            .table.shadow-1
-              .table-row.table-header
-                .table-row-item N° de Preg.
-                .table-row-item Rpta. Exam.
-                .table-row-item Rpta. Alum.
+            .table.header-fixed.shadow-1
+              .table-header
+                .table-row
+                  .table-row-item N° de Preg.
+                  .table-row-item Rpta. Exam.
+                  .table-row-item Rpta. Alum.
               .table-body
                 template(v-if='keyExam')
                   template(v-for='key in keyExam')

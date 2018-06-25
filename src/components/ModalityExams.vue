@@ -7,7 +7,7 @@
       .container.target
         .row
           .card
-            p Este alumno no tiene simulacros
+            h1.font-size-large Este alumno no tiene simulacros
     template(v-else-if="report")
       .container.target
         .row
@@ -54,17 +54,16 @@ export default {
       if(!localStorage.getItem('cima-reporte-simulacros')){
         let data = JSON.parse(localStorage.getItem('cima-estudiante'));
         res = await getExams(data.idalumnocolegio);
-        if(res!=null){
-          res = res.data;
+        res = res.data;
+        if(res!=1){
           res = this.formatData(res);
           localStorage.setItem('cima-reporte-simulacros',JSON.stringify(res));
-        }else{
-          res=1;
         }
       }else{
         res = JSON.parse(localStorage.getItem('cima-reporte-simulacros'));
       }
-      this.report = res!=null? res:1;
+
+      this.report = res;
     },
     isTrue(el) {
       if (el == 0) {

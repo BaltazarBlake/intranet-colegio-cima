@@ -5,8 +5,8 @@
         .row.cross-center.m-b
           .col-xs-12.col-s
             h1.font-size-x-large Observaciones del alumno
-          .col-xs
-            strong(:class="nota >= 10.5? 'green':'red'").sticker.m-b-0 PROMEDIO DE CONDUCTA: {{nota}}
+          // .col-xs
+          //   strong(:class="nota >= 10.5? 'green':'red'").sticker.m-b-0 PROMEDIO DE CONDUCTA: {{nota}}
     template(v-if='report')
         .container.target
           .row
@@ -21,6 +21,9 @@
                     tab(:name='rename(data.bimestre)' :selected='isTrue(index)')
                       .col-xs-12.m-t
                         .row
+                          .col-xs
+                            .sticker.m-b(:class="data.conducta >= 10.5? 'green':'red'") PROMEDIO DE CONDUCTA: {{data.conducta}}
+                        .row
                           template(v-for='observations in data.observaciones')
                             .col-xs-12.col-s-6.col-m-4.col-l-3.d-f
                               .card.m-b
@@ -32,7 +35,7 @@
                                     small.font-size-regular Concepto:
                                     h1.font-size-regular {{observations.observacion}}
                                   .col-xs-12.m-b-2
-                                    strong.sticker(:class="observations.puntos > 0? 'green':'red'") Puntos: {{observations.puntos}}
+                                    strong.sticker(:class="observations.puntos >= 0? 'green':'red'") Puntos: {{observations.puntos}}
                                   .col-xs-12.m-b-2
                                     small.font-size-regular Reportado por:
                                     h1.font-size-regular {{observations.reportadopor}}

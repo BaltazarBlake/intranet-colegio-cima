@@ -43,7 +43,6 @@ export default {
       report:null,
       heigth_horas: 0,
       width_dias: 0,
-      color_cursos: null,
       errors: null
     }
   },
@@ -71,21 +70,19 @@ export default {
       let hora_fin;
       let profe = "x";
       let id_profe;
-      // let aula = "x";
       let tmp_id = "id";
       let size = 0;
       let render_curso = "";
-      for (let h = 0; h < this.report.horas.length; h++) {
-        if (h == array_horas.length) {
-          break;
-        }
-        let curso = array_horas[h].curso;
 
+      let hoursDay = this.report.horas;
+      let courseDay = [];
+
+      for (let i = 0; i < array_horas.length; i++) {
+        let curso = array_horas[i].curso;
         if (tmp_curso != curso) {
           if (tmp_curso != "x") {
-            // let arr = this.color_cursos[tmp_id];
             render_curso += `
-            <div style='height:${this.heigth_horas * size}%;' class='course--desktop'>
+            <div style='height:${this.heigth_horas * size / 2}%;' class='course--desktop'>
               <div class='texto-curso' style=''>
                 <span class='horary__data--desktop font-size-regular'>${tmp_curso}</span>
                 <span class='horary__data--desktop font-size-small'>${profe}</span>
@@ -111,23 +108,22 @@ export default {
           `;
           }
           //comienza nuevo curso
-          tmp_curso = curso;
-          // aula = array_horas[h].numero_aula;
-          hora_inicio = array_horas[h].hora_inicio;
-          hora_fin = array_horas[h].hora_fin;
-          profe = array_horas[h].profesor;
-          id_profe = array_horas[h].idprofesor;
+          tmp_curso = curso;          
+          hora_inicio = array_horas[i].hora_inicio;
+          hora_fin = array_horas[i].hora_fin;
+          profe = array_horas[i].profesor;
+          id_profe = array_horas[i].idprofesor;
 
-          tmp_id = array_horas[h].id_curso;
+          tmp_id = array_horas[i].id_curso;
           size = 1;
         } else {
-          hora_fin = array_horas[h].hora_fin;
-          //mismo curso
+          hora_fin = array_horas[i].hora_fin;
+          // mismo curso
           size++;
         }
       }
       render_curso += `
-        <div style='height:${this.heigth_horas * size}%;' class='course--desktop'>
+        <div style='height:${this.heigth_horas * size / 2}%;' class='course--desktop'>
           <div class='texto-curso' style=''>
             <span class='horary__data--desktop font-size-regular'>${tmp_curso}</span>
             <span class='horary__data--desktop font-size-small'>${profe}</span>

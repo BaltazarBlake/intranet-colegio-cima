@@ -1,5 +1,5 @@
 <template lang="pug">
-  div.esto-tab(v-show='isActive')
+  div(v-show='isActive')
     slot
 </template>
 
