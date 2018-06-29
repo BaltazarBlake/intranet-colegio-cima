@@ -42,36 +42,57 @@
               tabs
                 template(v-for='(data,index) in detailExam.groups')
                   tab(:name='data.grupo' :selected='isTrue(index)')
-                    .col-xs-12.m-t
-                      .row
-                        .col-xs-12.m-b
-                          .card--ligth
-                            .row.cross-center
-                              .col-xs-12.col-s
-                                strong.font-size-large {{data.grupo}}
-                              .col-xs.col-s
-                                strong.tag.font-size-regular PESO: {{data.peso}}%
-                              .col-xs-12.col-s.m-t.m-b
-                                strong(:class="data.promedio >= 11? 'green':'red'").sticker.font-size-regular PROMEDIO: {{data.promedio}}
-                        .col-xs-12
-                          h1.font-size-regular EVALUACIONES
-                        template(v-for='exam in data.examenes')
-                          .col-xs-12.col-s-6.col-m-4.d-f
-                            .card
-                              .row
-                                .col-xs-12
-                                  small Evaluación:
-                                  h1.font-size-regular {{exam.evaluacion}}
-                                .col-xs-12
-                                  small Fecha:
-                                  h1.font-size-regular(v-text="format(exam.fecha)")
-                                .col-xs-12
-                                  small Instrumento:
-                                  h1.font-size-regular {{exam.instrumento}}
-                              .card__footer
+                    template(v-if='data.isCalc')
+                      .col-xs-12.m-t
+                        .table.shadow-1 
+                          .table-header
+                            .table-row
+                              .table-row-item Descripción
+                              .table-row-item Porcentaje
+                              .table-row-item Nota
+                              .table-row-item Puntos
+                          .table-body
+                            template(v-for="nota in data.notas")
+                              .table-row
+                                .table-row-item.font-size-small(data-header='Descripción') {{nota.grupo}}
+                                .table-row-item.font-size-small(data-header='Porcentaje') {{nota.peso}}
+                                .table-row-item.font-size-small(data-header='Nota') {{nota.nota}}
+                                .table-row-item.font-size-small(data-header='Puntos') {{nota.puntos}}
+                          .table-header
+                            .table-row
+                              .table-row-item.center.u-Flex-grow3 PROMEDIO ACUMULADO
+                              .table-row-item {{data.total}}
+                    template(v-else)
+                      .col-xs-12.m-t
+                        .row
+                          .col-xs-12.m-b
+                            .card--ligth
+                              .row.cross-center
+                                .col-xs-12.col-s
+                                  strong.font-size-large {{data.grupo}}
+                                .col-xs.col-s
+                                  strong.tag.font-size-regular PESO: {{data.peso}}%
+                                .col-xs-12.col-s.m-t.m-b
+                                  strong(:class="data.promedio >= 11? 'green':'red'").sticker.font-size-regular PROMEDIO: {{data.promedio}}
+                          .col-xs-12
+                            h1.font-size-regular EVALUACIONES
+                          template(v-for='exam in data.examenes')
+                            .col-xs-12.col-s-6.col-m-4.d-f
+                              .card
                                 .row
                                   .col-xs-12
-                                    strong.sticker(:class="exam.nota >= 11? 'green':'red'") Nota: {{exam.nota}}
+                                    small Evaluación:
+                                    h1.font-size-regular {{exam.evaluacion}}
+                                  .col-xs-12
+                                    small Fecha:
+                                    h1.font-size-regular(v-text="format(exam.fecha)")
+                                  .col-xs-12
+                                    small Instrumento:
+                                    h1.font-size-regular {{exam.instrumento}}
+                                .card__footer
+                                  .row
+                                    .col-xs-12
+                                      strong.sticker(:class="exam.nota >= 11? 'green':'red'") Nota: {{exam.nota}}
 
       template(v-else)
         .m-t-s
@@ -106,6 +127,35 @@ export default {
   created() {
     EventBus.$on("viewDetailExam", data => {
       this.detailExam = data;
+      let grupo = {
+        grupo:'CÁLCULO DEL PROMEDIO',
+        isCalc: true,
+        notas:[],
+        total:0
+      }
+
+      let i = 0;
+      let total = 0;
+      this.detailExam.groups.map(el=>{
+        if(el.isCalc){
+          i = 1;
+        }else{
+          let puntos = (parseFloat(el.peso)/100.0)*parseFloat(el.promedio);
+          puntos = Math.round(puntos*100)/100;
+          grupo.notas.push({
+            grupo:el.grupo,
+            peso:el.peso + '%',
+            nota:el.promedio,
+            puntos
+          })
+          total +=(parseFloat(el.peso)/100.0)*parseFloat(el.promedio);
+        }
+      })
+      total = Math.round(total*100)/100;
+      grupo.total = total;
+      console.log(grupo);
+      if(i!=1)
+        this.detailExam.groups.push(grupo);
       this.showModal = true;
     });
   },
