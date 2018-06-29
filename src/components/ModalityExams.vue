@@ -2,7 +2,7 @@
   div
     .band
       .container
-        h1.font-size-x-large Tus examenes
+        h1.font-size-x-large Tus exámenes
     template(v-if="report==1")
       .container.target
         .row

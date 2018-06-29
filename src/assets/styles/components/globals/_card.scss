@@ -1,5 +1,6 @@
 .card {
   @extend .shadow-1;
+  position: relative;
   width: 100%;
   padding: $gutter/1.7;
   margin-bottom: $gutter/2;
@@ -13,6 +14,12 @@
   &__body {
     display: flex;
     flex-wrap: wrap;
+  }
+
+  &__footer {
+    // position: absolute;
+    bottom: 0;
+    // padding: $gutter/2;
   }
   // CARD LIGTH
   &--ligth {

@@ -68,8 +68,10 @@
                                 .col-xs-12
                                   small Instrumento:
                                   h1.font-size-regular {{exam.instrumento}}
-                                .col-xs-12
-                                  strong.sticker(:class="exam.nota >= 11? 'green':'red'") Nota: {{exam.nota}}
+                              .card__footer
+                                .row
+                                  .col-xs-12
+                                    strong.sticker(:class="exam.nota >= 11? 'green':'red'") Nota: {{exam.nota}}
 
       template(v-else)
         .m-t-s
