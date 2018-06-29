@@ -12,9 +12,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  // padding: $gutter;
   @include z-index(modal);
-  // height: calc(80% - 2rem);
   width: 95%;
   top: 50%;
   left: 50%;
@@ -42,6 +40,9 @@
     
     @include MQ(XM) {
       height: 60vh;
+    }
+    @include MQ(M) {
+      height: 67vh;
     }
   }
 

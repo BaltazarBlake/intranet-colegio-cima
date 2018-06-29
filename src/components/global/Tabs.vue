@@ -1,5 +1,5 @@
 <template lang="pug">
-  div
+  .tabs__wrapper(:class="fixed? 'fixed':''")
     .col-xs-12
       .tabs
         ul.tabs__list
@@ -11,6 +11,12 @@
 
 <script>
 export default {
+  props: {
+    fixed: {
+      type: Boolean,
+      default: false
+    },
+  },
   data() {
     return {
       tabs:[],

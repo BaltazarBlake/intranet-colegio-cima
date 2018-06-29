@@ -1,10 +1,12 @@
 .tabs {
+  position: relative;
   display: flex;
   justify-content: flex-start;
   overflow-y: hidden;
   overflow-x: auto;
   height: 48px;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, .09);
+  @include z-index(origen);
 
   &__list {
     display: flex;
@@ -13,6 +15,17 @@
     height: 100%;
     flex-grow: 1;
     flex-shrink: 0;
+  }
+
+  &__wrapper {
+    &.fixed {
+      .tab__detail {
+        @include MQ(XM) {
+          max-height: 350px;
+          overflow: auto;
+        }
+      }
+    }
   }
 }
 
@@ -52,3 +65,4 @@
     width: 100%;
   }
 }
+

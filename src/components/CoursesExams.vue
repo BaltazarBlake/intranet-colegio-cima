@@ -39,7 +39,7 @@
         template(slot='body')
           .row
             .col-xs-12
-              tabs
+              tabs(:fixed="true")
                 template(v-for='(data,index) in detailExam.groups')
                   tab(:name='data.grupo' :selected='isTrue(index)')
                     .col-xs-12.m-t
@@ -58,16 +58,17 @@
                         template(v-for='exam in data.examenes')
                           .col-xs-12.col-s-6.col-m-4.d-f
                             .card
-                              .row
-                                .col-xs-12
-                                  small Evaluación:
-                                  h1.font-size-regular {{exam.evaluacion}}
-                                .col-xs-12
-                                  small Fecha:
-                                  h1.font-size-regular(v-text="format(exam.fecha)")
-                                .col-xs-12
-                                  small Instrumento:
-                                  h1.font-size-regular {{exam.instrumento}}
+                              .card__body
+                                .row
+                                  .col-xs-12
+                                    small Evaluación:
+                                    h1.font-size-regular {{exam.evaluacion}}
+                                  .col-xs-12
+                                    small Fecha:
+                                    h1.font-size-regular(v-text="format(exam.fecha)")
+                                  .col-xs-12
+                                    small Instrumento:
+                                    h1.font-size-regular {{exam.instrumento}}
                               .card__footer
                                 .row
                                   .col-xs-12

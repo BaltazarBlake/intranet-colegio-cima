@@ -54,7 +54,7 @@
                   .col-xs-12.m-b
                     strong.sticker.font-size-regular PUNTAJE {{data.puntaje}}
                   .col-xs-12.m-b
-                    strong.sticker.font-size-regular PUNTAJE BASE 20: {{data.nota}}
+                    strong.sticker.font-size-regular NOTA BASE 20: {{data.nota}}
                   .col-xs-12.m-b
                     .row
                       .col-xs-4

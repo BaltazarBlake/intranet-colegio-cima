@@ -19,9 +19,6 @@
     }
   }
 
-  @include MQ(XM) {
-  }
-
   // .Table-header
   &-header {
     display: none;
