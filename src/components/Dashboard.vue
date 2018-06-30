@@ -9,6 +9,7 @@
         //- Logo CIMA
         img(src="../assets/logo_colegio.svg", alt="Colegio CIMA").main-header__logo
         button(@click="showChildren" v-if="children").btn--warning.btn--change.is-active Cambiar
+        Children
     //- Main content
     main.main-content
       navigation
@@ -23,10 +24,11 @@
 </template>
 <script>
 import Navigation from './Navigation';
+import Children from './Children';
 import {EventBus} from '../event-bus.js';
 import {setLogeo} from '../functions/fetchFunctions';
 export default{
-  components:{Navigation},
+  components:{Navigation,Children},
   data(){
     return{
       children:false
