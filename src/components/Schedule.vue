@@ -44,9 +44,29 @@ export default {
       heigth_horas: 0,
       width_dias: 0,
       errors: null,
-      colors: {
-        
-      }
+      id:[],
+      colors: [
+        'EF5350',
+        'AB47BC',
+        '0097A7',
+        'FF9100',
+        'E0E0E0',
+        '78909C',
+        'A5D6A7',
+        '00d2d3',
+        'FFCC80',
+        '5f27cd',
+        '9E9D24',
+        '00E676',
+        'EEFF41',
+        'F48FB1',
+        '00E676',
+        'FDD835',
+        '474787',
+        '33d9b2',
+        'ff793f',
+        'EC407A',
+        ],
     }
   },
   async mounted(){
@@ -68,6 +88,7 @@ export default {
       this.width_dias = 100 / this.report.array_dias.length;
     },
     drawCurse(array_horas) {
+      console.log('-----')
       let tmp_curso = "x";
       let hora_inicio;
       let hora_fin;
@@ -76,16 +97,27 @@ export default {
       let tmp_id = "id";
       let size = 0;
       let render_curso = "";
-
+      let color;
       let hoursDay = this.report.horas;
       let courseDay = [];
+      let rgba; 
+      
 
       for (let i = 0; i < array_horas.length; i++) {
         let curso = array_horas[i].curso;
+        let id_curso = array_horas[i].id_curso;
+
+        
+
+        /*Color a RGBA*/
+        let r,g,b,rgba;
+        /*Color a RGBA*/
+
+
         if (tmp_curso != curso) {
-          if (tmp_curso != "x") {
+          if (tmp_curso != "x") {            
             render_curso += `
-            <div style='height:${this.heigth_horas * size / 2}%;' class='course--desktop'>
+            <div style='height:${this.heigth_horas * size / 2}%;background-color:#${color}' class='course--desktop'>
               <div class='texto-curso' style=''>
                 <span class='horary__data--desktop font-size-regular'>${tmp_curso}</span>
                 <span class='horary__data--desktop font-size-small'>${profe}</span>
@@ -118,6 +150,14 @@ export default {
           id_profe = array_horas[i].idprofesor;
 
           tmp_id = array_horas[i].id_curso;
+          // console.log(tmp_curso,' - ',tmp_id);
+          let i_id = this.id.indexOf(id_curso);
+          if(i_id===-1){
+            this.id.push(id_curso);
+          }
+          color = this.colors[this.id.indexOf(id_curso)];
+
+
           size = 1;
         } else {
           hora_fin = array_horas[i].hora_fin;
@@ -126,7 +166,7 @@ export default {
         }
       }
       render_curso += `
-        <div style='height:${this.heigth_horas * size / 2}%;' class='course--desktop'>
+        <div style='height:${this.heigth_horas * size / 2}%;background-color:#${color.toString(16)}' class='course--desktop'>
           <div class='texto-curso' style=''>
             <span class='horary__data--desktop font-size-regular'>${tmp_curso}</span>
             <span class='horary__data--desktop font-size-small'>${profe}</span>
