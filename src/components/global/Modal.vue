@@ -1,7 +1,7 @@
 <template lang='pug'>
   div
     template(v-if='active')
-      .modal
+      .modal(:class="alert? 'alert':''")
         div.modal__close(@click="close()")
           span.icon-close
         .modal__header
@@ -19,6 +19,10 @@ export default {
 
   props: {
     active: Boolean,
+    alert: {
+      type: Boolean,
+      default: false
+    }
   },
 
   created() {

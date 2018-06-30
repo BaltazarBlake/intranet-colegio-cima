@@ -2,7 +2,7 @@
   div
     .band 
       .container
-        h1.font-size-x-large En esta sección encontraras tu horario
+        h1.font-size-x-large En esta sección encontrarás tu horario
     template(v-if="report")
         .container.target
           .row.main-center
@@ -43,7 +43,10 @@ export default {
       report:null,
       heigth_horas: 0,
       width_dias: 0,
-      errors: null
+      errors: null,
+      colors: {
+        
+      }
     }
   },
   async mounted(){

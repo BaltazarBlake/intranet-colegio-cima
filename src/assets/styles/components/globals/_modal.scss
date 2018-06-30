@@ -73,5 +73,17 @@
       background-color: $red;
     }
   }
+
+  // TYPE
+  
+  // ALERT
+  &.alert {
+    width: 400px;
+    .modal__body {
+      min-height: 10vh;
+      height: auto;
+      max-height: 80%;
+    }
+  }
 }
 
