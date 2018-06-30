@@ -34,19 +34,40 @@
     template(v-else)
       .m-t-s
         spinner  
+    //- MODAL
+    modal(:active.sync="showModal", :alert="true")
+      template(slot='title')
+        .row.cross-center
+          .col-xs-12.col-s
+            strong.font-size-x-large Alerta!
+      template(slot='body')
+        .row
+          .col-xs-12
+            h1.font-size-large ¿Desea cerrar sesión?
+          .col-xs-12
+            .row.m-b
+              .col-xs
+                button.btn--danger(@click="cancelLogout()") CANCELAR
+              .col-xs
+                button.btn--default(@click="sendLogout()") ACEPTAR
 
 </template>
 
 <script>
+import Modal from "./global/Modal";
 import Spinner from './global/Spinner';
 import {token} from '../cfg/core';
 export default {
-  components: {Spinner},
+  components: {
+    Modal,
+    Spinner
+  },
   data() {
     return {
       report: null,
       profile: null,
       image: null,
+      showModal:false,
     }
   },
 
@@ -72,6 +93,12 @@ export default {
       this.image = 'dist/user.png';
     },
     logout() {
+      this.showModal = true;
+    },
+    cancelLogout() {
+      this.showModal = false;
+    },
+    sendLogout() {
        localStorage.removeItem(token);
       localStorage.removeItem('cima-estudiante');
       localStorage.removeItem('cima-children');

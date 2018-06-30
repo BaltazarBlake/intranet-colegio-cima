@@ -1,17 +1,24 @@
 <template lang="pug">
-  .card.aux-absolute
-    template(v-for="(data,index) in children")
-      .col-xs-12.col-s-6.col-m-4.d-f
-        .row.u-hover(@click="changeChildren(data)")
-          .profile__wrapper-image.x-small
-            img(:src='data.url_imagen', alt="").profile__user-image
-          .profile__description.row.main-center
-            .col-xs-12
-              h1.font-size-regular {{data.nombre}} 
+    Menu
+      span(slot='button') Cambiar
+      template(slot='body')
+        .row
+          template(v-for="(data,index) in children")
+            .col-xs-6.m-b
+              .row.main-center.u-hover(@click="changeChildren(data)")
+                .col-xs-12
+                  .profile__wrapper-image.x-small
+                    img(:src='data.url_imagen', alt="").profile__user-image
+                  .profile__description
+                      strong.font-size-regular {{data.nombre}}
 </template>
 
 <script>
+import Menu from "./global/Menu";
 export default {
+  components: {
+    Menu
+  },
   data(){
     return{
       children:[]
@@ -48,11 +55,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.aux-absolute{
-  position: absolute;
-  width: auto;
-  top:0;
-}
-</style>

@@ -60,7 +60,7 @@
             span Documentos Int.
     
 
-    // MODAL
+    //- MODAL
     modal(:active.sync="showModal", :alert="true")
       template(slot='title')
         .row.cross-center

@@ -2,7 +2,15 @@
   div
     .band
       .container
-        h1.font-size-x-large Bimestres:
+        .row.between
+          .col-xs
+            h1.font-size-x-large Bimestres:
+          .col-xs
+            .row.main-end.m-b
+              .col-xs
+                button.btn--warning.is-active(@click='viewReport()')
+                  span.icon-file-text
+                  span Reporte
     template(v-if='report')
       .container.target
         .row
@@ -97,6 +105,29 @@
       template(v-else)
         .m-t-s
           spinner
+    //- Reporte
+    report
+      template(slot='title') Reporte
+      template(slot='body')
+        .row
+          .col-xs-12
+            .table
+              .table-header
+                .table-row
+                  .table-row-item.u-Flex-grow2.font-size-small(data-header='Descripción') ÁREA CURRICULAR
+                  .table-row-item.u-Flex-grow1.font-size-small(data-header='Porcentaje') BIMESTRE
+                  .table-row-item.u-Flex-grow1.font-size-small(data-header='Nota') PROM.
+                  .table-row-item.u-Flex-grow1.font-size-small(data-header='Puntos') ACUM.
+                .table-row
+                  .table-row-item.u-Flex-grow2
+                  .u-Flex-grow1
+                    // .table-row
+                    .table-row-item.u-Flex-grow1.font-size-small(data-header='Descripción') I
+                    .table-row-item.u-Flex-grow1.font-size-small(data-header='Descripción') II
+                    .table-row-item.u-Flex-grow1.font-size-small(data-header='Descripción') III
+                    .table-row-item.u-Flex-grow1.font-size-small(data-header='Descripción') IV
+                  .table-row-item.u-Flex-grow2
+              .table-body
 
 </template>
 
@@ -108,12 +139,14 @@ import Spinner from "./global/Spinner";
 import Tabs from "./global/Tabs";
 import Tab from "./global/Tab";
 import Modal from "./global/Modal";
+import Report from './global/Report';
 import Course from "./Course";
 export default {
   components: {
     Spinner,
     Course,
     Modal,
+    Report,
     Tabs,
     Tab
   },
@@ -187,7 +220,11 @@ export default {
       let dates = el.split("-");
       let date = formatDate(dates[0], dates[1], dates[2]);
       return date;
-    }
+    },
+    viewReport() {
+      // this.showModalJustify = false;
+      EventBus.$emit('showReport');
+    },
   }
 };
 </script>

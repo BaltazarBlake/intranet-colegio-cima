@@ -1,0 +1,11 @@
+.menu {
+  @extend .card;
+  position: absolute;
+  width: 230px;
+  right: 0;
+  margin-top: $gutter/6;
+
+  &__wrapper {
+    position: relative;
+  }
+}
