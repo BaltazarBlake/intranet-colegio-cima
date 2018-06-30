@@ -4,3 +4,9 @@
 .u-bold{
   font-weight: bold;
 }
+.u-hover{
+  cursor:pointer;
+  &:hover{
+    opacity: .6;
+  }
+}
