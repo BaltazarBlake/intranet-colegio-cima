@@ -2,11 +2,11 @@
   div
     .band
       .container
-        .row.between
+        .row.cross-center
           .col-xs
             h1.font-size-x-large Bimestres:
           .col-xs
-            .row.main-end.m-b
+            .row.m-b
               .col-xs
                 button.btn--warning.is-active(@click='viewReport()')
                   span.icon-file-text
@@ -111,23 +111,57 @@
       template(slot='body')
         .row
           .col-xs-12
+            // .table
+            //   .table-header
+            //     .table-row
+            //       .table-row-item.u-Flex-grow2.font-size-small(data-header='Descripción') ÁREA CURRICULAR
+            //       .table-row-item.u-Flex-grow4.font-size-small(data-header='Porcentaje') BIMESTRE
+            //       .table-row-item.u-Flex-grow1.font-size-small(data-header='Nota') PROM.
+            //       .table-row-item.u-Flex-grow1.font-size-small(data-header='Puntos') ACUM.
+            //     // .table-row
+            //     //   .table-row-item.u-Flex-grow2
+            //     //   .table-row-item.u-Flex-grow1.font-size-small(data-header='Descripción') I
+            //     //   .table-row-item.u-Flex-grow1.font-size-small(data-header='Descripción') II
+            //     //   .table-row-item.u-Flex-grow1.font-size-small(data-header='Descripción') III
+            //     //   .table-row-item.u-Flex-grow1.font-size-small(data-header='Descripción') IV
+            //     //   .table-row-item.u-Flex-grow2
+            //   .table-body
+            //     .table-row
+            //       .table-row-item.u-Flex-grow2
             .table
               .table-header
-                .table-row
-                  .table-row-item.u-Flex-grow2.font-size-small(data-header='Descripción') ÁREA CURRICULAR
-                  .table-row-item.u-Flex-grow4.font-size-small(data-header='Porcentaje') BIMESTRE
-                  .table-row-item.u-Flex-grow1.font-size-small(data-header='Nota') PROM.
-                  .table-row-item.u-Flex-grow1.font-size-small(data-header='Puntos') ACUM.
-                // .table-row
-                //   .table-row-item.u-Flex-grow2
-                //   .table-row-item.u-Flex-grow1.font-size-small(data-header='Descripción') I
-                //   .table-row-item.u-Flex-grow1.font-size-small(data-header='Descripción') II
-                //   .table-row-item.u-Flex-grow1.font-size-small(data-header='Descripción') III
-                //   .table-row-item.u-Flex-grow1.font-size-small(data-header='Descripción') IV
-                //   .table-row-item.u-Flex-grow2
-              .table-body
-                .table-row
-                  .table-row-item.u-Flex-grow2
+                table
+                  thead
+                    tr
+                      th(rowspan="2") ÁREA CURRICULAR
+                      th(colspan="8") BIMESTRE
+                      th(rowspan="2", colspan="2") PROM.
+                      th(rowspan="2") ACUM.
+                    tr
+                      th(colspan="2") I
+                      th(colspan="2") II
+                      th(colspan="2") III
+                      th(colspan="2") IV
+              .table-content
+                table
+                  tbody
+                    tr
+                      td() Lenguaje
+                      td(colspan="2") 12
+                      td(colspan="2")
+                      td(colspan="2")
+                      td(colspan="2")
+                      td(colspan="2") 12
+                      td(colspan="2") 12
+                    - for (var x = 0; x < 10; x++)
+                      tr
+                        td() ALGEBRA
+                        td(colspan="2") 10
+                        td(colspan="2")
+                        td(colspan="2")
+                        td(colspan="2")
+                        td(colspan="2") 10
+                        td(colspan="2") 10
 
 </template>
 

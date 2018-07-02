@@ -1,107 +1,57 @@
 .table {
-  $header-color: #FAFAFA;
-  $light-color: #ffffff;
-  $dark-color: #F9F9F9;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  width: 100%;
+  overflow: hidden;
+  overflow-x: auto;
   margin-bottom: $gutter/2;
-  font-size: 1rem;
-  line-height: 1.5;
+  @extend .shadow-1;
 
-  &.header-fixed {
-      // .Table-body
-    .table-body {
-      @include MQ(XM) {
-        max-height: 400px;
-        overflow: auto;
-      }
-    }
-  }
-
-  // .Table-header
-  &-header {
-    display: none;
-    visibility: hidden;
-    @include MQ(XM) {
-      font-weight: 700;
-      display: block;
-      visibility: visible;
-      width: 100%;
-    }
-    .table-row-item {
-      background-color: $header-color;
-
-      &.center {
-        justify-content: center;
-      }
-    }
-  }
-  // .Table-body
-  &-body {
-    // max-height: 400px;
-    // overflow: auto;
-    @include MQ(XM) {
-      // margin-top: 50px;
-    }
-  }
-
-  // .Table-row
-  &-row {
+  & table {
     width: 100%;
-    &:nth-of-type(even) {
-      background-color:darken($dark-color, 10%);
+    border-spacing: 0;
+    border-collapse: collapse;
+    & thead th,
+    & tbody td {
+      padding: $gutter/2 $gutter/2;
+      text-align: left;
     }
-    &:nth-of-type(odd) {
-      background-color: $light-color;
+  
+    & thead {
+      & th {
+        height: 30px;
+      }
     }
-    @include MQ(XM) {
-      display: flex;
-      flex-flow: row nowrap;
-      &:nth-of-type(even) {
-        background-color: $light-color;
+  
+    & tbody {
+      & td {
+        border-top: 1px solid rgba(0,0,0,.15);
+        color: #333;
       }
-      &:nth-of-type(odd) {
-        background-color: $dark-color;
-      }
-    } 
-    // .Table-row-item
-    &-item {
-      display: flex;
-      flex-flow: row nowrap;
-      flex-grow: 1;
-      flex-basis: 0;
-      padding: 12px 6px;
-      word-break: break-word;
-      
-      &:before {
-        content: attr(data-header);
-        width: 50%;
-        font-weight: 700;
-      }
-      @include MQ(XM) {
-        border-top: 1px solid rgba(0, 0, 0, .04);
-        border-bottom: 1px solid rgba(0, 0, 0, .04);
-        padding: 12px 6px;
-        &:before {
-          content: none;
-        }
-      }
+    }
+  
+  }
+  
+  & .table-header,
+  & .table-content {
+    width: 100%;
+    position: relative;
+  }
+
+  & .table-header {
+    box-shadow: 0 0 20px 0 rgba(0,0,0,.09);
+  }
+
+  & .table-content {
+    // display: flex;
+    // flex: 1;
+  }
+  
+  &.header-fixed {
+    & .table-content {
+      max-height: 400px;
+      // overflow-y: auto;
+      // overflow-x: hidden;
+
     }
   }
+
 }
-
-@for $i from 1 through 10 {
-  .u-Flex-grow#{$i} {
-    flex-grow: #{$i};
-  }
-}
-
-
-
-// <div class="tbl-content">
-//   <table cellpadding="0" cellspacing="0" border="0">
-// $(window).on("load resize ", function() {
-//   var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
-//   $('.tbl-header').css({'padding-right':scrollWidth});
-// }).resize();
