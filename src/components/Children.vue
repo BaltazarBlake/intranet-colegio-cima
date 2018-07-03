@@ -38,7 +38,7 @@ export default {
   },
   methods:{
     changeChildren(data){
-      let path = this.$router.history.current.path;
+      // let path = this.$router.history.current.path;
       localStorage.removeItem('cima-estudiante-asistencia');
       localStorage.removeItem('cima-estudiante-classmates');
       localStorage.removeItem('cima-estudiante-cursos');
@@ -50,7 +50,8 @@ export default {
       localStorage.removeItem('cima-estudiante-events');
       localStorage.removeItem('cima-estudiante-payment');
       localStorage.setItem('cima-estudiante',JSON.stringify(data));
-      this.$router.go(path);
+      this.$router.replace('/Dashboard');
+      location.reload();
     }
   }
 }

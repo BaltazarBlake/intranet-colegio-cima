@@ -2,7 +2,15 @@
   div
     .band 
       .container
-        h1.font-size-x-large En esta sección encontrarás tu horario
+        .row.cross-center
+          .col-xs
+            h1.font-size-x-large En esta sección encontrarás tu horario
+          .col-xs.u-mla
+            .row.m-b
+              .col-xs(v-if="report!=1")
+                button(@click="print('print')").btn--warning.is-active
+                  span.icon-printer
+                  span Imprimir
     template(v-if="report")
         .container.target
           .row.main-center
@@ -11,7 +19,8 @@
                   article.message-not-available.row.main-center.cross-center
                     h1.title2 Horario aún no disponible.
             template(v-else)
-              div
+              div#print
+                p.print__title {{alumno.nombre}} {{alumno.apellido}} {{alumno.grado}} {{alumno.seccion}}
                 .horary
                   .horary__header
                     .horary__cell(:style="'width:'+width_dias+'%'")
@@ -44,6 +53,7 @@ export default {
       heigth_horas: 0,
       width_dias: 0,
       errors: null,
+      alumno:null,
       id:[],
       colors: [
         'EF5350',
@@ -75,9 +85,9 @@ export default {
   methods:{
     async getData(){
       let res;
+      this.alumno = JSON.parse(localStorage.getItem('cima-estudiante'));
       if(!localStorage.getItem('cima-estudiante-horario')){
-        let data = JSON.parse(localStorage.getItem('cima-estudiante'));
-        res = await getSchedule(data.idalumnocolegio);
+        res = await getSchedule(this.alumno.idalumnocolegio);
         res = res.data;
         localStorage.setItem('cima-estudiante-horario',JSON.stringify(res));
       }else{
@@ -191,6 +201,38 @@ export default {
         </div>
       `;
       return render_curso;
+    },
+     print(idReport) {
+      let report = document.getElementById(idReport);
+      let style = document.styleSheets;
+
+      let rules = [];
+      let styleString = '';
+
+      for (let i = 0; i < style.length; i++) {
+        rules.push(style[i].cssRules);
+        for (let j = 0; j < rules[i].length; j++) {
+          styleString += rules[i][j].cssText;
+        }
+      }
+
+      let print =
+        "<!DOCTYPE html>" +
+        "<html lang='en'>" +
+        "<head>" +
+        "<style>"+ styleString +"</style>" +
+        "<meta charset='UTF-8'>" +
+        "<meta name='viewport' content='width=device-width, initial-scale=1.0'>" +
+        "<title>Reporte</title>" +
+        "<style> button {display: none}</style>" +
+        "</head>" +
+        "<body onload='window.print();window.close()' class='container'>";
+
+      print += report.outerHTML + "</body>" + "</html>";
+
+      let printWindow = window.open("", "_blank");
+      printWindow.document.write(print);
+      printWindow.document.close();
     }
   }  
 }

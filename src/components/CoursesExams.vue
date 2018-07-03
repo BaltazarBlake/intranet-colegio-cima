@@ -134,17 +134,17 @@
                   thead
                     tr
                       th(rowspan="2") ÁREA CURRICULAR
-                      th(colspan="8") BIMESTRE
+                      th(:colspan="report[0].examenes.length*2" v-if="reportPrint") BIMESTRE
                       th(rowspan="2", colspan="2") PROM.
                       th(rowspan="2") ACUM.
                     tr
                       th(colspan="2") I
                       th(colspan="2") II
-                      th(colspan="2") III
-                      th(colspan="2") IV
               .table-content
                 table
                   tbody
+                    tr(v-for="data in reportPrint")
+                     td(:colspan="report[0].examenes.length*2 + 6" v-if="reportPrint") {{data.area}}
                     tr
                       td() Lenguaje
                       td(colspan="2") 12
@@ -242,6 +242,7 @@ export default {
         res = JSON.parse(localStorage.getItem("cima-estudiante-cursos"));
       }
       this.report = res;
+      this.printReport();
     },
     isTrue(el) {
       if (el == 0) {
@@ -260,6 +261,74 @@ export default {
       // this.showModalJustify = false;
       EventBus.$emit('showReport');
     },
+    printReport(){
+      this.reportPrint = this.report[0].examenes;
+      let areas = [];
+      let cursos = [];
+      let notas = [];
+      this.reportPrint.map(el=>{
+        el.cursos.map(curso=>{
+          let area = curso.area;
+          if(!areas.includes(area)){
+            areas.push(area);
+          }
+        })
+      });
+      areas.map(area=>{
+        let mc = [];
+        this.reportPrint.map(el=>{
+          let bimestre = el.bimestre;
+          el.cursos.map(curso=>{
+            if(area==curso.area && !mc.includes(curso.curso)){
+              mc.push(curso.curso);
+            }
+          })
+        })
+        cursos.push(mc)
+      })
+      cursos.map(curso=>{
+        curso.map(el=>{
+          let nt = [];
+          let prom = 0; 
+          let cont = 0;
+          this.reportPrint.map(ec=>{
+            let bimestre = ec.bimestre;
+            ec.cursos.map(cur=>{
+              if(el==cur.curso){
+                prom += cur.promedio;
+                cont++;
+                nt.push({
+                  nota:cur.promedio,
+                  bimestre,
+                })
+              }
+            })
+          })
+          let promedio = parseFloat(prom)/parseFloat(cont);
+          promedio = Math.round(promedio*100)/100;
+          notas.push({
+            curso:el,
+            notas:nt,
+            promedio
+          });
+        })
+      })
+      cursos.map(curso=>{
+        let cu = [];
+        notas.map(nota=>{
+          if(curso.includes(nota.curso)){
+            cu.push(nota);
+          }
+        })
+        let index = cursos.indexOf(curso);
+        let area = areas[index];
+        areas[index] = {
+          area,
+          cursos:cu
+        }
+      })
+      this.reportPrint = areas;
+    }
   }
 };
 </script>

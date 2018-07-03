@@ -13,13 +13,15 @@
       transform: translateX(0);
     }
   }
+  &__title{
+    display: none;
+  }
 }
 
 
 @media print {
 
   .print {
-
     &__img {
       position: absolute;
       left: 0;
@@ -44,7 +46,88 @@
     &__m-t {
       margin-top: 5.5cm;
     }
+    &__title{
+      display: block;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
   }
   
+  .horary--movile {
+    display: none;
+  }
 
+  .horary {
+    box-shadow: 0 2px 4px -1px rgba(0,0,0,.2),0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12);
+
+    &__data--desktop,
+    &__header,
+    &__hours {
+      display: flex;
+      justify-content: center;
+    }
+
+    &__hours {
+      align-items: center;
+      border-bottom: 1px solid #ccc;
+    }
+
+    &__header {
+      height: 50px;
+    }
+    &__body {
+      display: flex;
+      height: 550px;
+      margin-bottom: $gutter;
+    }
+    &__cell {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #21548c;
+      &-title {
+        color: #fff;
+      }
+    }
+    &__column,
+    &__column--desktop {
+      height: 100%;
+    }
+    &__column {
+      border-bottom: 1px solid #ccc;
+      width: $width-horary/6;
+    }
+  }
+
+  .day {
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0;
+    height: 100%;
+    color: #FFF;
+    &__title {
+      display: none;
+    }
+  }
+
+  .course--desktop {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: $gutter/3;
+    border-left: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    background-color: #f7f7f7;
+  }
+
+  // hacks 
+
+  .texto-curso {
+    text-align: center;
+  }
+
+  .column-w {
+    width: $width-horary/6;
+  }
 }
