@@ -135,33 +135,23 @@
                     tr
                       th(rowspan="2") ÁREA CURRICULAR
                       th(:colspan="report[0].examenes.length*2" v-if="reportPrint") BIMESTRE
-                      th(rowspan="2", colspan="2") PROM.
-                      th(rowspan="2") ACUM.
+                      th(rowspan="2", colspan="2") PROM. ACUM.
                     tr
                       th(colspan="2") I
                       th(colspan="2") II
               .table-content
                 table
                   tbody
-                    tr(v-for="data in reportPrint")
-                     td(:colspan="report[0].examenes.length*2 + 6" v-if="reportPrint") {{data.area}}
-                    tr
-                      td() Lenguaje
-                      td(colspan="2") 12
-                      td(colspan="2")
-                      td(colspan="2")
-                      td(colspan="2")
-                      td(colspan="2") 12
-                      td(colspan="2") 12
-                    - for (var x = 0; x < 10; x++)
-                      tr
-                        td() ALGEBRA
-                        td(colspan="2") 10
-                        td(colspan="2")
-                        td(colspan="2")
-                        td(colspan="2")
-                        td(colspan="2") 10
-                        td(colspan="2") 10
+                    template(v-for="data in reportPrint")
+                      td.u-gray(:colspan="report[0].examenes.length*2 + 4" v-if="reportPrint") {{data.area}}
+                      template(v-for="c in data.cursos")
+                        tr
+                          td(colspan="2") {{c.curso}}
+                          template(v-for="nota in c.notas")
+                            td(colspan="2") {{nota.nota}}
+                            // td(:colspan="2*(report[0].examenes.length - c.notas.length) + 2")
+                          td.u-mla(colspan="2") {{c.promedio}}
+                    
 
 </template>
 
