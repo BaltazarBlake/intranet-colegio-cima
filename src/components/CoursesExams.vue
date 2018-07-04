@@ -137,17 +137,17 @@
             //               template(v-for="n in (4- c.notas.length)")
             //                 td(colspan="2") -
             //               td.u-mla(colspan="2") {{c.promedio}}
-            table.header-fixed
+            table
               thead
                 tr
                   th(rowspan="2", colspan="2") ÁREA CURRICULAR
-                  th(colspan="8" v-if="reportPrint") BIMESTRE
-                  th(rowspan="2", colspan="2") PROM. ACUM.
+                  th(colspan="8" v-if="reportPrint").u-center BIMESTRE
+                  th(rowspan="2", colspan="2").u-center PROM. ACUM.
                 tr
-                  th(colspan="2") I
-                  th(colspan="2") II
-                  th(colspan="2") III
-                  th(colspan="2") IV
+                  th(colspan="2").u-center I
+                  th(colspan="2").u-center II
+                  th(colspan="2").u-center III
+                  th(colspan="2").u-center IV
               tbody
                 template(v-for="data in reportPrint")
                   td.u-gray(colspan="12" v-if="reportPrint") {{data.area}}
@@ -155,10 +155,13 @@
                     tr
                       td(colspan="2") {{c.curso}}
                       template(v-for="nota in c.notas")
-                        td(colspan="2") {{nota.nota}}
+                        td(colspan="2" :class="nota.nota<data.minima? 'text-danger': ''").u-center {{nota.nota}}
                       template(v-for="n in (4- c.notas.length)")
-                        td(colspan="2") -
-                      td.u-mla(colspan="2") {{c.promedio}}
+                        td(colspan="2").u-center -
+                      td.u-mla(colspan="2" :class="c.promedio<data.minima? 'text-danger':''").u-center {{c.promedio}}
+                  tr
+                    td.u-center.font-size-x-medium(colspan="10") PROMEDIO
+                    td(colspan="2" v-if="reportPrint" :class="data.promedio<data.minima? 'text-danger':''") {{data.promedio}}
                     
 
 </template>
@@ -296,14 +299,15 @@ export default {
                 prom += cur.promedio;
                 cont++;
                 nt.push({
-                  nota:cur.promedio,
+                  nota:Math.round(cur.promedio)<10? `0${Math.round(cur.promedio)}`:Math.round(cur.promedio),
                   bimestre,
+                  minima:cur.notaminima
                 })
               }
             })
           })
           let promedio = parseFloat(prom)/parseFloat(cont);
-          promedio = Math.round(promedio*100)/100;
+          promedio = Math.round(promedio)<10? `0${Math.round(promedio)}`:Math.round(promedio);
           notas.push({
             curso:el,
             notas:nt,
@@ -312,7 +316,10 @@ export default {
         })
       })
       cursos.map(curso=>{
+        let prom = 0;
+        let cont = 0;
         let cu = [];
+        let min = notas[0].notas[0].minima;
         notas.map(nota=>{
           if(curso.includes(nota.curso)){
             cu.push(nota);
@@ -320,9 +327,16 @@ export default {
         })
         let index = cursos.indexOf(curso);
         let area = areas[index];
+        cu.map(el=>{
+          prom += parseInt(el.promedio);
+          cont++;
+        });
+        let p = parseFloat(prom)/parseFloat(cont);
         areas[index] = {
           area,
-          cursos:cu
+          cursos:cu,
+          promedio:Math.round(p)<10? `0${Math.round(p)}`: Math.round(p),
+          minima:min
         }
       })
       this.reportPrint = areas;
