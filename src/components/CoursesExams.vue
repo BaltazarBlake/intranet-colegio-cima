@@ -111,23 +111,6 @@
       template(slot='body')
         .row
           .col-xs-12
-            // .table
-            //   .table-header
-            //     .table-row
-            //       .table-row-item.u-Flex-grow2.font-size-small(data-header='Descripción') ÁREA CURRICULAR
-            //       .table-row-item.u-Flex-grow4.font-size-small(data-header='Porcentaje') BIMESTRE
-            //       .table-row-item.u-Flex-grow1.font-size-small(data-header='Nota') PROM.
-            //       .table-row-item.u-Flex-grow1.font-size-small(data-header='Puntos') ACUM.
-            //     // .table-row
-            //     //   .table-row-item.u-Flex-grow2
-            //     //   .table-row-item.u-Flex-grow1.font-size-small(data-header='Descripción') I
-            //     //   .table-row-item.u-Flex-grow1.font-size-small(data-header='Descripción') II
-            //     //   .table-row-item.u-Flex-grow1.font-size-small(data-header='Descripción') III
-            //     //   .table-row-item.u-Flex-grow1.font-size-small(data-header='Descripción') IV
-            //     //   .table-row-item.u-Flex-grow2
-            //   .table-body
-            //     .table-row
-            //       .table-row-item.u-Flex-grow2
             .table
               .table-header
                 table
@@ -149,7 +132,8 @@
                           td(colspan="2") {{c.curso}}
                           template(v-for="nota in c.notas")
                             td(colspan="2") {{nota.nota}}
-                            // td(:colspan="2*(report[0].examenes.length - c.notas.length) + 2")
+                            template(v-for="n in (report[0].examenes.length - c.notas.length)")
+                              td(colspan="2") -
                           td.u-mla(colspan="2") {{c.promedio}}
                     
 
