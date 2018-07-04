@@ -130,4 +130,17 @@
   .column-w {
     width: $width-horary/6;
   }
+
+  .table {
+    &.header-fixed {
+      & .table-body {
+        max-height: initial;
+        overflow: hidden;
+      }
+    }
+    &-row-item {
+      padding: 0;
+    }
+    
+  }
 }

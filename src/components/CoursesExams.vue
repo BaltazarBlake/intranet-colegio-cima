@@ -109,19 +109,32 @@
     report
       template(slot='title') Reporte
       template(slot='body')
-        .row
+        .row#print
+          .print__header.col-xs-12
+            .row
+              .col-xs-12
+                .p-r
+                  img(src='../assets/logo_colegio.svg').print__img
+              .col-xs-12
+                .row.main-center
+                  .col-xs-12
+                    template(v-if='dataStudent')
+                      h1.font-size-x-large {{dataStudent.nombre}} {{dataStudent.apellido}}
+                      h2.font-size-regular {{dataStudent.nivel}} - {{dataStudent.grado}} {{dataStudent.seccion}}
+                    template(v-else)
+                      spinner
           .col-xs-12
             .table.header-fixed
               .table-header
                 .table-row
                   .table-row-item.u-Flex-grow5 ÁREA CURRICULAR
-                  .table-row-item.sub-row.u-Flex-grow4 BIMESTRE
+                  .table-row-item.sub-row.u-Flex-grow4.center BIMESTRE
                     .table-row
-                      .table-row-item I
-                      .table-row-item II
-                      .table-row-item III
-                      .table-row-item IV
-                  .table-row-item.u-Flex-grow3 PROM. ACUM.
+                      .table-row-item.center I
+                      .table-row-item.center II
+                      .table-row-item.center III
+                      .table-row-item.center IV
+                  .table-row-item.u-Flex-grow3.center PROM. ACUM.
               .table-body
                 template(v-for="data in reportPrint")
                   .table-row
@@ -131,13 +144,13 @@
                       .table-row-item.u-Flex-grow5 {{c.curso}}
                       // .table-row-item.u-Flex-grow4
                       template(v-for="nota in c.notas")
-                        .table-row-item(:class="nota.nota<data.minima? 'text-danger': ''") {{nota.nota}}
+                        .table-row-item.center(:class="nota.nota<data.minima? 'text-danger': ''") {{nota.nota}}
                       template(v-for="n in (4- c.notas.length)")
-                        .table-row-item -
-                      .table-row-item.u-Flex-grow3(:class="c.promedio<data.minima? 'text-danger':''") {{c.promedio}}
+                        .table-row-item.center -
+                      .table-row-item.u-Flex-grow3.center(:class="c.promedio<data.minima? 'text-danger':''") {{c.promedio}}
                   .table-row
-                    .table-row-item.u-Flex-grow9 PROMEDIO
-                    .table-row-item.u-Flex-grow3(v-if="reportPrint" :class="data.promedio<data.minima? 'text-danger':''") {{data.promedio}}
+                    .table-row-item.u-Flex-grow9.center PROMEDIO
+                    .table-row-item.u-Flex-grow3.center(v-if="reportPrint" :class="data.promedio<data.minima? 'text-danger':''") {{data.promedio}}
 
 </template>
 
@@ -165,7 +178,9 @@ export default {
       report: null,
       detailExam: null,
       showModal: false,
-      reportPrint: null
+      reportPrint: null,
+      dataStudent: null,
+      section: null,
     };
   },
   created() {
@@ -234,6 +249,7 @@ export default {
       return date;
     },
     viewReport() {
+      this.dataStudent = JSON.parse(localStorage.getItem("cima-estudiante"));
       // this.showModalJustify = false;
       EventBus.$emit('showReport');
     },

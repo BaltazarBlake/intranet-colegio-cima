@@ -34,12 +34,12 @@
   }
 
   &__body {
-    height: 40vh;
+    height: 65vh;
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: auto;
     
     @include MQ(XM) {
-      height: 60vh;
+      // height: vh;
     }
     @include MQ(M) {
       height: 67vh;
@@ -64,9 +64,12 @@
     transition: all .3s ease-in-out;
     background-color: darken($snow , 1%);
     // background-color: teal;
-    position: absolute;
-    top: -$gutter - .7;
-    right: 0;
+
+    @include MQ(XM) {
+      position: absolute;
+      top: -$gutter - .7;
+      right: 0;
+    }
 
     &:hover {
       color: #FFF;

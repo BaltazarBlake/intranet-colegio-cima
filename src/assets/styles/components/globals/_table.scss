@@ -5,6 +5,7 @@
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-between;
+  min-width: 450px;
   margin-bottom: $gutter/2;
   font-size: 1rem;
   @extend .shadow-1;
@@ -13,58 +14,41 @@
     .table-header {
       box-shadow: 0 0 20px 0 rgba(0, 0, 0, .09);
       position: relative;
-    }
-    // .Table-body
+    } // .Table-body
     .table-body {
-      @include MQ(XM) {
-        max-height: 400px;
-        overflow: auto;
-      }
+      max-height: 400px;
+      overflow: auto;
     }
-  }
-  @include MQ(XM) {}
+  } 
   // .Table-header
   &-header {
-    display: none;
-    visibility: hidden;
+    display: block;
+    visibility: visible;
+    width: 100%;
     height: 70px;
-    @include MQ(XM) {
-      font-weight: 700;
-      display: block;
-      visibility: visible;
-      width: 100%;
-    }
+    font-weight: 700;
+    @include MQ(XM) {}
     .table-row {
       height: 100%;
       &-item {
         background-color: $header-color;
         align-items: center;
-        &.center {
-          justify-content: center;
-        }
+        
       }
     }
-  }
+  } 
   // .Table-body
   &-body {}
   // .Table-row
   &-row {
     width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
     &:nth-of-type(even) {
-      background-color: darken($dark-color, 10%);
-    }
-    &:nth-of-type(odd) {
       background-color: $light-color;
     }
-    @include MQ(XM) {
-      display: flex;
-      flex-flow: row nowrap;
-      &:nth-of-type(even) {
-        background-color: $light-color;
-      }
-      &:nth-of-type(odd) {
-        background-color: $dark-color;
-      }
+    &:nth-of-type(odd) {
+      background-color: $dark-color;
     } 
     // .Table-row-item
     &-item {
@@ -72,7 +56,14 @@
       flex-flow: row nowrap;
       flex-grow: 1;
       flex-basis: 0;
-      word-break: break-word;
+      // word-break: break-word;
+      border-top: 1px solid rgba(0, 0, 0, .04);
+      border-bottom: 1px solid rgba(0, 0, 0, .04);
+      border-left: 1px solid rgba(0, 0, 0, .04);
+      padding: $gutter/3 $gutter/2;
+      &.center {
+        justify-content: center;
+      }
       &.sub-row {
         display: flex;
         flex-wrap: wrap;
@@ -92,20 +83,7 @@
           margin-right: -$gutter/2;
         }
       }
-      &:before {
-        content: attr(data-header);
-        width: 50%;
-        font-weight: 700;
-      }
-      @include MQ(XM) {
-        border-top: 1px solid rgba(0, 0, 0, .04);
-        border-bottom: 1px solid rgba(0, 0, 0, .04);
-        border-left: 1px solid rgba(0, 0, 0, .04);
-        padding: $gutter/3 $gutter/2;
-        &:before {
-          content: none;
-        }
-      }
+      
     }
   }
 }
