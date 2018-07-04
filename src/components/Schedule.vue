@@ -73,9 +73,9 @@ export default {
         '00E676',
         'FDD835',
         '474787',
-        '33d9b2',
-        'ff793f',
-        'EC407A',
+        'E3F2FD',
+        'FFE0B2',
+        'FFEBEE',
         ],
     }
   },

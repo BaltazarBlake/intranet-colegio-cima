@@ -1,38 +1,127 @@
-table {
-  width: 100%;
-  overflow: hidden;
-  overflow-x: auto;
+.table {
+  $header-color: #fff;
+  $light-color: #ffffff;
+  $dark-color: #fff;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
   margin-bottom: $gutter/2;
-  border-spacing: 0;
-  border-collapse: collapse;
+  font-size: 1rem;
   @extend .shadow-1;
-
-  & thead th,
-  & tbody td {
-    padding: $gutter/2 $gutter/2;
-    text-align: left;
-  }
-
-  & thead {
-    & th {
-      height: 30px;
-    }
-  }
-
-  & tbody {
-    & td {
-      border-top: 1px solid rgba(0,0,0,.15);
-      color: #333;
-    }
-  }
-  
   &.header-fixed {
-    & tbody {
-      max-height: 400px;
-      overflow-y: auto;
-      overflow-x: hidden;
-
+    // .Table-header
+    .table-header {
+      box-shadow: 0 0 20px 0 rgba(0, 0, 0, .09);
+      position: relative;
+    }
+    // .Table-body
+    .table-body {
+      @include MQ(XM) {
+        max-height: 400px;
+        overflow: auto;
+      }
     }
   }
-
+  @include MQ(XM) {}
+  // .Table-header
+  &-header {
+    display: none;
+    visibility: hidden;
+    height: 70px;
+    @include MQ(XM) {
+      font-weight: 700;
+      display: block;
+      visibility: visible;
+      width: 100%;
+    }
+    .table-row {
+      height: 100%;
+      &-item {
+        background-color: $header-color;
+        align-items: center;
+        &.center {
+          justify-content: center;
+        }
+      }
+    }
+  }
+  // .Table-body
+  &-body {}
+  // .Table-row
+  &-row {
+    width: 100%;
+    &:nth-of-type(even) {
+      background-color: darken($dark-color, 10%);
+    }
+    &:nth-of-type(odd) {
+      background-color: $light-color;
+    }
+    @include MQ(XM) {
+      display: flex;
+      flex-flow: row nowrap;
+      &:nth-of-type(even) {
+        background-color: $light-color;
+      }
+      &:nth-of-type(odd) {
+        background-color: $dark-color;
+      }
+    } 
+    // .Table-row-item
+    &-item {
+      display: flex;
+      flex-flow: row nowrap;
+      flex-grow: 1;
+      flex-basis: 0;
+      word-break: break-word;
+      &.sub-row {
+        display: flex;
+        flex-wrap: wrap;
+        & .table-row-main-item {
+          min-width: 100%;
+        }
+        & .table-row-item {
+          padding: 0 $gutter/2;
+          border-top: none;
+          border-bottom: none;
+        }
+        & .table-row {
+          display: flex;
+          height: 50%;
+          width: calc(100% + 1.7rem);
+          margin-left: -$gutter/2;
+          margin-right: -$gutter/2;
+        }
+      }
+      &:before {
+        content: attr(data-header);
+        width: 50%;
+        font-weight: 700;
+      }
+      @include MQ(XM) {
+        border-top: 1px solid rgba(0, 0, 0, .04);
+        border-bottom: 1px solid rgba(0, 0, 0, .04);
+        border-left: 1px solid rgba(0, 0, 0, .04);
+        padding: $gutter/3 $gutter/2;
+        &:before {
+          content: none;
+        }
+      }
+    }
+  }
 }
+
+$table-column: 12;
+@for $i from 1 through $table-column {
+  .u-Flex-grow#{$i} {
+    // flex-grow: #{$i};
+    flex-basis: 100% / $flexgrid-grid-columns * $i;
+    max-width: 100% / $flexgrid-grid-columns * $i;
+  }
+}
+
+// <div class="tbl-content">
+//   <table cellpadding="0" cellspacing="0" border="0">
+// $(window).on("load resize ", function() {
+//   var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+//   $('.tbl-header').css({'padding-right':scrollWidth});
+// }).resize();

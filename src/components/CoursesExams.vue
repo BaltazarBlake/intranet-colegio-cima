@@ -55,21 +55,21 @@
                         .table.shadow-1 
                           .table-header
                             .table-row
-                              .table-row-item Descripción
-                              .table-row-item Porcentaje
-                              .table-row-item Nota
-                              .table-row-item Puntos
+                              .table-row-item.u-Flex-grow3 Descripción
+                              .table-row-item.u-Flex-grow3 Porcentaje
+                              .table-row-item.u-Flex-grow3 Nota
+                              .table-row-item.u-Flex-grow3 Puntos
                           .table-body
                             template(v-for="nota in data.notas")
                               .table-row
-                                .table-row-item.font-size-small(data-header='Descripción') {{nota.grupo}}
-                                .table-row-item.font-size-small(data-header='Porcentaje') {{nota.peso}}
-                                .table-row-item.font-size-small(data-header='Nota') {{nota.nota}}
-                                .table-row-item.font-size-small(data-header='Puntos') {{nota.puntos}}
+                                .table-row-item.u-Flex-grow3.font-size-small(data-header='Descripción') {{nota.grupo}}
+                                .table-row-item.u-Flex-grow3.font-size-small(data-header='Porcentaje') {{nota.peso}}
+                                .table-row-item.u-Flex-grow3.font-size-small(data-header='Nota') {{nota.nota}}
+                                .table-row-item.u-Flex-grow3.font-size-small(data-header='Puntos') {{nota.puntos}}
                           .table-header
                             .table-row
-                              .table-row-item.center.u-Flex-grow3 PROMEDIO ACUMULADO
-                              .table-row-item {{data.total}}
+                              .table-row-item.center.u-Flex-grow9 PROMEDIO ACUMULADO
+                              .table-row-item.u-Flex-grow3 {{data.total}}
                     template(v-else)
                       .col-xs-12.m-t
                         .row
@@ -111,58 +111,33 @@
       template(slot='body')
         .row
           .col-xs-12
-            // .table
-            //   .table-header
-            //     table
-            //       thead
-            //         tr
-            //           th(rowspan="2", colspan="2") ÁREA CURRICULAR
-            //           th(colspan="8" v-if="reportPrint") BIMESTRE
-            //           th(rowspan="2", colspan="2") PROM. ACUM.
-            //         tr
-            //           th(colspan="2") I
-            //           th(colspan="2") II
-            //           th(colspan="2") III
-            //           th(colspan="2") IV
-            //   .table-content
-            //     table
-            //       tbody
-            //         template(v-for="data in reportPrint")
-            //           td.u-gray(colspan="12" v-if="reportPrint") {{data.area}}
-            //           template(v-for="c in data.cursos")
-            //             tr
-            //               td(colspan="2") {{c.curso}}
-            //               template(v-for="nota in c.notas")
-            //                 td(colspan="2") {{nota.nota}}
-            //               template(v-for="n in (4- c.notas.length)")
-            //                 td(colspan="2") -
-            //               td.u-mla(colspan="2") {{c.promedio}}
-            table
-              thead
-                tr
-                  th(rowspan="2", colspan="2") ÁREA CURRICULAR
-                  th(colspan="8" v-if="reportPrint").u-center BIMESTRE
-                  th(rowspan="2", colspan="2").u-center PROM. ACUM.
-                tr
-                  th(colspan="2").u-center I
-                  th(colspan="2").u-center II
-                  th(colspan="2").u-center III
-                  th(colspan="2").u-center IV
-              tbody
+            .table.header-fixed
+              .table-header
+                .table-row
+                  .table-row-item.u-Flex-grow5 ÁREA CURRICULAR
+                  .table-row-item.sub-row.u-Flex-grow4 BIMESTRE
+                    .table-row
+                      .table-row-item I
+                      .table-row-item II
+                      .table-row-item III
+                      .table-row-item IV
+                  .table-row-item.u-Flex-grow3 PROM. ACUM.
+              .table-body
                 template(v-for="data in reportPrint")
-                  td.u-gray(colspan="12" v-if="reportPrint") {{data.area}}
+                  .table-row
+                    .table-row-item.u-gray(v-if="reportPrint") {{data.area}}
                   template(v-for="c in data.cursos")
-                    tr
-                      td(colspan="2") {{c.curso}}
+                    .table-row
+                      .table-row-item.u-Flex-grow5 {{c.curso}}
+                      // .table-row-item.u-Flex-grow4
                       template(v-for="nota in c.notas")
-                        td(colspan="2" :class="nota.nota<data.minima? 'text-danger': ''").u-center {{nota.nota}}
+                        .table-row-item(:class="nota.nota<data.minima? 'text-danger': ''") {{nota.nota}}
                       template(v-for="n in (4- c.notas.length)")
-                        td(colspan="2").u-center -
-                      td.u-mla(colspan="2" :class="c.promedio<data.minima? 'text-danger':''").u-center {{c.promedio}}
-                  tr
-                    td.u-center.font-size-x-medium(colspan="10") PROMEDIO
-                    td(colspan="2" v-if="reportPrint" :class="data.promedio<data.minima? 'text-danger':''") {{data.promedio}}
-                    
+                        .table-row-item -
+                      .table-row-item.u-Flex-grow3(:class="c.promedio<data.minima? 'text-danger':''") {{c.promedio}}
+                  .table-row
+                    .table-row-item.u-Flex-grow9 PROMEDIO
+                    .table-row-item.u-Flex-grow3(v-if="reportPrint" :class="data.promedio<data.minima? 'text-danger':''") {{data.promedio}}
 
 </template>
 
