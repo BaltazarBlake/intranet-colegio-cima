@@ -117,23 +117,25 @@
                   thead
                     tr
                       th(rowspan="2") ÁREA CURRICULAR
-                      th(:colspan="report[0].examenes.length*2" v-if="reportPrint") BIMESTRE
+                      th(colspan="8" v-if="reportPrint") BIMESTRE
                       th(rowspan="2", colspan="2") PROM. ACUM.
                     tr
                       th(colspan="2") I
                       th(colspan="2") II
+                      th(colspan="2") III
+                      th(colspan="2") IV
               .table-content
                 table
                   tbody
                     template(v-for="data in reportPrint")
-                      td.u-gray(:colspan="report[0].examenes.length*2 + 4" v-if="reportPrint") {{data.area}}
+                      td.u-gray(colspan="12" v-if="reportPrint") {{data.area}}
                       template(v-for="c in data.cursos")
                         tr
                           td(colspan="2") {{c.curso}}
                           template(v-for="nota in c.notas")
                             td(colspan="2") {{nota.nota}}
-                            template(v-for="n in (report[0].examenes.length - c.notas.length)")
-                              td(colspan="2") -
+                          template(v-for="n in (4- c.notas.length)")
+                            td(colspan="2") -
                           td.u-mla(colspan="2") {{c.promedio}}
                     
 
