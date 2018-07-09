@@ -20,13 +20,18 @@
       .calendar__body        
         template(v-for='day in data.asistencia')
           .calendar__day
-            small.calendar__day-number(:class='colorState(day)' @click='viewJustify(day, data.mes)' v-text="getDay(day.dia)")
+            template(v-if="day.justificacion")
+              notification
+                template(slot='icon')
+                  span.icon-notes
+            small.calendar__day-number(:class='colorState(day)' @click='viewJustify(day, data.mes)' v-text="getDay(day.dia)")                
             small.font-size-small {{viewHour(day)}}
 </template>
 
 <script>
 import { EventBus } from '../../event-bus.js';
 import Modal from './Modal';
+import Notification from './Notification';
 import jwt from 'jwt-decode';
 import {getJustify} from '../../functions/fetchFunctions';
 import {token} from '../../cfg/core';
@@ -35,6 +40,7 @@ export default {
 
   components: {
     Modal,
+    Notification
   },
 
   props: ['data', 'idTurn', 'turn', 'showModalJustify'],
@@ -137,7 +143,7 @@ export default {
     },
 
     viewJustify(day, month) {
-      if (day.dia != undefined && day.dia != 0 && day.estado_am != undefined && this.showModalJustify == true && day.nro_dia) {
+      if (day.dia != undefined && day.dia != 0 && day.justificacion != null && day.estado_am != undefined && this.showModalJustify == true && day.nro_dia) {
         if (this.turn) {
           let send = {
             report: day.justificacion,

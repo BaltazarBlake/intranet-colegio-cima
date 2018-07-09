@@ -109,4 +109,19 @@
   }
 }
 
+.btn--back {
+  @extend .btn--floating;
+  right: auto;
+  border: none;
+  background-color: $red;
+  border-radius: 2em;
+  &>span[class^="icon-"] {
+    margin: 0;
+    font-size: 1.3em;
+  }
+
+  @include MQ(XM) {
+    // top: 75px;
+  }
+}
 

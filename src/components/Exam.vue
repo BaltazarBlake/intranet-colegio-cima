@@ -2,6 +2,9 @@
   div
     template(v-if="report")
       .band
+      .container
+        button.btn--back.shadow-2(@click="$router.go(-1)")
+          span.icon-arrow
       .container.target
         .row
           .col-xs-12
@@ -124,6 +127,9 @@ export default {
     this.getData();
   },
   methods: {
+    goBack() {
+
+    },
     getData() {
       this.report = JSON.parse(localStorage.getItem('cima-reporte-simulacros'))[this.modalidad].examenes[this.examen];
     },

@@ -24,9 +24,9 @@
                           .table-row
                             .table-row-item.font-size-small(data-header='Descripción') {{payment.descripcion}}
                             .table-row-item.font-size-small(data-header='Fecha Vencimiento') {{format(payment.fechavencimiento)}}
-                            .table-row-item.font-size-small(data-header='Monto') S/. {{payment.monto}}
+                            .table-row-item.font-size-small(data-header='Monto') S/ {{payment.monto}}
                             .table-row-item.font-size-small(data-header='Monto Pagado') 
-                              span(v-if="payment.montopagado") S/. {{payment.montopagado}}
+                              span(v-if="payment.montopagado") S/ {{payment.montopagado}}
                             .table-row-item.font-size-small.sticker(data-header='Estado', :class="colorState(payment.estado)") {{payment.estado}}
     template(v-else)
       .m-t-s
