@@ -162,7 +162,7 @@ import Spinner from "./global/Spinner";
 import Tabs from "./global/Tabs";
 import Tab from "./global/Tab";
 import Modal from "./global/Modal";
-import Report from './global/Report';
+import Report from "./global/Report";
 import Course from "./Course";
 export default {
   components: {
@@ -187,34 +187,65 @@ export default {
     EventBus.$on("viewDetailExam", data => {
       this.detailExam = data;
       let grupo = {
-        grupo:'CÁLCULO DEL PROMEDIO',
+        grupo: "CÁLCULO DEL PROMEDIO",
         isCalc: true,
-        notas:[],
-        total:0
-      }
+        notas: [],
+        total: 0
+      };
 
       let i = 0;
       let total = 0;
-      this.detailExam.groups.map(el=>{
-        if(el.isCalc){
-          i = 1;
-        }else{
-          let puntos = (parseFloat(el.peso)/100.0)*parseFloat(el.promedio);
-          puntos = Math.round(puntos*100)/100;
-          grupo.notas.push({
-            grupo:el.grupo,
-            peso:el.peso + '%',
-            nota:el.promedio,
-            puntos
-          })
-          total +=(parseFloat(el.peso)/100.0)*parseFloat(el.promedio);
+
+      let curso = this.detailExam.course;
+      console.log(this.grupos);
+      let misgrupos = this.getAVGCalc();
+      // misgrupos[0] = 'Acá no hay nada';
+      console.log('1-----')
+      console.log (misgrupos);
+      let group;
+      misgrupos.map(el=>{
+        if(el.curso == curso){
+          group = el;
         }
       })
-      total = Math.round(total*100)/100;
+      console.log('2-----')
+      console.log (misgrupos);
+ 
+      console.log('3-----')
+      console.log (misgrupos);
+
+      group.grupos.map(el=>{
+        el.isnull = true;
+        this.detailExam.groups.map(g=>{
+            if(el.grupo == g.grupo){
+              el.isnull = false;
+              el.peso = g.peso;
+              el.promedio = g.promedio;
+              el.examenes = g.examenes;
+            }
+        })
+      })
+      this.detailExam.groups = group.grupos.slice();
+
+
+      this.detailExam.groups.map(el => {
+        if (el.isCalc) {
+          i = 1;
+        } else {
+          let puntos = parseFloat(el.peso) / 100.0 * parseFloat(el.promedio);
+          puntos = Math.round(puntos * 100) / 100;
+          grupo.notas.push({
+            grupo: el.grupo,
+            peso: el.peso + "%",
+            nota: el.isnull? '-' : el.promedio,
+            puntos: el.isnull ? '-' : puntos
+          });
+          total +=el.isnull? 0 :  parseFloat(el.peso) / 100.0 * parseFloat(el.promedio);
+        }
+      });
+      total = Math.round(total * 100) / 100;
       grupo.total = total;
-      console.log(grupo);
-      if(i!=1)
-        this.detailExam.groups.push(grupo);
+      if (i != 1) this.detailExam.groups.push(grupo);
       this.showModal = true;
     });
   },
@@ -234,6 +265,7 @@ export default {
       }
       this.report = res;
       this.printReport();
+      this.getAVGCalc();
     },
     isTrue(el) {
       if (el == 0) {
@@ -251,86 +283,100 @@ export default {
     viewReport() {
       this.dataStudent = JSON.parse(localStorage.getItem("cima-estudiante"));
       // this.showModalJustify = false;
-      EventBus.$emit('showReport');
+      EventBus.$emit("showReport");
     },
-    printReport(){
+    printReport() {
       this.reportPrint = this.report[0].examenes;
       let areas = [];
       let cursos = [];
       let notas = [];
-      this.reportPrint.map(el=>{
-        el.cursos.map(curso=>{
+      this.reportPrint.map(el => {
+        el.cursos.map(curso => {
           let area = curso.area;
-          if(!areas.includes(area)){
+          if (!areas.includes(area)) {
             areas.push(area);
           }
-        })
+        });
       });
-      areas.map(area=>{
+      areas.map(area => {
         let mc = [];
-        this.reportPrint.map(el=>{
+        this.reportPrint.map(el => {
           let bimestre = el.bimestre;
-          el.cursos.map(curso=>{
-            if(area==curso.area && !mc.includes(curso.curso)){
+          el.cursos.map(curso => {
+            if (area == curso.area && !mc.includes(curso.curso)) {
               mc.push(curso.curso);
             }
-          })
-        })
-        cursos.push(mc)
-      })
-      cursos.map(curso=>{
-        curso.map(el=>{
+          });
+        });
+        cursos.push(mc);
+      });
+      cursos.map(curso => {
+        curso.map(el => {
           let nt = [];
-          let prom = 0; 
+          let prom = 0;
           let cont = 0;
-          this.reportPrint.map(ec=>{
+          this.reportPrint.map(ec => {
             let bimestre = ec.bimestre;
-            ec.cursos.map(cur=>{
-              if(el==cur.curso){
+            ec.cursos.map(cur => {
+              if (el == cur.curso) {
                 prom += cur.promedio;
                 cont++;
                 nt.push({
-                  nota:Math.round(cur.promedio)<10? `0${Math.round(cur.promedio)}`:Math.round(cur.promedio),
+                  nota:
+                    Math.round(cur.promedio) < 10
+                      ? `0${Math.round(cur.promedio)}`
+                      : Math.round(cur.promedio),
                   bimestre,
-                  minima:cur.notaminima
-                })
+                  minima: cur.notaminima
+                });
               }
-            })
-          })
-          let promedio = parseFloat(prom)/parseFloat(cont);
-          promedio = Math.round(promedio)<10? `0${Math.round(promedio)}`:Math.round(promedio);
+            });
+          });
+          let promedio = parseFloat(prom) / parseFloat(cont);
+          promedio =
+            Math.round(promedio) < 10
+              ? `0${Math.round(promedio)}`
+              : Math.round(promedio);
           notas.push({
-            curso:el,
-            notas:nt,
+            curso: el,
+            notas: nt,
             promedio
           });
-        })
-      })
-      cursos.map(curso=>{
+        });
+      });
+      cursos.map(curso => {
         let prom = 0;
         let cont = 0;
         let cu = [];
         let min = notas[0].notas[0].minima;
-        notas.map(nota=>{
-          if(curso.includes(nota.curso)){
+        notas.map(nota => {
+          if (curso.includes(nota.curso)) {
             cu.push(nota);
           }
-        })
+        });
         let index = cursos.indexOf(curso);
         let area = areas[index];
-        cu.map(el=>{
+        cu.map(el => {
           prom += parseInt(el.promedio);
           cont++;
         });
-        let p = parseFloat(prom)/parseFloat(cont);
+        let p = parseFloat(prom) / parseFloat(cont);
         areas[index] = {
           area,
-          cursos:cu,
-          promedio:Math.round(p)<10? `0${Math.round(p)}`: Math.round(p),
-          minima:min
-        }
-      })
+          cursos: cu,
+          promedio: Math.round(p) < 10 ? `0${Math.round(p)}` : Math.round(p),
+          minima: min
+        };
+      });
       this.reportPrint = areas;
+    },
+    getAVGCalc() {
+      let cursos = this.report[0].examenes[0].cursos;
+      let grupos = [];
+      cursos.map(curso => {
+        grupos.push({ curso: curso.curso, grupos: curso.grupos });
+      });
+      return grupos;
     }
   }
 };
