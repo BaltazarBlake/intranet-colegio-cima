@@ -28,6 +28,7 @@ export default {
     viewDetailExam(detail) {
       let send = {
         course: detail.curso,
+        idCourse: detail.idareacurricular,
         mean: detail.promedio,
         minimumNote: detail.notaminima,
         groups: detail.grupos,

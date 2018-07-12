@@ -60,12 +60,12 @@
                               .table-row-item.u-Flex-grow3 Nota
                               .table-row-item.u-Flex-grow3 Puntos
                           .table-body
-                            template(v-for="nota in data.notas")
+                            template(v-for="peso in weightCourse")
                               .table-row
-                                .table-row-item.u-Flex-grow3.font-size-small(data-header='Descripción') {{nota.grupo}}
-                                .table-row-item.u-Flex-grow3.font-size-small(data-header='Porcentaje') {{nota.peso}}
-                                .table-row-item.u-Flex-grow3.font-size-small(data-header='Nota') {{nota.nota}}
-                                .table-row-item.u-Flex-grow3.font-size-small(data-header='Puntos') {{nota.puntos}}
+                                .table-row-item.u-Flex-grow3.font-size-small {{peso.grupo_evaluacion}}
+                                .table-row-item.u-Flex-grow3.font-size-small {{peso.peso}}
+                                .table-row-item.u-Flex-grow3.font-size-small(v-text="peso.nota != -1? peso.nota : '-'")
+                                .table-row-item.u-Flex-grow3.font-size-small(v-text="peso.puntos != -1? peso.puntos : '-'")
                           .table-header
                             .table-row
                               .table-row-item.center.u-Flex-grow9 PROMEDIO ACUMULADO
@@ -181,6 +181,8 @@ export default {
       reportPrint: null,
       dataStudent: null,
       section: null,
+      weightCourses: null,
+      weightCourse: null,
     };
   },
   created() {
@@ -193,64 +195,49 @@ export default {
         total: 0
       };
 
+      
+      
+      let auxWeight = this.weightCourses;
+      auxWeight.map(el => {
+        if (el.idareacurricular == data.idCourse) {
+          this.weightCourse = el.pesos;
+        }
+      });
+
+      this.weightCourse.map(el => {
+        el.nota = -1;
+        el.puntos = -1;
+      })
+
       let i = 0;
       let total = 0;
-
-      let curso = this.detailExam.course;
-      console.log(this.grupos);
-      let misgrupos = this.getAVGCalc();
-      // misgrupos[0] = 'Acá no hay nada';
-      console.log('1-----')
-      console.log (misgrupos);
-      let group;
-      misgrupos.map(el=>{
-        if(el.curso == curso){
-          group = el;
-        }
-      })
-      console.log('2-----')
-      console.log (misgrupos);
- 
-      console.log('3-----')
-      console.log (misgrupos);
-
-      group.grupos.map(el=>{
-        el.isnull = true;
-        this.detailExam.groups.map(g=>{
-            if(el.grupo == g.grupo){
-              el.isnull = false;
-              el.peso = g.peso;
-              el.promedio = g.promedio;
-              el.examenes = g.examenes;
-            }
-        })
-      })
-      this.detailExam.groups = group.grupos.slice();
-
 
       this.detailExam.groups.map(el => {
         if (el.isCalc) {
           i = 1;
         } else {
-          let puntos = parseFloat(el.peso) / 100.0 * parseFloat(el.promedio);
-          puntos = Math.round(puntos * 100) / 100;
-          grupo.notas.push({
-            grupo: el.grupo,
-            peso: el.peso + "%",
-            nota: el.isnull? '-' : el.promedio,
-            puntos: el.isnull ? '-' : puntos
+          this.weightCourse.map(data => {
+            if (data.grupo_evaluacion == el.grupo) {
+              data.nota = el.promedio;
+              data.puntos = Math.round((parseFloat(el.peso) / 100.0 * parseFloat(el.promedio))*100)/100;
+            }
           });
+
+          grupo.notas = this.weightCourse;
           total +=el.isnull? 0 :  parseFloat(el.peso) / 100.0 * parseFloat(el.promedio);
         }
       });
       total = Math.round(total * 100) / 100;
       grupo.total = total;
-      if (i != 1) this.detailExam.groups.push(grupo);
+      if (i != 1) {
+        this.detailExam.groups.push(grupo);
+      }
       this.showModal = true;
     });
   },
   async mounted() {
     await this.getData();
+    this.resetDetailExam;
   },
   methods: {
     async getData() {
@@ -265,7 +252,7 @@ export default {
       }
       this.report = res;
       this.printReport();
-      this.getAVGCalc();
+      this.weightCourses = this.report[0].pesos;
     },
     isTrue(el) {
       if (el == 0) {
@@ -369,15 +356,7 @@ export default {
         };
       });
       this.reportPrint = areas;
-    },
-    getAVGCalc() {
-      let cursos = this.report[0].examenes[0].cursos;
-      let grupos = [];
-      cursos.map(curso => {
-        grupos.push({ curso: curso.curso, grupos: curso.grupos });
-      });
-      return grupos;
     }
-  }
+  },
 };
 </script>

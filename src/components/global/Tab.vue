@@ -1,5 +1,5 @@
 <template lang="pug">
-  div(v-show='isActive')
+  div(v-if='isActive')
     slot
 </template>
 
