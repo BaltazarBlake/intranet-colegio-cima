@@ -20,6 +20,9 @@
                 .legend__label
                   i.circle--arrive
                   span Asistencia
+                .legend__label
+                  i.circle--justify
+                  span Justificación
             .d-f.m-b
               button(@click='checkMorning()' :class='turn? "is-active" : ""').btn--default Mañana
               button(@click='checkAfternoon()' :class='turn? "" : "is-active"').btn--default Tarde
@@ -29,7 +32,7 @@
             .row
               template(v-for='month in report')
                 .col-xs-12.col-xm-6.col-xl-4.d-f
-                  calendar(:data='month' :idTurn='idTurn' :turn='turn' :showModalJustify='showModalJustify')
+                  calendar(:data='month' :idTurn='idTurn' :turn='turn' :showModalJustify='showModalJustify' :activeNotification="activeNotification")
           template(v-else)
             .m-t-s
               spinner
@@ -135,6 +138,7 @@ export default {
       test: null,
       showModalJustify: true,
       showModal: false,
+      activeNotification: true,
     }
   },
   components: {
@@ -183,10 +187,12 @@ export default {
 
     checkMorning() {
       this.turn = true;
+      this.activeNotification = true;
     },
 
     checkAfternoon() {
       this.turn = false;
+      this.activeNotification = false;
     },
 
     viewReport() {

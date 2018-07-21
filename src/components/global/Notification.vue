@@ -1,11 +1,14 @@
 <template lang="pug">
-  .notification
-    slot(name='icon')
+  div
+    template(v-if="active")
+      .notification
+        slot(name='icon')
 </template>
 
 <script>
 export default {
-  name: 'Notification'
+  name: 'Notification',
+  props: ['active'],
 }
 </script>
 

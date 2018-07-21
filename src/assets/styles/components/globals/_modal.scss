@@ -34,7 +34,7 @@
   }
 
   &__body {
-    height: 65vh;
+    // height: 65vh;
     overflow-y: auto;
     overflow-x: auto;
     
@@ -42,7 +42,7 @@
       // height: vh;
     }
     @include MQ(M) {
-      height: 67vh;
+      // height: 67vh;
     }
   }
 

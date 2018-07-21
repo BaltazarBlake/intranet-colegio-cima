@@ -47,28 +47,6 @@
     &-title {
       color: #333;
     }
-
-    .circle--absence,
-    .circle--delay,
-    .circle--arrive {
-      width: 2em;
-      height: 2em;
-      border-radius: 50%;
-      margin-right: $gutter/3;
-    }
-    
-    .circle--absence {
-      background-color: #FFEBEE;
-      border: 1px solid #F44336;
-    }
-    .circle--delay {
-      background-color: #FFE0B2;
-      border: 1px solid #FF9800;
-    }
-    .circle--arrive {
-      background-color: #E3F2FD;
-      border: 1px solid #2196F3;
-    }
   }
 
   &__day {
@@ -95,8 +73,7 @@
       transition: all .3s ease-in-out;
       
       // &.arrive,
-      &.absence,
-      &.delay {
+      &.justify {
         cursor: pointer;
 
         &:hover {
@@ -114,18 +91,23 @@
 
 
       &.absence {
-        background-color: #FFEBEE;
-        border: 1px solid #F44336;
+        background-color: $absence;
+        border: 1px solid $b-absence;
       }
 
       &.delay {
-        background-color: #FFE0B2;
-        border: 1px solid #FF9800;
+        background-color: $delay;
+        border: 1px solid $b-delay;
+      }
+
+      &.justify {
+        background-color: $justify;
+        border: 1px solid $b-justify;
       }
 
       &.arrive {
-        background-color: #E3F2FD;
-        border: 1px solid #2196F3;
+        background-color: $arrive;
+        border: 1px solid $b-arrive;
       }
 
 

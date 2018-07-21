@@ -21,7 +21,7 @@
         template(v-for='day in data.asistencia')
           .calendar__day
             template(v-if="day.justificacion")
-              notification
+              notification(:active="activeNotification")
                 template(slot='icon')
                   span.icon-notes
             small.calendar__day-number(:class='colorState(day)' @click='viewJustify(day, data.mes)' v-text="getDay(day.dia)")                
@@ -43,7 +43,7 @@ export default {
     Notification
   },
 
-  props: ['data', 'idTurn', 'turn', 'showModalJustify'],
+  props: ['data', 'idTurn', 'turn', 'showModalJustify', 'activeNotification'],
 
   created() {
     EventBus.$on('sendJustification',(data) => {
@@ -63,6 +63,7 @@ export default {
       if (day.dia != 'auxiliar') {
         if (this.idTurn == 1) {
           // Turno mañana
+          // this.activeNotification = true;
           if (this.turn) {
             if (day.estado_am == '[F]' && day.am == '') {
               classColor = 'absence';
@@ -70,9 +71,12 @@ export default {
               classColor = 'delay';
             } else if (day.estado_am == '' && day.am != '') {
               classColor = 'arrive';
+            } else if (day.estado_am == '[J]' && day.am == '') {
+              classColor = 'justify';
             }
           // si viene en turno tarde
           } else {
+            // this.activeNotification = false;
             if (!this.turn) {
               if (day.estado_pm == '' && day.pm == '[F]') {
                 classColor = '';
