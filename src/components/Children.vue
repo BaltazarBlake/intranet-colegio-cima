@@ -1,5 +1,5 @@
 <template lang="pug">
-    Menu
+    Menu     
       span(slot='button') Cambiar
       template(slot='body')
         .row
