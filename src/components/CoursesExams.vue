@@ -5,12 +5,14 @@
         .row.cross-center
           .col-xs
             h1.font-size-x-large Bimestres:
-          .col-xs
-            .row.m-b
-              .col-xs
-                button.btn--warning.is-active(@click='viewReport()')
-                  span.icon-file-text
-                  span Reporte
+          // template(v-if='report && report[0].deudas < 2')
+          template(v-if='report && report[0].deudas == 1000')
+            .col-xs
+              .row.m-b
+                .col-xs
+                  button.btn--warning.is-active(@click='viewReport()')
+                    span.icon-file-text
+                    span Reporte
     template(v-if='report')
       .container.target
         .row

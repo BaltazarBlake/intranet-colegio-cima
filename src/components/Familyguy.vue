@@ -43,13 +43,13 @@
       template(slot='body')
         .row
           .col-xs-12
-            h1.font-size-large ¿Desea cerrar sesión?
+            h1.font-size-large.text-center ¿Desea cerrar sesión?
           .col-xs-12
             .row.m-b
-              .col-xs
-                button.btn--danger(@click="cancelLogout()") CANCELAR
-              .col-xs
-                button.btn--default(@click="sendLogout()") ACEPTAR
+              .col-xs.m-auto
+                button.btn--default(@click="cancelLogout()") CANCELAR
+              .col-xs.m-auto
+                button.btn--danger(@click="sendLogout()") ACEPTAR
 
 </template>
 
