@@ -11,23 +11,24 @@
               template(v-for="(data,index) in report")
                 tab(:name="data.tipo", :selected="isTrue(index)")
                   .col-xs-12.m-t
-                    .table.shadow-1 
-                      .table-header
-                        .table-row
-                          .table-row-item Descripción
-                          .table-row-item Fecha Vencimiento
-                          .table-row-item Monto
-                          .table-row-item Monto Pagado
-                          .table-row-item.center Estado
-                      .table-body
-                        template(v-for="payment in data.pagos")
+                    .table__wrapper
+                      .table.shadow-1(style="min-width:750px")
+                        .table-header
                           .table-row
-                            .table-row-item.font-size-small(data-header='Descripción') {{payment.descripcion}}
-                            .table-row-item.font-size-small(data-header='Fecha Vencimiento') {{format(payment.fechavencimiento)}}
-                            .table-row-item.font-size-small(data-header='Monto') S/ {{payment.monto}}
-                            .table-row-item.font-size-small(data-header='Monto Pagado') 
-                              span(v-if="payment.montopagado") S/ {{payment.montopagado}}
-                            .table-row-item.font-size-small.sticker(data-header='Estado', :class="colorState(payment.estado)") {{payment.estado}}
+                            .table-row-item Descripción
+                            .table-row-item Fecha Vencimiento
+                            .table-row-item Monto
+                            .table-row-item Monto Pagado
+                            .table-row-item.center Estado
+                        .table-body
+                          template(v-for="payment in data.pagos")
+                            .table-row
+                              .table-row-item.font-size-small(data-header='Descripción') {{payment.descripcion}}
+                              .table-row-item.font-size-small(data-header='Fecha Vencimiento') {{format(payment.fechavencimiento)}}
+                              .table-row-item.font-size-small(data-header='Monto') S/ {{payment.monto}}
+                              .table-row-item.font-size-small(data-header='Monto Pagado') 
+                                span(v-if="payment.montopagado") S/ {{payment.montopagado}}
+                              .table-row-item.font-size-small.sticker(data-header='Estado', :class="colorState(payment.estado)") {{payment.estado}}
     template(v-else)
       .m-t-s
         spinner

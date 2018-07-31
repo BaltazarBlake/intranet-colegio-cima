@@ -13,7 +13,7 @@ async function login(username,password){
     const res = await response.json();
     return res;
   }catch(err){
-    console.log(`Error al realizar la petición fetch: ${err}`);
+    console.log(`Error al realizar la petición fetch: ${err.message}`);
   }
 }
 

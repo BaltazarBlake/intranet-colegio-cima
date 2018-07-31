@@ -1,5 +1,5 @@
 <template lang="pug">
-  .table.shadow-1
+  .table.shadow-1(:class="")
     .table-header
       .table-row
         .table-row-item N° de Preg.
@@ -15,6 +15,7 @@
 
 <script>
 export default {
+  props: [],
   data() {
     return {
       label: null,

@@ -5,10 +5,21 @@
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-between;
-  min-width: 450px;
+  // min-width: 750px;
   margin-bottom: $gutter/2;
   font-size: 1rem;
   @extend .shadow-1;
+
+  &.small {
+    min-width: 400px;
+  }
+  &.regular {
+    min-width: 750px;
+  }
+
+  &__wrapper {
+    overflow-x: auto;
+  }
   &.header-fixed {
     // .Table-header
     .table-header {
@@ -16,7 +27,7 @@
       position: relative;
     } // .Table-body
     .table-body {
-      max-height: 400px;
+      max-height: 270px;
       overflow: auto;
     }
   } 

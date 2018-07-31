@@ -34,9 +34,9 @@
   }
 
   &__body {
-    // height: 65vh;
+    height: 65vh;
     overflow-y: auto;
-    overflow-x: auto;
+    overflow-x: hidden;
     
     @include MQ(XM) {
       // height: vh;
@@ -47,7 +47,7 @@
   }
 
   &__content {
-    margin: $gutter/2 $gutter 0;
+    margin: $gutter/2 0;
   }
 
   &__close {

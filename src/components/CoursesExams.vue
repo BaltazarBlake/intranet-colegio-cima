@@ -52,24 +52,25 @@
                   tab(:name='data.grupo' :selected='isTrue(index)')
                     template(v-if='data.isCalc')
                       .col-xs-12.m-t
-                        .table.shadow-1 
-                          .table-header
-                            .table-row
-                              .table-row-item.u-Flex-grow3 Descripción
-                              .table-row-item.u-Flex-grow3 Porcentaje
-                              .table-row-item.u-Flex-grow3 Nota
-                              .table-row-item.u-Flex-grow3 Puntos
-                          .table-body
-                            template(v-for="peso in weightCourse")
+                        .table__wrapper
+                          .table.shadow-1 
+                            .table-header
                               .table-row
-                                .table-row-item.u-Flex-grow3.font-size-small {{peso.grupo_evaluacion}}
-                                .table-row-item.u-Flex-grow3.font-size-small {{peso.peso}}
-                                .table-row-item.u-Flex-grow3.font-size-small(v-text="peso.nota != -1? peso.nota : '-'")
-                                .table-row-item.u-Flex-grow3.font-size-small(v-text="peso.puntos != -1? peso.puntos : '-'")
-                          .table-header
-                            .table-row
-                              .table-row-item.center.u-Flex-grow9 PROMEDIO ACUMULADO
-                              .table-row-item.u-Flex-grow3 {{data.total}}
+                                .table-row-item.u-Flex-grow3 Descripción
+                                .table-row-item.u-Flex-grow3 Porcentaje
+                                .table-row-item.u-Flex-grow3 Nota
+                                .table-row-item.u-Flex-grow3 Puntos
+                            .table-body
+                              template(v-for="peso in weightCourse")
+                                .table-row
+                                  .table-row-item.u-Flex-grow3.font-size-small {{peso.grupo_evaluacion}}
+                                  .table-row-item.u-Flex-grow3.font-size-small {{peso.peso}}
+                                  .table-row-item.u-Flex-grow3.font-size-small(v-text="peso.nota != -1? peso.nota : '-'")
+                                  .table-row-item.u-Flex-grow3.font-size-small(v-text="peso.puntos != -1? peso.puntos : '-'")
+                            .table-header
+                              .table-row
+                                .table-row-item.center.u-Flex-grow9 PROMEDIO ACUMULADO
+                                .table-row-item.u-Flex-grow3 {{data.total}}
                     template(v-else)
                       .col-xs-12.m-t
                         .row

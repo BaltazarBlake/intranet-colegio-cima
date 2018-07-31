@@ -3,7 +3,7 @@
     .band 
       .container
         .row.cross-center
-          .col-xs
+          .col-xs-12.col-s
             h1.font-size-x-large En esta sección encontrarás tu horario
           .col-xs.u-mla
             .row.m-b

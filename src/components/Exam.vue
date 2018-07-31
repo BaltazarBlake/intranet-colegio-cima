@@ -88,22 +88,23 @@
       template(slot='body')
         .row
           .col-xs-12
-            .table.header-fixed.shadow-1
-              .table-header
-                .table-row
-                  .table-row-item N° de Preg.
-                  .table-row-item Rpta. Exam.
-                  .table-row-item Rpta. Alum.
-              .table-body
-                template(v-if='keyExam')
-                  template(v-for='key in keyExam')
-                    .table-row
-                      .table-row-item(data-header='N° de Preg.') {{key.numero_pregunta}}
-                      .table-row-item(data-header='Rpta. Exam.') {{key.clave}}
-                      .table-row-item.font-weight-bold(v-text='correctKey(key.respuesta)' :class='colorKey(key.clave,key.respuesta)' data-header='Rpta. Alum.')
-                template(v-else)
-                  .m-t-s
-                    spinner
+            .table__wrapper
+              .table.header-fixed.shadow-1
+                .table-header
+                  .table-row
+                    .table-row-item N° de Preg.
+                    .table-row-item Rpta. Exam.
+                    .table-row-item Rpta. Alum.
+                .table-body
+                  template(v-if='keyExam')
+                    template(v-for='key in keyExam')
+                      .table-row
+                        .table-row-item(data-header='N° de Preg.') {{key.numero_pregunta}}
+                        .table-row-item(data-header='Rpta. Exam.') {{key.clave}}
+                        .table-row-item.font-weight-bold(v-text='correctKey(key.respuesta)' :class='colorKey(key.clave,key.respuesta)' data-header='Rpta. Alum.')
+                  template(v-else)
+                    .m-t-s
+                      spinner
 
 
 </template>
