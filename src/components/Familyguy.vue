@@ -35,7 +35,7 @@
       .m-t-s
         spinner  
     //- MODAL
-    modal(:active.sync="showModal", :alert="true")
+    modal.mx-90(:active.sync="showModal", :alert="true")
       template(slot='title')
         .row.cross-center
           .col-xs-12.col-s
