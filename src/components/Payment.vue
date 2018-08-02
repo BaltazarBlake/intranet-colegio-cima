@@ -66,6 +66,21 @@ export default {
         res = JSON.parse(localStorage.getItem('cima-estudiante-payment'));
       }
       this.report = res;
+      let total = 0;
+      this.report[0].pagos.map(el=>{
+        if(el.matricula==1){
+          total += parseInt(el.montopagado);
+        }
+      })
+      this.report[1].pagos.map(el=>{
+        if(el.matricula==1){
+          total += parseInt(el.montopagado);
+          el.montopagado = total;
+          if(el.monto == total){
+            el.estado = "CANCELADO";
+          }
+        }
+      })
     },
     colorState(el) {
       let classColor;
