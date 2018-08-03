@@ -16,7 +16,7 @@
                         i.icon-edit
                 .profile__wrapper-image             
                   img(:src='data.url_imagen' @error='detectedImages(data)' :id="'avatar' + data.idperson").profile__user-image.parent
-                  template(v-if="type == 0")
+                  template(v-if="type == 1000") //-temporalmente oculto
                     .profile__user-option
                       label(:for="'upload-image' + data.idperson").btn--edit
                         input.u-hidden(type="file" :id="'upload-image' + data.idperson" accept="image/*" @click="setImage(data.idperson)") 
