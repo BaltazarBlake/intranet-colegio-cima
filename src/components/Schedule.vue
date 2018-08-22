@@ -94,8 +94,18 @@ export default {
         res = JSON.parse(localStorage.getItem('cima-estudiante-horario'));
       }
       this.report = res;
+
+      console.log(this.report);
+      let horas = [];
+      this.report[0].cursos.map(curso=>{
+        curso.horas.map(hora=>{
+            horas.push(hora);
+        })
+      })
+      this.report.horas = horas;
+      console.log(horas);
       this.heigth_horas = 100 / this.report.horas.length;
-      this.width_dias = 100 / this.report.array_dias.length;
+      this.width_dias = 100 / this.report.length;
     },
     drawCurse(array_horas) {
       console.log('-----')
