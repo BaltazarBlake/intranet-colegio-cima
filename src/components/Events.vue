@@ -13,7 +13,8 @@
                     strong(v-text='format(data.fecha)').font-size-large.text--uppercase
                   .card--event__description
                     .card--event__name
-                      h1.text--uppercase {{data.descripcion}}
+                      h2.text--uppercase {{data.titulo}}
+                      p.font-size-regular {{data.descripcion}}
                     .card--event__hour
                       small A LAS 
                       strong {{data.hora}} 

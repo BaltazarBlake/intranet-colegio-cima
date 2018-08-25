@@ -119,14 +119,12 @@ export default {
       this.report = res;
       let horas = [];
       if (!res.err) {
-        console.log('asdasdasdasdasd');
         this.report[0].cursos.map(curso => {
           curso.horas.map(hora => {
             horas.push(hora);
           });
         });
         this.report.horas = horas;
-        console.log(horas);
         this.heigth_horas = 100 / this.report.horas.length;
         this.width_dias = 100 / this.report.length;
       }
