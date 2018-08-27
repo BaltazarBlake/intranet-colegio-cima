@@ -48,6 +48,7 @@ export default {
       localStorage.removeItem('cima-estudiante-horario');
       localStorage.removeItem('cima-estudiante-profesores');
       localStorage.removeItem('cima-estudiante-events');
+      localStorage.removeItem('cima-estudiante-rol-examenes');
       localStorage.removeItem('cima-estudiante-payment');
       localStorage.setItem('cima-estudiante',JSON.stringify(data));
       this.$router.replace('/Dashboard');

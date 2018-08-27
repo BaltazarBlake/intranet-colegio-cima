@@ -47,6 +47,10 @@
             span.icon-event
             span Eventos
         li.navigation__item.col-xs-12
+          router-link(active-class="is-active" to="/Dashboard/RolExams" exact).navigation__link
+            span.icon-event
+            span Rol de Exámenes
+        li.navigation__item.col-xs-12
           router-link(active-class="is-active" to="/Dashboard/Teachers" exact).navigation__link
             span.icon-team
             span Profesores
@@ -160,6 +164,7 @@ export default{
       localStorage.removeItem('cima-estudiante-profesores');
       localStorage.removeItem('cima-parent-profile');
       localStorage.removeItem('cima-estudiante-events');
+      localStorage.removeItem('cima-estudiante-rol-examenes');
       localStorage.removeItem('cima-estudiante-payment');
       this.$router.replace('/');
     }

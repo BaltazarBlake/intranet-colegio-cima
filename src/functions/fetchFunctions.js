@@ -259,6 +259,11 @@ async function setLogeo(idClient,type){
   return res;
 }
 
+async function getRolExamenes(idAlumno){
+  const response = await fetch(`${host}/student/rolexams/${idAlumno}`,{method:'get',headers:{'authorization':localStorage.getItem(token)}})
+  return await response.json();
+}
+
 export { login,
          getTeachers,
          getChildren,
@@ -276,4 +281,6 @@ export { login,
          getEvent,
          updateFamilyProfile,
          updateImage,
-         setLogeo}
+         setLogeo,
+         getRolExamenes
+        }

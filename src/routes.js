@@ -14,6 +14,7 @@ import ModalityExams from './components/ModalityExams';
 import Exam from './components/Exam';
 import Payment from './components/Payment';
 import Events from './components/Events';
+import RolExams from './components/RolExams';
 
 export const routes = [
   {
@@ -89,6 +90,11 @@ export const routes = [
       {
         path: 'Events',
         component: Events,
+        meta: { reqAuth: true },
+      },
+      {
+        path: 'RolExams',
+        component: RolExams,
         meta: { reqAuth: true },
       },
     ]
