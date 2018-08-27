@@ -20,7 +20,7 @@
                     //-   small A LAS 
                     //-   strong {{data.hora}} 
                     //-   small HORAS.
-    template(v-else-if='report==undefined')
+    template(v-else-if='report===undefined')
       .container.target
         .col-xs-12
           .card
