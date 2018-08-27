@@ -249,7 +249,7 @@ async function setLogeo(idClient,type){
   const response = await fetch(
                           `${host}/intranet/${idClient}/${type}`,
                           {
-                            method:'post',
+                            method:'get',
                             headers:{
                               'authorization': localStorage.getItem(token),
                             }
