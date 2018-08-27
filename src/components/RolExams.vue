@@ -2,7 +2,7 @@
   div
     .band 
       .container
-        h1.font-size-x-large Rol de Exámenes
+        h1.font-size-x-large ROL DE EXÁMENES {{bimestre}} BIMESTRE
     template(v-if='report')
         .container.target
           .row
@@ -10,10 +10,11 @@
               .col-xs-12.col-m-6.col-xl-4.d-f
                 article.card--event(:class="getClassStatus(data.estado)")
                   .card--event__date
-                    strong(v-text='format(data.fecha)').font-size-large.text--uppercase
+                    strong.font-size-large.text--uppercase {{data.dia}} {{format(data.fecha)}}
                   .card--event__description
                     .card--event__name(v-for="curso in data.cursos")
                       h2.text--uppercase {{curso.curso}}
+                      p.font-size-small ({{curso.tipo}})
                       p.font-size-regular {{curso.docente}}
                     //- .card--event__hour
                     //-   small A LAS 
@@ -45,6 +46,7 @@ export default {
     return {
       report:null,
       status:null,
+      bimestre:null
     }
   },
   async mounted() {
@@ -62,6 +64,15 @@ export default {
         res = JSON.parse(localStorage.getItem('cima-estudiante-rol-examenes'));
       }
       this.report = res;
+      if(this.report){
+        switch(this.report[0].bimestre){
+          case 1: this.bimestre = 'I'; break;
+          case 2: this.bimestre = 'II'; break;
+          case 3: this.bimestre = 'III'; break;
+          case 4: this.bimestre = 'IV'; break;
+        }
+      }
+        
     },
     format(el) {
       let dates = el.split("-");
