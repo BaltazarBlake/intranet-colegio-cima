@@ -16,7 +16,7 @@
                         i.icon-edit
                 .profile__wrapper-image             
                   img(:src='data.url_imagen' @error='detectedImages(data)' :id="'avatar' + data.idperson").profile__user-image.parent
-                  template(v-if="type == 1000") //-temporalmente oculto
+                  template(v-if="type == 0") 
                     .profile__user-option
                       label(:for="'upload-image' + data.idperson").btn--edit
                         input.u-hidden(type="file" :id="'upload-image' + data.idperson" accept="image/*" @click="setImage(data.idperson)") 
@@ -50,7 +50,7 @@
             strong.font-size-x-large Editar información
       template(slot='body')
         template(v-if="isEditing")
-          form(@submit.prevent="save()").row
+          form(@submit.prevent="save()").row.p-5
             .input-field.col-xs-12.col-xm-6
               label.input-field__label Nombres
               input(type="text" v-model="isEditing.nombre").input-field__input
@@ -216,7 +216,7 @@ export default {
       this.imgEl.src = this.cropImg.toDataURL();
       this.cropImg.toBlob( blob => {
         let formData = new FormData();
-        console.log('blob', blob);
+        // console.log('blob', blob);
         formData.append('photo', blob, `${this.imgId}.jpg`);
         updateImage(formData);
       });
