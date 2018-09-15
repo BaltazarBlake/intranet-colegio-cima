@@ -15,6 +15,8 @@
                     .col-xs-12
                       h1.font-size-regular {{teacher.nombre}}
                     .col-xs-12
+                      p.font-size-regular {{teacher.telefonosms}}
+                    .col-xs-12
                       small.font-size-small {{getText(teacher.asignaturas)}} 
     template(v-else)
       .m-t-s
