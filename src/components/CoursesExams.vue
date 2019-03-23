@@ -5,14 +5,14 @@
         .row.cross-center
           .col-xs
             h1.font-size-x-large Bimestres:
-          // template(v-if='report && report[0].deudas < 2')
-          template(v-if='report && report[0].deudas == 1000')
-            .col-xs
-              .row.m-b
-                .col-xs
-                  button.btn--warning.is-active(@click='viewReport()')
-                    span.icon-file-text
-                    span Reporte
+            //- template(v-if='report && report[0].deudas < 2')
+            template(v-if='report && report[0].deudas == 1000')
+              .col-xs
+                .row.m-b
+                  .col-xs
+                    button.btn--warning.is-active(@click='viewReport()')
+                      span.icon-file-text
+                      span Reporte
     template(v-if='report')
       .container.target
         .row
@@ -245,13 +245,20 @@ export default {
   methods: {
     async getData() {
       let res;
+      console.log("qwqwq");
+      let data = JSON.parse(localStorage.getItem("cima-estudiante"));
+      console.log(data.idalumnocolegio);
+      
+      
       if (!localStorage.getItem("cima-estudiante-cursos")) {
-        let data = JSON.parse(localStorage.getItem("cima-estudiante"));
         res = await getCourses(data.idalumnocolegio);
         res = res.data;
+        console.log("marz 23", res);
         localStorage.setItem("cima-estudiante-cursos", JSON.stringify(res));
       } else {
         res = JSON.parse(localStorage.getItem("cima-estudiante-cursos"));
+        console.log("sss");
+        
       }
       this.report = res;
       this.printReport();
@@ -276,6 +283,7 @@ export default {
       EventBus.$emit("showReport");
     },
     printReport() {
+      if (this.report[0].examenes == null) return
       this.reportPrint = this.report[0].examenes;
       let areas = [];
       let cursos = [];

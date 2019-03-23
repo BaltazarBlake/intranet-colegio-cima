@@ -1,6 +1,8 @@
 <template lang="pug">
     .menu__wrapper
-      button.btn--warning.is-active(@click="isVisible = true" v-if="children.length>1")
+      button.btn--warning.is-active(
+        @click="isVisible = true",
+        v-if="children.length>1")
         slot(name='button')
       .menu(v-if="isVisible", v-click-outside="outside", @click="inside")
         slot(name='body')

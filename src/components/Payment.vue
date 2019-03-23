@@ -60,23 +60,26 @@ export default {
       if(!localStorage.getItem('cima-estudiante-payment')){
         let data = JSON.parse(localStorage.getItem('cima-estudiante'));
         res = await getPayment(data.idalumnocolegio);
+        console.log(res)
         res = res.data;
         localStorage.setItem('cima-estudiante-payment',JSON.stringify(res));
       }else{
         res = JSON.parse(localStorage.getItem('cima-estudiante-payment'));
       }
       this.report = res;
+      let data = JSON.parse(localStorage.getItem('cima-estudiante'));
+      console.log(data)
       let total = 0;
+      // this.report[0].pagos.map(el=>{
+      //   if(el.matricula==1){
+      //     total += parseInt(el.montopagado);
+      //   }
+      // })
       this.report[0].pagos.map(el=>{
         if(el.matricula==1){
           total += parseInt(el.montopagado);
-        }
-      })
-      this.report[1].pagos.map(el=>{
-        if(el.matricula==1){
-          total += parseInt(el.montopagado);
           el.montopagado = total;
-          if(el.monto == total){
+          if(el.monto <= total){
             el.estado = "CANCELADO";
           }
         }

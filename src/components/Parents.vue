@@ -90,6 +90,9 @@
             button(@click="cropReset", type="button").btn--default Restablecer
           .col-xs.m-t
             button(@click="cropDestroy", type="button").btn--default Cancelar
+        .row.main-center
+          .col-xs-12
+            h1.font-size-x-large.m-t Dentro de 24 hrs se actualizara la nueva foto.
 </template>
 
 <script>

@@ -71,6 +71,7 @@ export default{
           localStorage.setItem(token,myToken);
           if (type === 'student') {
             let report = await getProfile(idUser);
+            console.log('profile', report);
             localStorage.setItem('cima-estudiante',JSON.stringify(report.data));
             this.$router.replace('/Dashboard',() => {
               this.user     = '';
